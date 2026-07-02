@@ -42,7 +42,7 @@ export function Hero() {
 
           <motion.p
             {...fadeUp(0.25)}
-            className="mt-6 max-w-lg text-base leading-relaxed text-white/80 sm:text-lg"
+            className="mx-auto mt-6 max-w-lg text-base leading-relaxed text-white/80 sm:text-lg"
           >
             Ervaar pure prestaties, comfort en uitstraling. Stap vandaag nog in een
             auto die elke rit bijzonder maakt — zorgeloos huren vanaf 18 jaar.
@@ -50,7 +50,7 @@ export function Hero() {
 
           <motion.div
             {...fadeUp(0.4)}
-            className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center"
+            className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"
           >
             <a
               href="#aanbod"
@@ -81,7 +81,7 @@ export function Hero() {
           {/* Beoordeling — vervang door je echte Google-score */}
           <motion.div
             {...fadeUp(0.55)}
-            className="mt-7 flex items-center gap-2.5"
+            className="mt-7 flex items-center justify-center gap-2.5"
           >
             <span className="text-sm font-semibold text-white">4,3/5 op Google</span>
             <div className="flex gap-0.5" role="img" aria-label="4,3 van 5 sterren">
