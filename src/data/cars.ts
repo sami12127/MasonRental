@@ -150,7 +150,3 @@ export const cars: Car[] = [
 export function getCarById(id: string | undefined): Car | undefined {
   return cars.find((car) => car.id === id);
 }
-
-/* Vervang door eigen hero-foto of -video van de Audi RS6 C8 */
-export const heroImage =
-  "https://images.unsplash.com/photo-1542282088-fe8426682b8f?auto=format&fit=crop&w=2000&h=1250&q=80";

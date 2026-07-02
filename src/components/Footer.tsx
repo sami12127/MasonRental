@@ -11,8 +11,8 @@ const nav = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/5 bg-night">
-      <div className="mx-auto max-w-7xl px-6 py-14 lg:px-10">
+    <footer className="bg-night px-6 pb-10 lg:px-10">
+      <div className="mx-auto max-w-7xl rounded-3xl border border-white/10 bg-charcoal px-6 py-12 md:px-12 lg:px-14">
         <div className="flex flex-col items-center gap-10 md:flex-row md:items-start md:justify-between">
           <div className="text-center md:text-left">
             <Link to="/#home" className="text-xl font-bold tracking-tight text-white">
