@@ -1,5 +1,6 @@
 import { Hero } from "../components/Hero";
 import { Fleet } from "../components/Fleet";
+import { Showcase } from "../components/Showcase";
 import { WhyUs } from "../components/WhyUs";
 import { HowItWorks } from "../components/HowItWorks";
 import { About } from "../components/About";
@@ -12,6 +13,7 @@ export function HomePage() {
     <>
       <Hero />
       <Fleet />
+      <Showcase />
       <WhyUs />
       <HowItWorks />
       <About />

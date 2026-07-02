@@ -34,6 +34,10 @@ export interface Car {
   id: string;
   name: string;
   tagline: string;
+  /* Korte kenmerken die op de aanbod-card getoond worden */
+  bodyType: string;
+  transmission: string;
+  doors: string;
   /* Hoofd-/card-afbeelding. Vervang door eigen foto in /public/cars */
   image: string;
   /* Alle foto's voor de galerij op de detailpagina (eerste = hoofdfoto) */
@@ -54,14 +58,18 @@ export const cars: Car[] = [
     id: "audi-rs6-c8",
     name: "Audi RS6 C8",
     tagline: "De ultieme performance stationwagen",
-    image:
-      "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=1400&h=875&q=80",
-    /* Voeg hier je eigen RS6-foto's toe (bijv. /cars/rs6-1.jpg) voor een volledige galerij */
+    bodyType: "Avant",
+    transmission: "Automaat",
+    doors: "5 Deurs",
+    image: "/cars/rs6-1.jpg",
     gallery: [
-      "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=1600&h=1000&q=80",
+      "/cars/rs6-1.jpg",
+      "/cars/rs6-2.jpg",
+      "/cars/rs6-3.jpg",
+      "/cars/rs6-4.jpg",
     ],
-    pricePerDay: 395,
-    deposit: 1500,
+    pricePerDay: 750,
+    deposit: 3000,
     description:
       "De Audi RS6 C8 combineert de ruimte en het comfort van een Avant met de prestaties van een supercar. Onder de motorkap ligt een 4.0 V8 biturbo die 600 pk levert, goed voor een sprint naar 100 km/u in slechts 3,6 seconden. Met permanente Quattro-vierwielaandrijving, adaptieve luchtvering en een intimiderende aanwezigheid is dit dé auto voor wie kracht en klasse wil combineren.",
     specs: [
@@ -98,8 +106,11 @@ export const cars: Car[] = [
     id: "audi-rs3-8y",
     name: "Audi RS3 8Y",
     tagline: "Compacte kracht met een iconisch geluid",
+    bodyType: "Hatchback",
+    transmission: "Automaat",
+    doors: "5 Deurs",
     /* Eigen foto's van de RS3 staan in /public/cars (rs3-6565 t/m rs3-6573) */
-    image: "/cars/rs3-6567.jpg",
+    image: "/cars/rs3-6570.jpg",
     gallery: [
       "/cars/rs3-6567.jpg",
       "/cars/rs3-6573.jpg",
@@ -111,8 +122,8 @@ export const cars: Car[] = [
       "/cars/rs3-6569.jpg",
       "/cars/rs3-6571.jpg",
     ],
-    pricePerDay: 295,
-    deposit: 1000,
+    pricePerDay: 350,
+    deposit: 2000,
     description:
       "De Audi RS3 8Y is een compacte krachtpatser met een karakter dat je nergens anders vindt. Zijn legendarische 2.5 TFSI vijfcilinder produceert 400 pk en een geluid dat kippenvel bezorgt. Dankzij de RS Torque Splitter en Quattro-aandrijving plakt de RS3 aan het asfalt, terwijl de sprint naar 100 km/u in 3,8 seconden is volbracht. De perfecte keuze voor wie maximale beleving in een handzaam formaat zoekt.",
     specs: [

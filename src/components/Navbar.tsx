@@ -58,9 +58,16 @@ export function Navbar() {
         <button
           type="button"
           onClick={goHome}
-          className="cursor-pointer text-xl font-bold tracking-tight text-white"
+          aria-label="Mason Rental — naar home"
+          className="cursor-pointer"
         >
-          MASON<span className="text-gold"> RENTAL</span>
+          <img
+            src="/logo1.png"
+            alt="Mason Rental"
+            width={913}
+            height={223}
+            className="h-9 w-auto sm:h-10"
+          />
         </button>
 
         <ul className="hidden items-center gap-8 lg:flex">
@@ -69,7 +76,7 @@ export function Navbar() {
               <button
                 type="button"
                 onClick={() => goToSection(link.id)}
-                className="cursor-pointer text-sm font-medium text-white/70 transition-colors duration-200 hover:text-gold"
+                className="cursor-pointer text-lg font-bold text-white transition-colors duration-200 hover:text-gold"
               >
                 {link.label}
               </button>

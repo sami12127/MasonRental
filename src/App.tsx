@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
+import { WhatsAppButton } from "./components/WhatsAppButton";
 import { HomePage } from "./pages/HomePage";
 import { CarDetailPage } from "./pages/CarDetailPage";
 
@@ -45,6 +46,7 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
+      <WhatsAppButton />
     </>
   );
 }

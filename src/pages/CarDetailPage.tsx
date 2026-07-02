@@ -25,7 +25,7 @@ import type { HighlightIcon } from "../data/cars";
 import { Reveal } from "../components/ui/Reveal";
 
 /* Vervang door je eigen WhatsApp-nummer (internationaal, zonder + of spaties) */
-const WHATSAPP_NUMBER = "31600000000";
+const WHATSAPP_NUMBER = "31618623757";
 
 const highlightIcons: Record<HighlightIcon, Icon> = {
   age: UserIcon,

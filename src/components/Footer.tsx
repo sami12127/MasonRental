@@ -15,8 +15,14 @@ export function Footer() {
       <div className="mx-auto max-w-7xl rounded-3xl border border-white/10 bg-charcoal px-6 py-12 md:px-12 lg:px-14">
         <div className="flex flex-col items-center gap-10 md:flex-row md:items-start md:justify-between">
           <div className="text-center md:text-left">
-            <Link to="/#home" className="text-xl font-bold tracking-tight text-white">
-              MASON<span className="text-gold"> RENTAL</span>
+            <Link to="/#home" aria-label="Mason Rental — naar home" className="inline-block">
+              <img
+                src="/logo1.png"
+                alt="Mason Rental"
+                width={913}
+                height={223}
+                className="h-10 w-auto"
+              />
             </Link>
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-white/45">
               Exclusieve autoverhuur voor wie alleen genoegen neemt met het beste.
@@ -40,7 +46,7 @@ export function Footer() {
 
           <div className="flex gap-3">
             <a
-              href="https://wa.me/31600000000"
+              href="https://wa.me/31618623757"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="WhatsApp"

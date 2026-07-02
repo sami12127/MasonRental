@@ -144,7 +144,7 @@ export function Contact() {
                 <ul className="mt-5 space-y-4">
                   <li>
                     <a
-                      href="https://wa.me/31600000000"
+                      href="https://wa.me/31618623757"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group flex min-h-11 items-center gap-3 text-sm text-white/75 transition-colors hover:text-gold"
@@ -152,18 +152,18 @@ export function Contact() {
                       <span className="inline-flex size-10 items-center justify-center rounded-full bg-gold/10 text-gold transition-colors duration-300 group-hover:bg-gold group-hover:text-night">
                         <WhatsappLogoIcon size={20} weight="duotone" aria-hidden="true" />
                       </span>
-                      WhatsApp: 06 00000000
+                      WhatsApp: 06 18623757
                     </a>
                   </li>
                   <li>
                     <a
-                      href="tel:+31600000000"
+                      href="tel:+31618623757"
                       className="group flex min-h-11 items-center gap-3 text-sm text-white/75 transition-colors hover:text-gold"
                     >
                       <span className="inline-flex size-10 items-center justify-center rounded-full bg-gold/10 text-gold transition-colors duration-300 group-hover:bg-gold group-hover:text-night">
                         <PhoneIcon size={20} weight="duotone" aria-hidden="true" />
                       </span>
-                      06 00000000
+                      06 18623757
                     </a>
                   </li>
                   <li>

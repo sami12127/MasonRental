@@ -1,108 +1,112 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import {
-  ArrowRightIcon,
-  CarProfileIcon,
-  DoorOpenIcon,
-  EngineIcon,
-  GaugeIcon,
-  GearSixIcon,
-  TireIcon,
-} from "@phosphor-icons/react";
-import type { Icon } from "@phosphor-icons/react";
+import { ArrowRightIcon } from "@phosphor-icons/react";
 import { cars } from "../data/cars";
-import type { CarSpec } from "../data/cars";
 import { Reveal } from "./ui/Reveal";
 import { SectionHeading } from "./ui/SectionHeading";
 
-const specIcons: Record<CarSpec["icon"], Icon> = {
-  power: GaugeIcon,
-  engine: EngineIcon,
-  drivetrain: TireIcon,
-  gearbox: GearSixIcon,
-  doors: DoorOpenIcon,
-  body: CarProfileIcon,
-};
-
 export function Fleet() {
   return (
-    <section id="aanbod" className="bg-night py-24 md:py-32">
+    <section id="aanbod" className="bg-night pt-6 pb-14 md:pt-8 md:pb-16">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <SectionHeading
-          eyebrow="Wagenpark"
-          title="Ons exclusieve aanbod"
-          description="Een zorgvuldig geselecteerd wagenpark met high-performance auto's, altijd in perfecte staat."
+          title="Ons"
+          titleAccent="aanbod"
+          description="Een zorgvuldig geselecteerd wagenpark met high-performance auto's, altijd in perfecte staat en klaar voor jouw moment."
+          spacing="tight"
         />
 
-        <div className="grid gap-8 md:grid-cols-2">
-          {cars.map((car, i) => (
-            <Reveal key={car.id} delay={i * 0.15}>
-              <motion.div
-                whileHover={{ y: -6 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
-                className="h-full"
-              >
-                <Link
-                  to={`/auto/${car.id}`}
-                  className="group flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-charcoal transition-colors duration-300 hover:border-gold/40"
-                  aria-label={`Bekijk de ${car.name}`}
+        {/* Bij meer auto's kun je dit uitbreiden naar lg:grid-cols-3 of 4 */}
+        <div className="mx-auto grid max-w-3xl gap-8 sm:grid-cols-2">
+          {cars.map((car, i) => {
+            const hoverImage = car.gallery[1] ?? car.gallery[0];
+            return (
+              <Reveal key={car.id} delay={i * 0.12}>
+                <motion.div
+                  whileHover={{ y: -6 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                  className="h-full"
                 >
-                  <div className="relative aspect-[16/10] overflow-hidden">
+                  <Link
+                    to={`/auto/${car.id}`}
+                    aria-label={`Bekijk de ${car.name}`}
+                    className="group relative flex aspect-[7/8] flex-col justify-end overflow-hidden rounded-[2rem] border border-white/10 shadow-none transition-shadow duration-300 hover:shadow-[0_38px_70px_-20px_rgba(201,163,78,0.55),0_14px_34px_-14px_rgba(201,163,78,0.4)]"
+                  >
+                    {/* Basisfoto — vervaagt bij hover */}
                     <img
                       src={car.image}
                       alt={car.name}
                       loading="lazy"
                       width={1400}
                       height={875}
-                      className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                      className="absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-0"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-transparent to-transparent" />
-                    <span className="absolute right-4 top-4 rounded-full bg-night/70 px-4 py-1.5 text-sm font-semibold text-gold backdrop-blur-md">
-                      €{car.pricePerDay} <span className="text-white/60">p/d</span>
-                    </span>
-                  </div>
+                    {/* Tweede foto — verschijnt bij hover (eager geladen voor een vloeiende wissel) */}
+                    <img
+                      src={hoverImage}
+                      alt=""
+                      aria-hidden="true"
+                      width={1400}
+                      height={875}
+                      className="absolute inset-0 h-full w-full object-cover opacity-0 transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-100"
+                    />
+                    <div
+                      className="absolute inset-0 bg-gradient-to-t from-night/95 via-night/45 to-transparent"
+                      aria-hidden="true"
+                    />
 
-                  <div className="flex flex-1 flex-col p-7 md:p-9">
-                    <h3 className="text-2xl font-bold text-white">{car.name}</h3>
-                    <p className="mt-1.5 text-sm text-mist">{car.tagline}</p>
+                    <div className="relative z-10 p-6 md:p-7">
+                      <p className="text-sm font-semibold uppercase tracking-wider text-white/70">
+                        {car.bodyType}
+                      </p>
+                      <h3 className="mt-1.5 text-2xl font-extrabold leading-tight text-white md:text-[1.65rem]">
+                        {car.name}
+                      </h3>
 
-                    <ul className="mt-6 flex flex-wrap gap-2.5">
-                      {car.specs.map((spec) => {
-                        const SpecIcon = specIcons[spec.icon];
-                        return (
-                          <li
-                            key={spec.label}
-                            className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-graphite px-3.5 py-1.5 text-xs font-medium text-white/80"
-                          >
-                            <SpecIcon
-                              size={15}
-                              weight="duotone"
-                              className="text-gold"
-                              aria-hidden="true"
-                            />
-                            {spec.label}
-                          </li>
-                        );
-                      })}
-                    </ul>
-
-                    <div className="mt-8 flex items-center justify-between pt-2">
-                      <span className="inline-flex items-center gap-2 text-sm font-semibold text-gold">
-                        Bekijk details
-                        <ArrowRightIcon
-                          size={16}
-                          weight="bold"
-                          className="transition-transform duration-300 group-hover:translate-x-1"
-                          aria-hidden="true"
-                        />
+                      <span className="mt-3.5 inline-flex items-center rounded-full bg-gold px-4 py-1.5 text-base font-extrabold uppercase tracking-wide text-night">
+                        € {car.pricePerDay} p/d
                       </span>
+
+                      <div className="mt-6 grid grid-cols-2 gap-4">
+                        <div>
+                          <p className="text-xs font-medium uppercase tracking-wider text-white/55">
+                            Transmissie
+                          </p>
+                          <p className="mt-1 text-base font-bold text-white">
+                            {car.transmission}
+                          </p>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-xs font-medium uppercase tracking-wider text-white/55">
+                            Deuren
+                          </p>
+                          <p className="mt-1 text-base font-bold text-white">
+                            {car.doors}
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              </motion.div>
-            </Reveal>
-          ))}
+                  </Link>
+                </motion.div>
+              </Reveal>
+            );
+          })}
         </div>
+
+        <Reveal className="mt-12 flex justify-center">
+          <a
+            href="#contact"
+            className="group inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-full bg-gold px-8 py-3.5 text-sm font-bold uppercase tracking-wide text-night transition-all duration-300 hover:bg-gold-light hover:shadow-[0_0_36px_-8px_var(--color-gold)] active:scale-[0.97]"
+          >
+            Bekijk volledig aanbod
+            <ArrowRightIcon
+              size={16}
+              weight="bold"
+              className="transition-transform duration-300 group-hover:translate-x-1"
+              aria-hidden="true"
+            />
+          </a>
+        </Reveal>
       </div>
     </section>
   );
