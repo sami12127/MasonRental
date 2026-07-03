@@ -68,11 +68,11 @@ export function Footer() {
           <div className="text-center md:text-left">
             <Link to="/#home" aria-label="Mason Rental — naar home" className="inline-block">
               <img
-                src="/logo1.png"
+                src="/logo-mr.png"
                 alt="Mason Rental"
-                width={1368}
-                height={287}
-                className="h-14 w-auto sm:h-16"
+                width={1288}
+                height={203}
+                className="h-9 w-auto sm:h-10"
               />
             </Link>
             <p className="mx-auto mt-4 max-w-xs text-sm leading-relaxed text-white/45 md:mx-0">

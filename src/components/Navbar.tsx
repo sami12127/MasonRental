@@ -53,7 +53,7 @@ export function Navbar() {
     >
       <nav
         aria-label="Hoofdnavigatie"
-        className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 sm:h-32 lg:px-10"
+        className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 sm:h-20 lg:px-10"
       >
         <button
           type="button"
@@ -62,11 +62,11 @@ export function Navbar() {
           className="cursor-pointer"
         >
           <img
-            src="/logo1.png"
+            src="/logo-mr.png"
             alt="Mason Rental"
-            width={1368}
-            height={287}
-            className="h-12 w-auto sm:h-24"
+            width={1288}
+            height={203}
+            className="h-7 w-auto sm:h-9"
           />
         </button>
 
