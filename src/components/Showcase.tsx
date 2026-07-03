@@ -3,22 +3,15 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowRightIcon } from "@phosphor-icons/react";
 import { Reveal } from "./ui/Reveal";
 
-/* Pas deze cijfers gerust aan naar de echte cijfers van Mason Rental */
-const stats = [
-  { value: "500+", label: "Tevreden klanten" },
-  { value: "4.9★", label: "Gemiddelde beoordeling" },
-  { value: "24u", label: "Zelfde dag geregeld" },
-];
-
 /* Foto's voor de carrousel — vervang of vul aan via /public/cars */
 const slides = [
-  "/cars/rs3-6573.jpg",
-  "/cars/rs3-6570.jpg",
-  "/cars/rs3-6565.jpg",
-  "/cars/rs3-6572.jpg",
+  "/cars/rs3-15.jpg", // RS6 + RS3 samen
+  "/cars/rs6-2.jpg", // RS6
+  "/cars/rs3-6573.jpg", // RS3
+  "/cars/rs3-6570.jpg", // RS3
 ];
 
-const AUTOPLAY_MS = 5000;
+const AUTOPLAY_MS = 3000;
 
 export function Showcase() {
   const [index, setIndex] = useState(0);
@@ -38,24 +31,8 @@ export function Showcase() {
   return (
     <section className="bg-night pb-24 pt-8 md:pb-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        {/* Statistiekenrij */}
-        <Reveal>
-          <dl className="mx-auto grid max-w-3xl grid-cols-3 gap-6 text-center">
-            {stats.map((stat) => (
-              <div key={stat.label}>
-                <dd className="text-3xl font-black tracking-tight text-gold sm:text-4xl md:text-5xl">
-                  {stat.value}
-                </dd>
-                <dt className="mt-2 text-[11px] font-medium uppercase tracking-[0.18em] text-mist sm:text-xs">
-                  {stat.label}
-                </dt>
-              </div>
-            ))}
-          </dl>
-        </Reveal>
-
         {/* Split: tekst links, carrousel rechts */}
-        <div className="mt-20 grid items-center gap-10 lg:mt-28 lg:grid-cols-2 lg:gap-16">
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <Reveal>
             <div>
               <p className="mb-4 text-xs font-medium uppercase tracking-[0.3em] text-gold">
@@ -96,7 +73,7 @@ export function Showcase() {
                     initial={{ opacity: 0, scale: 1.04 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    transition={{ duration: 0.45, ease: "easeOut" }}
                     className="absolute inset-0 h-full w-full object-cover"
                   />
                 </AnimatePresence>

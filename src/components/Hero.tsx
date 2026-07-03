@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowUpRightIcon, StarIcon } from "@phosphor-icons/react";
+import { ArrowUpRightIcon } from "@phosphor-icons/react";
 
 export function Hero() {
   const reduceMotion = useReducedMotion();
@@ -76,25 +76,6 @@ export function Hero() {
                 aria-hidden="true"
               />
             </a>
-          </motion.div>
-
-          {/* Beoordeling — vervang door je echte Google-score */}
-          <motion.div
-            {...fadeUp(0.55)}
-            className="mt-7 flex items-center justify-center gap-2.5"
-          >
-            <span className="text-sm font-semibold text-white">4,3/5 op Google</span>
-            <div className="flex gap-0.5" role="img" aria-label="4,3 van 5 sterren">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <StarIcon
-                  key={i}
-                  size={16}
-                  weight="fill"
-                  className="text-gold"
-                  aria-hidden="true"
-                />
-              ))}
-            </div>
           </motion.div>
         </div>
       </div>

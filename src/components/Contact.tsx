@@ -1,8 +1,4 @@
-import { useState } from "react";
-import type { FormEvent } from "react";
 import {
-  CheckCircleIcon,
-  CircleNotchIcon,
   InstagramLogoIcon,
   MapPinIcon,
   PhoneIcon,
@@ -10,131 +6,46 @@ import {
 } from "@phosphor-icons/react";
 import { Reveal } from "./ui/Reveal";
 import { SectionHeading } from "./ui/SectionHeading";
-import { cars } from "../data/cars";
 
-type Status = "idle" | "sending" | "sent";
-
-const inputClass =
-  "w-full min-h-12 rounded-xl border border-white/15 bg-night/60 px-4 py-3 text-sm text-white placeholder:text-white/35 transition-colors duration-200 focus:border-gold focus:outline-none";
+/* Vervang door je eigen WhatsApp-nummer (internationaal, zonder + of spaties) */
+const WHATSAPP_NUMBER = "31618623757";
+const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+  "Hallo Mason Rental, ik wil graag een auto reserveren."
+)}`;
 
 export function Contact() {
-  const [status, setStatus] = useState<Status>("idle");
-
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    if (status !== "idle") return;
-    setStatus("sending");
-    /* Koppel hier je eigen backend of e-maildienst (bijv. Formspree/Resend) */
-    setTimeout(() => setStatus("sent"), 1200);
-  }
-
   return (
     <section id="contact" className="bg-night py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <SectionHeading
           eyebrow="Contact"
           title="Reserveer jouw auto"
-          description="Vul het formulier in en wij nemen dezelfde dag nog contact met je op."
+          description="Reserveren doe je snel en persoonlijk via WhatsApp — wij nemen dezelfde dag nog contact met je op."
         />
 
         <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr]">
           <Reveal>
-            <form
-              onSubmit={handleSubmit}
-              className="rounded-3xl border border-white/10 bg-charcoal p-7 md:p-10"
-              aria-label="Reserveringsformulier"
-            >
-              <div className="grid gap-5 sm:grid-cols-2">
-                <div>
-                  <label htmlFor="name" className="mb-2 block text-sm font-medium text-white/80">
-                    Naam <span className="text-gold" aria-hidden="true">*</span>
-                  </label>
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    required
-                    autoComplete="name"
-                    placeholder="Jouw naam"
-                    className={inputClass}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="phone" className="mb-2 block text-sm font-medium text-white/80">
-                    Telefoon <span className="text-gold" aria-hidden="true">*</span>
-                  </label>
-                  <input
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    required
-                    autoComplete="tel"
-                    placeholder="06 12345678"
-                    className={inputClass}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="mb-2 block text-sm font-medium text-white/80">
-                    E-mail <span className="text-gold" aria-hidden="true">*</span>
-                  </label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    autoComplete="email"
-                    placeholder="naam@voorbeeld.nl"
-                    className={inputClass}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="car" className="mb-2 block text-sm font-medium text-white/80">
-                    Gewenste auto
-                  </label>
-                  <select id="car" name="car" className={`${inputClass} cursor-pointer`}>
-                    {cars.map((car) => (
-                      <option key={car.id} value={car.id} className="bg-charcoal">
-                        {car.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="sm:col-span-2">
-                  <label htmlFor="message" className="mb-2 block text-sm font-medium text-white/80">
-                    Bericht
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={4}
-                    placeholder="Gewenste datum, duur en eventuele vragen"
-                    className={`${inputClass} resize-y`}
-                  />
-                </div>
-              </div>
-
-              <p className="mt-4 text-xs text-white/40">
-                Velden met <span className="text-gold">*</span> zijn verplicht.
+            <div className="flex h-full flex-col justify-center rounded-3xl border border-gold/25 bg-charcoal p-8 text-center md:p-12">
+              <span className="mx-auto inline-flex size-16 items-center justify-center rounded-full bg-gold/10 text-gold">
+                <WhatsappLogoIcon size={32} weight="fill" aria-hidden="true" />
+              </span>
+              <h3 className="mt-6 text-2xl font-bold text-white md:text-3xl">
+                Direct reserveren via WhatsApp
+              </h3>
+              <p className="mx-auto mt-3 max-w-md text-base leading-relaxed text-mist">
+                Stuur ons een bericht met de auto die je op het oog hebt en de
+                gewenste datum. Wij bevestigen je reservering doorgaans binnen enkele uren.
               </p>
-
-              <button
-                type="submit"
-                disabled={status !== "idle"}
-                className="mt-6 inline-flex min-h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-gold px-8 text-sm font-semibold text-night transition-all duration-300 hover:bg-gold-light hover:shadow-[0_0_28px_-8px_var(--color-gold)] active:scale-[0.98] disabled:cursor-default disabled:opacity-60 sm:w-auto"
+              <a
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mx-auto mt-8 inline-flex min-h-13 cursor-pointer items-center justify-center gap-2 rounded-full bg-gold px-9 py-3.5 text-sm font-semibold text-night transition-all duration-300 hover:bg-gold-light hover:shadow-[0_0_28px_-8px_var(--color-gold)] active:scale-[0.98]"
               >
-                {status === "sending" && (
-                  <CircleNotchIcon size={16} className="animate-spin" aria-hidden="true" />
-                )}
-                {status === "sent" ? "Verzonden" : status === "sending" ? "Versturen..." : "Verstuur aanvraag"}
-              </button>
-
-              {status === "sent" && (
-                <p role="status" className="mt-4 flex items-center gap-2 text-sm text-gold">
-                  <CheckCircleIcon size={16} weight="fill" aria-hidden="true" />
-                  Bedankt! Wij nemen zo snel mogelijk contact met je op.
-                </p>
-              )}
-            </form>
+                <WhatsappLogoIcon size={20} weight="fill" aria-hidden="true" />
+                Reserveer via WhatsApp
+              </a>
+            </div>
           </Reveal>
 
           <Reveal delay={0.15}>
@@ -144,7 +55,7 @@ export function Contact() {
                 <ul className="mt-5 space-y-4">
                   <li>
                     <a
-                      href="https://wa.me/31618623757"
+                      href={whatsappHref}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group flex min-h-11 items-center gap-3 text-sm text-white/75 transition-colors hover:text-gold"

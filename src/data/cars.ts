@@ -40,6 +40,8 @@ export interface Car {
   doors: string;
   /* Hoofd-/card-afbeelding. Vervang door eigen foto in /public/cars */
   image: string;
+  /* Optioneel: foto die bij hover op de aanbod-card verschijnt (val terug op gallery[1]) */
+  hoverImage?: string;
   /* Alle foto's voor de galerij op de detailpagina (eerste = hoofdfoto) */
   gallery: string[];
   pricePerDay: number;
@@ -109,11 +111,14 @@ export const cars: Car[] = [
     bodyType: "Hatchback",
     transmission: "Automaat",
     doors: "5 Deurs",
-    /* Eigen foto's van de RS3 staan in /public/cars (rs3-6565 t/m rs3-6573) */
+    /* Eigen foto's van de RS3 staan in /public/cars (rs3-6565 t/m rs3-6573 + interieur rs3-35/36) */
     image: "/cars/rs3-6570.jpg",
+    hoverImage: "/cars/rs3-35.jpg",
     gallery: [
       "/cars/rs3-6567.jpg",
       "/cars/rs3-6573.jpg",
+      "/cars/rs3-35.jpg",
+      "/cars/rs3-36.jpg",
       "/cars/rs3-6572.jpg",
       "/cars/rs3-6570.jpg",
       "/cars/rs3-6565.jpg",

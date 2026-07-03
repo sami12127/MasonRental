@@ -45,7 +45,7 @@ export const faqs = [
   {
     question: "Hoe reserveer ik een auto?",
     answer:
-      "Kies jouw auto, vul het reserveringsformulier in en wij nemen dezelfde dag nog contact met je op om alles te bevestigen. Reserveren kan ook direct via WhatsApp.",
+      "Kies jouw auto en stuur ons een bericht via WhatsApp. Wij nemen dezelfde dag nog contact met je op om alles te bevestigen.",
   },
 ];
 
@@ -56,7 +56,7 @@ export const steps = [
   },
   {
     title: "Reserveer",
-    description: "Vul het formulier in of stuur ons direct een bericht via WhatsApp.",
+    description: "Stuur ons direct een bericht via WhatsApp.",
   },
   {
     title: "Wij nemen contact op",

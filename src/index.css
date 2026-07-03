@@ -14,7 +14,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 9rem;
 }
 
 /* Oneindige logo-carrousel */
@@ -69,4 +69,16 @@ body {
   outline: 2px solid var(--color-gold);
   outline-offset: 3px;
   border-radius: 4px;
+}
+
+/* Verbergt alleen de horizontale scrollbar onder de mobiele thumbnail-strip;
+   op desktop (verticale strip) blijft de scrollbar zichtbaar. */
+@media (max-width: 639px) {
+  .thumb-scroll {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .thumb-scroll::-webkit-scrollbar {
+    display: none;
+  }
 }

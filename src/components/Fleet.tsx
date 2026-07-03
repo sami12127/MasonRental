@@ -1,13 +1,12 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRightIcon } from "@phosphor-icons/react";
 import { cars } from "../data/cars";
 import { Reveal } from "./ui/Reveal";
 import { SectionHeading } from "./ui/SectionHeading";
 
 export function Fleet() {
   return (
-    <section id="aanbod" className="bg-night pt-6 pb-14 md:pt-8 md:pb-16">
+    <section id="aanbod" className="bg-night pt-20 pb-14 md:pt-28 md:pb-16">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <SectionHeading
           title="Ons"
@@ -19,7 +18,7 @@ export function Fleet() {
         {/* Bij meer auto's kun je dit uitbreiden naar lg:grid-cols-3 of 4 */}
         <div className="mx-auto grid max-w-3xl gap-8 sm:grid-cols-2">
           {cars.map((car, i) => {
-            const hoverImage = car.gallery[1] ?? car.gallery[0];
+            const hoverImage = car.hoverImage ?? car.gallery[1] ?? car.gallery[0];
             return (
               <Reveal key={car.id} delay={i * 0.12}>
                 <motion.div
@@ -30,7 +29,7 @@ export function Fleet() {
                   <Link
                     to={`/auto/${car.id}`}
                     aria-label={`Bekijk de ${car.name}`}
-                    className="group relative flex aspect-[7/8] flex-col justify-end overflow-hidden rounded-[2rem] border border-white/10 shadow-none transition-shadow duration-300 hover:shadow-[0_38px_70px_-20px_rgba(201,163,78,0.55),0_14px_34px_-14px_rgba(201,163,78,0.4)]"
+                    className="group relative flex aspect-[7/8] flex-col justify-end overflow-hidden rounded-[2rem] border border-white/10"
                   >
                     {/* Basisfoto — vervaagt bij hover */}
                     <img
@@ -52,6 +51,11 @@ export function Fleet() {
                     />
                     <div
                       className="absolute inset-0 bg-gradient-to-t from-night/95 via-night/45 to-transparent"
+                      aria-hidden="true"
+                    />
+                    {/* Gouden gloed die bij hover onderin de card omhoog komt */}
+                    <div
+                      className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-gold/55 via-gold/15 to-transparent opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100"
                       aria-hidden="true"
                     />
 
@@ -93,20 +97,6 @@ export function Fleet() {
           })}
         </div>
 
-        <Reveal className="mt-12 flex justify-center">
-          <a
-            href="#contact"
-            className="group inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-full bg-gold px-8 py-3.5 text-sm font-bold uppercase tracking-wide text-night transition-all duration-300 hover:bg-gold-light hover:shadow-[0_0_36px_-8px_var(--color-gold)] active:scale-[0.97]"
-          >
-            Bekijk volledig aanbod
-            <ArrowRightIcon
-              size={16}
-              weight="bold"
-              className="transition-transform duration-300 group-hover:translate-x-1"
-              aria-hidden="true"
-            />
-          </a>
-        </Reveal>
       </div>
     </section>
   );
