@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ListIcon, XIcon } from "@phosphor-icons/react";
+import { useTransitionNavigate } from "./PageTransition";
 
 type NavLink =
   | { label: string; id: string; to?: undefined }
@@ -18,7 +19,10 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+  const transitionNavigate = useTransitionNavigate();
   const { pathname } = useLocation();
+  // Navigeer met curtain-overgang waar mogelijk, anders instant.
+  const nav = transitionNavigate ?? navigate;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -33,7 +37,7 @@ export function Navbar() {
     if (pathname === "/") {
       document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     } else {
-      navigate(`/#${id}`);
+      nav(`/#${id}`);
     }
   };
 
@@ -43,7 +47,7 @@ export function Navbar() {
     if (pathname === to && hash) {
       document.getElementById(hash)?.scrollIntoView({ behavior: "smooth" });
     } else {
-      navigate(hash ? `${to}#${hash}` : to);
+      nav(hash ? `${to}#${hash}` : to);
     }
   };
 
@@ -57,7 +61,7 @@ export function Navbar() {
     if (pathname === "/") {
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
-      navigate("/");
+      nav("/");
     }
   };
 

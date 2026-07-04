@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { WhatsAppButton } from "./components/WhatsAppButton";
+import { PageTransitionProvider } from "./components/PageTransition";
 import { HomePage } from "./pages/HomePage";
 import { CarDetailPage } from "./pages/CarDetailPage";
 import { ContactPage } from "./pages/ContactPage";
@@ -30,7 +31,7 @@ function ScrollManager() {
 
 export default function App() {
   return (
-    <>
+    <PageTransitionProvider>
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-gold focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-night"
@@ -49,6 +50,6 @@ export default function App() {
       </main>
       <Footer />
       <WhatsAppButton />
-    </>
+    </PageTransitionProvider>
   );
 }

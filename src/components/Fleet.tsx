@@ -124,9 +124,9 @@ export function Fleet() {
                     aria-hidden="true"
                   />
 
-                  {/* Hoek-vlaggetje dat om de linkerbovenhoek van de kaart valt */}
-                  <div className="pointer-events-none absolute left-0 top-0 z-20 h-[170px] w-[170px] overflow-hidden">
-                    <span className="absolute left-[-60px] top-[38px] w-[240px] -rotate-45 bg-gold py-1.5 text-center text-[0.58rem] font-extrabold uppercase tracking-[0.04em] text-night shadow-[0_3px_10px_rgba(0,0,0,0.45)]">
+                  {/* Horizontaal vlaggetje vanaf de linkerrand */}
+                  <div className="pointer-events-none absolute left-0 top-6 z-20">
+                    <span className="inline-flex items-center bg-gold py-1.5 pl-5 pr-7 text-[0.7rem] font-extrabold uppercase tracking-[0.08em] text-night shadow-[0_3px_10px_rgba(0,0,0,0.4)] [clip-path:polygon(0_0,100%_0,calc(100%-11px)_50%,100%_100%,0_100%)]">
                       Binnenkort beschikbaar
                     </span>
                   </div>
