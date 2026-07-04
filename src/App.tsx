@@ -5,6 +5,7 @@ import { Footer } from "./components/Footer";
 import { WhatsAppButton } from "./components/WhatsAppButton";
 import { HomePage } from "./pages/HomePage";
 import { CarDetailPage } from "./pages/CarDetailPage";
+import { ContactPage } from "./pages/ContactPage";
 
 /** Scrollt naar boven bij routewissel, of naar de sectie als er een hash is. */
 function ScrollManager() {
@@ -42,6 +43,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/auto/:id" element={<CarDetailPage />} />
+          <Route path="/contact" element={<ContactPage />} />
           <Route path="*" element={<HomePage />} />
         </Routes>
       </main>

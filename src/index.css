@@ -15,6 +15,8 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 6rem;
+  overflow-x: hidden;
+  scrollbar-color: var(--color-gold) transparent;
 }
 
 /* Oneindige logo-carrousel */
@@ -40,6 +42,7 @@ html {
 }
 
 body {
+  overflow-x: hidden;
   background-color: var(--color-night);
   color: #ffffff;
   font-family: var(--font-sans);
@@ -58,14 +61,16 @@ body {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-night);
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-graphite);
+  background-color: var(--color-gold);
   border-radius: 5px;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, transparent 12px, black 88px, black 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, transparent 12px, black 88px, black 100%);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-gold);
+  background-color: var(--color-gold-light);
 }
 
 :focus-visible {

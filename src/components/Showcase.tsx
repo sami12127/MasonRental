@@ -29,7 +29,7 @@ export function Showcase() {
   }, [reduceMotion, index]);
 
   return (
-    <section className="bg-night pb-24 pt-8 md:pb-32">
+    <section className="bg-night pb-24 pt-20 md:pb-32 md:pt-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         {/* Split: tekst links, carrousel rechts */}
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">

@@ -29,6 +29,7 @@ import type { Icon } from "@phosphor-icons/react";
 import { getCarById } from "../data/cars";
 import type { HighlightIcon } from "../data/cars";
 import { Reveal } from "../components/ui/Reveal";
+import { ContactCTA } from "../components/ContactCTA";
 
 /* Vervang door je eigen WhatsApp-nummer (internationaal, zonder + of spaties) */
 const WHATSAPP_NUMBER = "31618623757";
@@ -352,6 +353,8 @@ export function CarDetailPage() {
           </Reveal>
         </div>
       </div>
+
+      <ContactCTA image={car.image} imageAlt={car.name} />
     </div>
   );
 }

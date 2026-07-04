@@ -5,8 +5,7 @@ import { WhyUs } from "../components/WhyUs";
 import { HowItWorks } from "../components/HowItWorks";
 import { About } from "../components/About";
 import { Reviews } from "../components/Reviews";
-import { FAQ } from "../components/FAQ";
-import { Contact } from "../components/Contact";
+import { ContactCTA } from "../components/ContactCTA";
 
 export function HomePage() {
   return (
@@ -18,8 +17,7 @@ export function HomePage() {
       <HowItWorks />
       <About />
       <Reviews />
-      <FAQ />
-      <Contact />
+      <ContactCTA image="/cars/rs6-1.jpg" imageAlt="Audi RS6" />
     </>
   );
 }

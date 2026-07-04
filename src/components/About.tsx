@@ -2,7 +2,7 @@ import { Reveal } from "./ui/Reveal";
 
 export function About() {
   return (
-    <section id="over-ons" className="bg-charcoal py-24 md:py-32">
+    <section id="over-ons" className="bg-night py-24 md:py-32">
       <div className="mx-auto max-w-3xl px-6 text-center lg:px-10">
         <Reveal>
           <p className="mb-3 text-xs font-medium uppercase tracking-[0.3em] text-gold">

@@ -166,3 +166,33 @@ export const cars: Car[] = [
 export function getCarById(id: string | undefined): Car | undefined {
   return cars.find((car) => car.id === id);
 }
+
+/* Auto's die er binnenkort aankomen — teaser-card in het aanbod, nog geen
+   detailpagina. */
+export interface UpcomingCar {
+  name: string;
+  bodyType: string;
+  /* Korte pakkende omschrijving onder de naam */
+  tagline: string;
+  /* Exterieurfoto voor de card */
+  image: string;
+  /* Interieurfoto die bij hover verschijnt */
+  hoverImage?: string;
+}
+
+export const upcomingCars: UpcomingCar[] = [
+  {
+    name: "Golf 8 GTI",
+    bodyType: "Hot Hatch",
+    tagline: "De iconische GTI in zijn scherpste vorm.",
+    image: "/cars/golf-8-gti.jpg",
+    hoverImage: "/cars/golf-8-gti-interieur.jpg",
+  },
+  {
+    name: "Golf 8 R",
+    bodyType: "Hot Hatch",
+    tagline: "Vierwielaandrijving en pure prestatie.",
+    image: "/cars/golf-8-r.jpg",
+    hoverImage: "/cars/golf-8-r-interieur.jpg",
+  },
+];

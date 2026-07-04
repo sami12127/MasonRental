@@ -3,12 +3,15 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ListIcon, XIcon } from "@phosphor-icons/react";
 
-const links = [
+type NavLink =
+  | { label: string; id: string; to?: undefined }
+  | { label: string; to: string; hash?: string; id?: undefined };
+
+const links: NavLink[] = [
   { label: "Home", id: "home" },
   { label: "Aanbod", id: "aanbod" },
   { label: "Over ons", id: "over-ons" },
-  { label: "FAQ", id: "faq" },
-  { label: "Contact", id: "contact" },
+  { label: "Contact & FAQ", to: "/contact" },
 ];
 
 export function Navbar() {
@@ -34,6 +37,21 @@ export function Navbar() {
     }
   };
 
+  /** Navigeert naar een aparte pagina (bv. /contact), eventueel naar een sectie. */
+  const goToPage = (to: string, hash?: string) => {
+    setOpen(false);
+    if (pathname === to && hash) {
+      document.getElementById(hash)?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      navigate(hash ? `${to}#${hash}` : to);
+    }
+  };
+
+  const handleLink = (link: NavLink) => {
+    if (link.to) goToPage(link.to, link.hash);
+    else goToSection(link.id);
+  };
+
   const goHome = () => {
     setOpen(false);
     if (pathname === "/") {
@@ -53,13 +71,25 @@ export function Navbar() {
     >
       <nav
         aria-label="Hoofdnavigatie"
-        className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 sm:h-20 lg:px-10"
+        className="relative mx-auto flex h-16 max-w-7xl items-center justify-between px-6 sm:h-20 lg:px-10"
       >
+        {/* Hamburger — links op mobiel, verborgen op desktop */}
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+          aria-label={open ? "Menu sluiten" : "Menu openen"}
+          className="-ml-2 inline-flex size-11 cursor-pointer items-center justify-center rounded-full text-white transition-colors hover:text-gold lg:hidden"
+        >
+          {open ? <XIcon size={24} /> : <ListIcon size={24} />}
+        </button>
+
+        {/* Logo — gecentreerd op mobiel, links op desktop */}
         <button
           type="button"
           onClick={goHome}
           aria-label="Mason Rental — naar home"
-          className="cursor-pointer"
+          className="absolute left-1/2 -translate-x-1/2 cursor-pointer lg:static lg:left-auto lg:translate-x-0"
         >
           <img
             src="/logo-mr.png"
@@ -72,10 +102,10 @@ export function Navbar() {
 
         <ul className="hidden items-center gap-8 lg:flex">
           {links.map((link) => (
-            <li key={link.id}>
+            <li key={link.label}>
               <button
                 type="button"
-                onClick={() => goToSection(link.id)}
+                onClick={() => handleLink(link)}
                 className="cursor-pointer text-lg font-bold text-white transition-colors duration-200 hover:text-gold"
               >
                 {link.label}
@@ -87,19 +117,10 @@ export function Navbar() {
         <div className="flex items-center gap-3">
           <button
             type="button"
-            onClick={() => goToSection("contact")}
+            onClick={() => goToPage("/contact", "contact")}
             className="hidden min-h-11 cursor-pointer items-center rounded-full bg-gold px-6 py-2.5 text-sm font-semibold text-night transition-all duration-300 hover:bg-gold-light hover:shadow-[0_0_28px_-8px_var(--color-gold)] active:scale-[0.97] sm:inline-flex"
           >
             Reserveer
-          </button>
-          <button
-            type="button"
-            onClick={() => setOpen((v) => !v)}
-            aria-expanded={open}
-            aria-label={open ? "Menu sluiten" : "Menu openen"}
-            className="inline-flex size-11 cursor-pointer items-center justify-center rounded-full text-white transition-colors hover:text-gold lg:hidden"
-          >
-            {open ? <XIcon size={24} /> : <ListIcon size={24} />}
           </button>
         </div>
       </nav>
@@ -115,10 +136,10 @@ export function Navbar() {
           >
             <ul className="flex flex-col px-6 py-4">
               {links.map((link) => (
-                <li key={link.id}>
+                <li key={link.label}>
                   <button
                     type="button"
-                    onClick={() => goToSection(link.id)}
+                    onClick={() => handleLink(link)}
                     className="block w-full py-3.5 text-left text-base font-medium text-white/80 transition-colors hover:text-gold"
                   >
                     {link.label}
@@ -128,7 +149,7 @@ export function Navbar() {
               <li className="pb-2 pt-3">
                 <button
                   type="button"
-                  onClick={() => goToSection("contact")}
+                  onClick={() => goToPage("/contact", "contact")}
                   className="inline-flex min-h-12 w-full cursor-pointer items-center justify-center rounded-full bg-gold px-6 text-sm font-semibold text-night"
                 >
                   Reserveer
