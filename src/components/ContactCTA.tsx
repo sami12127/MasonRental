@@ -12,7 +12,7 @@ export function ContactCTA({ image, imageAlt = "Mason Rental auto" }: ContactCTA
   return (
     <section className="bg-night px-6 py-16 md:py-24 lg:px-10">
       <Reveal>
-        <div className="mx-auto grid max-w-7xl overflow-hidden rounded-[2rem] bg-gold md:grid-cols-2">
+        <div className="mx-auto grid max-w-5xl overflow-hidden rounded-[2rem] bg-gold md:grid-cols-2">
           {/* Tekst + acties */}
           <div className="flex flex-col justify-center p-8 md:p-12 lg:p-16">
             <h2 className="text-3xl font-black tracking-tight text-night md:text-4xl">

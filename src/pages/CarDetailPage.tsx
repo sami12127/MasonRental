@@ -160,30 +160,33 @@ export function CarDetailPage() {
           <div className="flex flex-col gap-12">
           <Reveal>
             <div className="flex flex-col-reverse gap-3 sm:flex-row">
-              {/* Thumbnails links */}
+              {/* Thumbnails links. Op desktop scrollt de lijst absoluut binnen
+                 een wrapper, zodat de hoofdfoto de hoogte bepaalt (geen restrook). */}
               {car.gallery.length > 1 && (
-                <div className="thumb-scroll flex gap-3 overflow-x-auto sm:max-h-[560px] sm:w-24 sm:flex-col sm:overflow-x-visible sm:overflow-y-auto sm:pr-4">
-                  {car.gallery.map((src, i) => (
-                    <button
-                      key={src}
-                      type="button"
-                      onClick={() => setActiveImage(i)}
-                      aria-label={`Toon foto ${i + 1}`}
-                      aria-current={i === activeImage}
-                      className={`aspect-square size-16 shrink-0 cursor-pointer overflow-hidden rounded-xl border transition-all duration-200 sm:size-20 ${
-                        i === activeImage
-                          ? "border-gold opacity-100"
-                          : "border-white/10 opacity-60 hover:opacity-100"
-                      }`}
-                    >
-                      <img
-                        src={src}
-                        alt=""
-                        loading="lazy"
-                        className="h-full w-full object-cover"
-                      />
-                    </button>
-                  ))}
+                <div className="sm:relative sm:w-24 sm:shrink-0">
+                  <div className="thumb-scroll flex gap-3 overflow-x-auto sm:absolute sm:inset-0 sm:flex-col sm:overflow-x-visible sm:overflow-y-auto sm:pr-4">
+                    {car.gallery.map((src, i) => (
+                      <button
+                        key={src}
+                        type="button"
+                        onClick={() => setActiveImage(i)}
+                        aria-label={`Toon foto ${i + 1}`}
+                        aria-current={i === activeImage}
+                        className={`aspect-square size-16 shrink-0 cursor-pointer overflow-hidden rounded-xl border transition-all duration-200 sm:size-20 ${
+                          i === activeImage
+                            ? "border-gold opacity-100"
+                            : "border-white/10 opacity-60 hover:opacity-100"
+                        }`}
+                      >
+                        <img
+                          src={src}
+                          alt=""
+                          loading="lazy"
+                          className="h-full w-full object-cover"
+                        />
+                      </button>
+                    ))}
+                  </div>
                 </div>
               )}
 
