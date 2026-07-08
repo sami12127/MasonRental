@@ -264,7 +264,7 @@ export function CarDetailPage() {
           </div>
 
           <Reveal delay={0.1}>
-            <div className="flex flex-col gap-6 lg:sticky lg:top-36 lg:self-start">
+            <div className="flex flex-col gap-6">
               {/* Tarieven-card */}
               <div className="rounded-2xl border border-gold/25 bg-charcoal p-5">
                 <h2 className="text-xl font-bold text-gold">Tarieven</h2>

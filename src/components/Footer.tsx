@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import {
   InstagramLogoIcon,
   MapPinIcon,
+  SnapchatLogoIcon,
+  TiktokLogoIcon,
   WhatsappLogoIcon,
 } from "@phosphor-icons/react";
 
@@ -13,6 +15,8 @@ const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent
 const socials = [
   { icon: WhatsappLogoIcon, label: "WhatsApp", href: whatsappHref },
   { icon: InstagramLogoIcon, label: "Instagram", href: "https://instagram.com/masonrental" },
+  { icon: TiktokLogoIcon, label: "TikTok", href: "https://tiktok.com/@masonrental" },
+  { icon: SnapchatLogoIcon, label: "Snapchat", href: "https://snapchat.com/add/masonrental" },
 ];
 
 export function Footer() {

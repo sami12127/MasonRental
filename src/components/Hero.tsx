@@ -26,9 +26,9 @@ export function Hero() {
         animate={reduceMotion ? undefined : { scale: 1 }}
         transition={{ duration: 2.4, ease: "easeOut" }}
       />
-      {/* Lichte scrims — net genoeg voor leesbaarheid, foto blijft goed zichtbaar */}
-      <div className="absolute inset-0 bg-night/30" />
-      <div className="absolute inset-0 bg-gradient-to-t from-night/60 via-transparent to-night/20" />
+      {/* Donkere scrims — meer contrast, foto blijft zichtbaar */}
+      <div className="absolute inset-0 bg-night/55" />
+      <div className="absolute inset-0 bg-gradient-to-t from-night/80 via-night/40 to-night/50" />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-20 lg:px-10">
         <div className="mx-auto max-w-3xl text-center">
