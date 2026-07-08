@@ -1,34 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { motion, useReducedMotion } from "framer-motion";
-import type { TargetAndTransition, Transition } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   ArrowLeftIcon,
   ArrowsOutIcon,
-  BankIcon,
-  CalendarBlankIcon,
   CheckIcon,
-  DeviceMobileIcon,
-  DoorOpenIcon,
-  EngineIcon,
-  GasPumpIcon,
-  GaugeIcon,
-  GearIcon,
-  GearSixIcon,
-  InfinityIcon,
-  LightningIcon,
-  MapPinIcon,
-  MoneyIcon,
-  ShieldCheckIcon,
-  TimerIcon,
-  UserIcon,
-  UsersIcon,
   WhatsappLogoIcon,
 } from "@phosphor-icons/react";
-import type { Icon } from "@phosphor-icons/react";
 import { getCarById } from "../data/cars";
 import type { HighlightIcon } from "../data/cars";
 import { Reveal } from "../components/ui/Reveal";
+import { LottieIcon } from "../components/ui/LottieIcon";
 import { ContactCTA } from "../components/ContactCTA";
 
 /* Vervang door je eigen WhatsApp-nummer (internationaal, zonder + of spaties) */
@@ -36,86 +18,31 @@ const WHATSAPP_NUMBER = "31618623757";
 
 /* Betaalmogelijkheden — geldt voor alle auto's */
 const paymentMethods = [
-  { icon: MoneyIcon, label: "Contant betalen" },
-  { icon: BankIcon, label: "Veilig via bankoverschrijving" },
-  { icon: DeviceMobileIcon, label: "Tikkie" },
+  { lottie: "/lottie_animations/money.json", label: "Contant betalen" },
+  { lottie: "/lottie_animations/bankoverschrijving.json", label: "Veilig via bankoverschrijving" },
+  { lottie: "/lottie_animations/tikkie.json", label: "Tikkie" },
 ];
 
-const highlightIcons: Record<HighlightIcon, Icon> = {
-  age: UserIcon,
-  power: LightningIcon,
-  doors: DoorOpenIcon,
-  topspeed: GaugeIcon,
-  gearbox: GearSixIcon,
-  acceleration: TimerIcon,
-  fuel: GasPumpIcon,
-  transmission: GearIcon,
-  year: CalendarBlankIcon,
-  seats: UsersIcon,
-  engine: EngineIcon,
-  location: MapPinIcon,
-};
-
-/* Continue, subtiele animatie per icoontype — passend bij wat het icoon voorstelt */
-const iconMotions: Record<
-  HighlightIcon,
-  { animate: TargetAndTransition; transition: Transition }
-> = {
-  power: {
-    animate: { scale: [1, 1.18, 1], opacity: [1, 0.65, 1] },
-    transition: { duration: 1.4, repeat: Infinity, ease: "easeInOut" },
-  },
-  gearbox: {
-    animate: { rotate: 360 },
-    transition: { duration: 6, repeat: Infinity, ease: "linear" },
-  },
-  transmission: {
-    animate: { rotate: 360 },
-    transition: { duration: 7, repeat: Infinity, ease: "linear" },
-  },
-  topspeed: {
-    animate: { rotate: [-10, 10, -10] },
-    transition: { duration: 2.2, repeat: Infinity, ease: "easeInOut" },
-  },
-  acceleration: {
-    animate: { scale: [1, 1.12, 1] },
-    transition: { duration: 1.6, repeat: Infinity, ease: "easeInOut" },
-  },
-  engine: {
-    animate: { rotate: [-2.5, 2.5, -2.5] },
-    transition: { duration: 0.5, repeat: Infinity, ease: "easeInOut" },
-  },
-  fuel: {
-    animate: { y: [0, -3, 0] },
-    transition: { duration: 2.4, repeat: Infinity, ease: "easeInOut" },
-  },
-  age: {
-    animate: { y: [0, -4, 0] },
-    transition: { duration: 3, repeat: Infinity, ease: "easeInOut" },
-  },
-  doors: {
-    animate: { y: [0, -4, 0] },
-    transition: { duration: 3.2, repeat: Infinity, ease: "easeInOut" },
-  },
-  year: {
-    animate: { y: [0, -4, 0] },
-    transition: { duration: 3.4, repeat: Infinity, ease: "easeInOut" },
-  },
-  seats: {
-    animate: { y: [0, -4, 0] },
-    transition: { duration: 2.8, repeat: Infinity, ease: "easeInOut" },
-  },
-  location: {
-    animate: { y: [0, -4, 0] },
-    transition: { duration: 3, repeat: Infinity, ease: "easeInOut" },
-  },
+/* Lottie-animatie per highlight-type — vervangt de statische icoontjes */
+const highlightLotties: Record<HighlightIcon, string> = {
+  age: "/lottie_animations/driver.json",
+  power: "/lottie_animations/horsepower.json",
+  doors: "/lottie_animations/door.json",
+  topspeed: "/lottie_animations/speedometer.json",
+  gearbox: "/lottie_animations/tandwiel.json",
+  acceleration: "/lottie_animations/stopwatch.json",
+  fuel: "/lottie_animations/fuel.json",
+  transmission: "/lottie_animations/schakelen.json",
+  year: "/lottie_animations/agenda.json",
+  seats: "/lottie_animations/gordel.json",
+  engine: "/lottie_animations/engine.json",
+  location: "/lottie_animations/location.json",
 };
 
 export function CarDetailPage() {
   const { id } = useParams();
   const car = getCarById(id);
   const [activeImage, setActiveImage] = useState(0);
-  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     setActiveImage(0);
@@ -239,25 +166,17 @@ export function CarDetailPage() {
               <h2 className="text-2xl font-bold text-white md:text-3xl">Handig om te weten</h2>
               <div className="mt-4 h-px w-14 bg-gold/60" aria-hidden="true" />
               <ul className="mt-8 grid gap-x-16 gap-y-3 sm:grid-cols-2">
-                {car.highlights.map((highlight) => {
-                  const HlIcon = highlightIcons[highlight.icon];
-                  const iconMotion = iconMotions[highlight.icon];
-                  return (
-                    <li key={highlight.text} className="flex items-center gap-4">
-                      <motion.span
-                        className="inline-flex shrink-0 text-gold"
-                        style={{ transformOrigin: "center" }}
-                        animate={reduceMotion ? undefined : iconMotion.animate}
-                        transition={reduceMotion ? undefined : iconMotion.transition}
-                      >
-                        <HlIcon size={30} weight="duotone" aria-hidden="true" />
-                      </motion.span>
-                      <span className="text-base font-medium text-white md:text-lg">
-                        {highlight.text}
-                      </span>
-                    </li>
-                  );
-                })}
+                {car.highlights.map((highlight) => (
+                  <li key={highlight.text} className="flex items-center gap-4">
+                    <LottieIcon
+                      src={highlightLotties[highlight.icon]}
+                      className="inline-flex size-9 shrink-0"
+                    />
+                    <span className="text-base font-medium text-white md:text-lg">
+                      {highlight.text}
+                    </span>
+                  </li>
+                ))}
               </ul>
             </div>
           </Reveal>
@@ -271,7 +190,7 @@ export function CarDetailPage() {
                 <dl className="mt-4 space-y-3">
                   <div className="flex items-center justify-between">
                     <dt className="flex items-center gap-2 text-base font-semibold text-white">
-                      <CalendarBlankIcon size={20} className="text-gold" aria-hidden="true" />
+                      <LottieIcon src="/lottie_animations/kalender.json" className="inline-flex size-6 shrink-0" />
                       Dagprijs
                     </dt>
                     <dd className="text-base font-bold text-white">
@@ -280,7 +199,7 @@ export function CarDetailPage() {
                   </div>
                   <div className="flex items-center justify-between">
                     <dt className="flex items-center gap-2 text-base font-semibold text-white">
-                      <ShieldCheckIcon size={20} className="text-gold" aria-hidden="true" />
+                      <LottieIcon src="/lottie_animations/borg.json" className="inline-flex size-6 shrink-0" />
                       Borg
                     </dt>
                     <dd className="text-base font-bold text-white">
@@ -289,7 +208,7 @@ export function CarDetailPage() {
                   </div>
                   <div className="flex items-center justify-between">
                     <dt className="flex items-center gap-2 text-base font-semibold text-white">
-                      <InfinityIcon size={20} className="text-gold" aria-hidden="true" />
+                      <LottieIcon src="/lottie_animations/infinty.json" className="inline-flex size-6 shrink-0" />
                       Kilometers
                     </dt>
                     <dd className="text-base font-bold text-white">Onbeperkt vrij</dd>
@@ -310,7 +229,7 @@ export function CarDetailPage() {
                       key={method.label}
                       className="flex items-center gap-2 text-base font-semibold text-white"
                     >
-                      <method.icon size={20} className="shrink-0 text-gold" aria-hidden="true" />
+                      <LottieIcon src={method.lottie} className="inline-flex size-6 shrink-0" />
                       {method.label}
                     </li>
                   ))}

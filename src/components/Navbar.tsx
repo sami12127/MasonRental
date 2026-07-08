@@ -4,14 +4,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { ListIcon, XIcon } from "@phosphor-icons/react";
 import { useTransitionNavigate } from "./PageTransition";
 
-type NavLink =
-  | { label: string; id: string; to?: undefined }
-  | { label: string; to: string; hash?: string; id?: undefined };
+type NavLink = { label: string; to: string; hash?: string };
 
 const links: NavLink[] = [
-  { label: "Home", id: "home" },
-  { label: "Aanbod", id: "aanbod" },
-  { label: "Over ons", id: "over-ons" },
+  { label: "Home", to: "/" },
+  { label: "Aanbod", to: "/aanbod" },
+  { label: "Over ons", to: "/over-ons" },
   { label: "Contact & FAQ", to: "/contact" },
 ];
 
@@ -31,39 +29,25 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /** Navigeert naar een homepage-sectie, ook vanaf een detailpagina. */
-  const goToSection = (id: string) => {
-    setOpen(false);
-    if (pathname === "/") {
-      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    } else {
-      nav(`/#${id}`);
-    }
-  };
-
-  /** Navigeert naar een aparte pagina (bv. /contact), eventueel naar een sectie. */
+  /** Navigeert naar een aparte pagina (bv. /aanbod), eventueel naar een sectie. */
   const goToPage = (to: string, hash?: string) => {
     setOpen(false);
-    if (pathname === to && hash) {
-      document.getElementById(hash)?.scrollIntoView({ behavior: "smooth" });
+    if (pathname === to) {
+      // Al op deze pagina: scroll naar de sectie of naar boven.
+      if (hash) document.getElementById(hash)?.scrollIntoView({ behavior: "smooth" });
+      else window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
       nav(hash ? `${to}#${hash}` : to);
     }
   };
 
-  const handleLink = (link: NavLink) => {
-    if (link.to) goToPage(link.to, link.hash);
-    else goToSection(link.id);
-  };
+  const handleLink = (link: NavLink) => goToPage(link.to, link.hash);
 
-  const goHome = () => {
-    setOpen(false);
-    if (pathname === "/") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } else {
-      nav("/");
-    }
-  };
+  /** Markeert het huidige tabblad, ook op onderliggende pagina's. */
+  const isActive = (to: string) =>
+    to === "/" ? pathname === "/" : pathname === to || pathname.startsWith(`${to}/`);
+
+  const goHome = () => goToPage("/");
 
   return (
     <header
@@ -110,7 +94,10 @@ export function Navbar() {
               <button
                 type="button"
                 onClick={() => handleLink(link)}
-                className="cursor-pointer text-lg font-bold text-white transition-colors duration-200 hover:text-gold"
+                aria-current={isActive(link.to) ? "page" : undefined}
+                className={`cursor-pointer text-lg font-bold transition-colors duration-200 hover:text-gold ${
+                  isActive(link.to) ? "text-gold" : "text-white"
+                }`}
               >
                 {link.label}
               </button>
@@ -144,7 +131,10 @@ export function Navbar() {
                   <button
                     type="button"
                     onClick={() => handleLink(link)}
-                    className="block w-full py-3.5 text-left text-base font-medium text-white/80 transition-colors hover:text-gold"
+                    aria-current={isActive(link.to) ? "page" : undefined}
+                    className={`block w-full py-3.5 text-left text-base font-medium transition-colors hover:text-gold ${
+                      isActive(link.to) ? "text-gold" : "text-white/80"
+                    }`}
                   >
                     {link.label}
                   </button>

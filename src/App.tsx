@@ -5,6 +5,8 @@ import { Footer } from "./components/Footer";
 import { WhatsAppButton } from "./components/WhatsAppButton";
 import { PageTransitionProvider } from "./components/PageTransition";
 import { HomePage } from "./pages/HomePage";
+import { AanbodPage } from "./pages/AanbodPage";
+import { OverOnsPage } from "./pages/OverOnsPage";
 import { CarDetailPage } from "./pages/CarDetailPage";
 import { ContactPage } from "./pages/ContactPage";
 
@@ -43,6 +45,8 @@ export default function App() {
       <main id="main">
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/aanbod" element={<AanbodPage />} />
+          <Route path="/over-ons" element={<OverOnsPage />} />
           <Route path="/auto/:id" element={<CarDetailPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="*" element={<HomePage />} />

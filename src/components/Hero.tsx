@@ -51,8 +51,8 @@ export function Hero() {
             {...fadeUp(0.4)}
             className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"
           >
-            <a
-              href="#aanbod"
+            <Link
+              to="/aanbod"
               className="group inline-flex min-h-13 cursor-pointer items-center justify-center gap-2 rounded-full bg-gold px-8 py-3.5 text-sm font-bold uppercase tracking-wide text-night transition-all duration-300 hover:bg-gold-light hover:shadow-[0_0_36px_-8px_var(--color-gold)] active:scale-[0.97]"
             >
               Ontdek ons aanbod
@@ -62,7 +62,7 @@ export function Hero() {
                 className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 aria-hidden="true"
               />
-            </a>
+            </Link>
             <Link
               to="/contact"
               className="group inline-flex min-h-13 cursor-pointer items-center justify-center gap-2 rounded-full border border-white/30 bg-white/[0.06] px-8 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition-colors duration-300 hover:border-gold hover:text-gold"

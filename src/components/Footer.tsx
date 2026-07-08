@@ -35,6 +35,27 @@ export function Footer() {
         </Link>
       </div>
 
+      {/* Paginanavigatie */}
+      <nav
+        aria-label="Footernavigatie"
+        className="relative mb-8 flex flex-wrap justify-center gap-x-8 gap-y-3 px-6"
+      >
+        {[
+          { label: "Home", to: "/" },
+          { label: "Aanbod", to: "/aanbod" },
+          { label: "Over ons", to: "/over-ons" },
+          { label: "Contact & FAQ", to: "/contact" },
+        ].map((link) => (
+          <Link
+            key={link.label}
+            to={link.to}
+            className="text-sm font-semibold text-white/60 transition-colors duration-200 hover:text-gold"
+          >
+            {link.label}
+          </Link>
+        ))}
+      </nav>
+
       {/* Socials */}
       <div className="relative flex justify-center gap-3 px-6">
         {socials.map((social) => (

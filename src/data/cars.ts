@@ -33,6 +33,8 @@ export interface CarHighlight {
 export interface Car {
   id: string;
   name: string;
+  /* Automerk — gebruikt voor het merk-filter op de aanbod-pagina */
+  brand: string;
   tagline: string;
   /* Korte kenmerken die op de aanbod-card getoond worden */
   bodyType: string;
@@ -59,6 +61,7 @@ export const cars: Car[] = [
   {
     id: "audi-rs6-c8",
     name: "Audi RS6 C8",
+    brand: "Audi",
     tagline: "De ultieme performance stationwagen",
     bodyType: "Avant",
     transmission: "Automaat",
@@ -107,6 +110,7 @@ export const cars: Car[] = [
   {
     id: "audi-rs3-8y",
     name: "Audi RS3 8Y",
+    brand: "Audi",
     tagline: "Compacte kracht met een iconisch geluid",
     bodyType: "Hatchback",
     transmission: "Automaat",
@@ -171,6 +175,8 @@ export function getCarById(id: string | undefined): Car | undefined {
    detailpagina. */
 export interface UpcomingCar {
   name: string;
+  /* Automerk — gebruikt voor het merk-filter op de aanbod-pagina */
+  brand: string;
   bodyType: string;
   /* Korte pakkende omschrijving onder de naam */
   tagline: string;
@@ -183,6 +189,7 @@ export interface UpcomingCar {
 export const upcomingCars: UpcomingCar[] = [
   {
     name: "Golf 8 GTI",
+    brand: "Volkswagen",
     bodyType: "Hot Hatch",
     tagline: "De iconische GTI in zijn scherpste vorm.",
     image: "/cars/golf-8-gti.jpg",
@@ -190,6 +197,7 @@ export const upcomingCars: UpcomingCar[] = [
   },
   {
     name: "Golf 8 R",
+    brand: "Volkswagen",
     bodyType: "Hot Hatch",
     tagline: "Vierwielaandrijving en pure prestatie.",
     image: "/cars/golf-8-r.jpg",

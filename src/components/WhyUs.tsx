@@ -1,30 +1,17 @@
-import { useEffect, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import type { TargetAndTransition, Transition } from "framer-motion";
-import Lottie from "lottie-react";
-import {
-  ArrowRightIcon,
-  CarProfileIcon,
-  HandTapIcon,
-  HeadsetIcon,
-} from "@phosphor-icons/react";
-import type { Icon } from "@phosphor-icons/react";
+import { ArrowRightIcon } from "@phosphor-icons/react";
 import { Reveal } from "./ui/Reveal";
+import { LottieIcon } from "./ui/LottieIcon";
 
 const WHATSAPP_NUMBER = "31618623757";
 const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
   "Hallo Mason Rental, ik wil graag een auto reserveren."
 )}`;
 
-type Motion = { animate: TargetAndTransition; transition: Transition };
-
 interface Step {
-  icon?: Icon;
-  /** Lottie-animatie i.p.v. een statisch icoon (bv. de euromunt) */
-  lottieSrc?: string;
+  /** Lottie-animatie als icoon. */
+  lottieSrc: string;
   title: string;
   description: string;
-  motion?: Motion;
   /** Uitgelichte (gouden) card */
   highlight?: boolean;
   cta?: { label: string; href: string };
@@ -34,56 +21,34 @@ interface Step {
 
 const steps: Step[] = [
   {
-    icon: HandTapIcon,
+    lottieSrc: "/lottie_animations/tappendeVINGER.json",
     title: "Kies jouw auto",
     description: "Kies uit ons gevarieerde aanbod jouw favoriete auto.",
-    motion: {
-      animate: { scale: [1, 0.88, 1] },
-      transition: { duration: 1.8, repeat: Infinity, ease: "easeInOut" },
-    },
   },
   {
-    icon: HeadsetIcon,
+    lottieSrc: "/lottie_animations/contactzwart.json",
     title: "Contact",
     description:
       "Neem contact met ons op via de verschillende contactmogelijkheden met de gewenste datum, je naam en natuurlijk de auto.",
     highlight: true,
     cta: { label: "Neem contact op", href: whatsappHref },
-    motion: {
-      animate: { rotate: [-8, 8, -8] },
-      transition: { duration: 2.6, repeat: Infinity, ease: "easeInOut" },
-    },
   },
   {
-    lottieSrc: "/euro.json",
+    lottieSrc: "/lottie_animations/spinnendeEURO.json",
     title: "Ontvang je prijsopgave en proefovereenkomst",
     description:
       "Na je aanvraag krijg je binnen 1 uur de prijs en een helder overzicht van onze huurvoorwaarden.",
   },
   {
-    icon: CarProfileIcon,
+    lottieSrc: "/lottie_animations/rijdendeAUTO.json",
     title: "Auto ophalen & let's go",
     description:
       "Haal je auto op bij onze locatie in Amsterdam en geniet van elke kilometer.",
-    motion: {
-      animate: { x: [0, 6, 0] },
-      transition: { duration: 1.8, repeat: Infinity, ease: "easeInOut" },
-    },
     tall: true,
   },
 ];
 
 export function WhyUs() {
-  const reduceMotion = useReducedMotion();
-  const [euroAnimation, setEuroAnimation] = useState<object | null>(null);
-
-  useEffect(() => {
-    fetch("/euro.json")
-      .then((res) => res.json())
-      .then(setEuroAnimation)
-      .catch(() => {});
-  }, []);
-
   const renderCard = (step: Step, i: number) => (
     <Reveal key={step.title} delay={i * 0.1}>
       <div
@@ -95,22 +60,7 @@ export function WhyUs() {
             : "border-white/10 bg-charcoal hover:border-gold/40"
         }`}
       >
-        {step.lottieSrc ? (
-          <div className="mb-5 size-16">
-            {euroAnimation && <Lottie animationData={euroAnimation} loop autoplay />}
-          </div>
-        ) : (
-          step.icon && (
-            <motion.span
-              className={`mb-5 inline-flex ${step.highlight ? "text-night" : "text-gold"}`}
-              style={{ transformOrigin: "center" }}
-              animate={reduceMotion ? undefined : step.motion?.animate}
-              transition={reduceMotion ? undefined : step.motion?.transition}
-            >
-              <step.icon size={56} weight="light" aria-hidden="true" />
-            </motion.span>
-          )
-        )}
+        <LottieIcon src={step.lottieSrc} className="mb-5 size-16" />
 
         <h3
           className={`text-sm font-bold uppercase tracking-wide ${

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { ArrowRightIcon } from "@phosphor-icons/react";
 import { Reveal } from "./ui/Reveal";
 
@@ -47,8 +48,8 @@ export function Showcase() {
                 te genieten van luxe en stijl — wij hebben een passend aanbod om
                 uit te kiezen.
               </p>
-              <a
-                href="#aanbod"
+              <Link
+                to="/aanbod"
                 className="group mt-9 inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-full bg-gold px-8 py-3.5 text-sm font-bold uppercase tracking-wide text-night transition-all duration-300 hover:bg-gold-light hover:shadow-[0_0_36px_-8px_var(--color-gold)] active:scale-[0.97]"
               >
                 Bekijk het aanbod
@@ -58,7 +59,7 @@ export function Showcase() {
                   className="transition-transform duration-300 group-hover:translate-x-1"
                   aria-hidden="true"
                 />
-              </a>
+              </Link>
             </div>
           </Reveal>
 
