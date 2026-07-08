@@ -18,7 +18,7 @@ export function Hero() {
     >
       {/* Achtergrondfoto. Vervang eventueel via /public/cars */}
       <motion.img
-        src="/cars/rs3-01.jpg"
+        src="/cars/rs3-01.webp"
         alt=""
         aria-hidden="true"
         className="absolute inset-0 h-full w-full object-cover"

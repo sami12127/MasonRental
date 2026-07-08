@@ -11,7 +11,7 @@ export function HomePage() {
       <Showcase />
       <Fleet cta={{ label: "Bekijk het volledige aanbod", to: "/aanbod" }} />
       <Reviews />
-      <ContactCTA image="/cars/rs6-1.jpg" imageAlt="Audi RS6" />
+      <ContactCTA image="/cars/rs6-1.webp" imageAlt="Audi RS6" />
     </>
   );
 }

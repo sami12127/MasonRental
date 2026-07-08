@@ -6,10 +6,10 @@ import { Reveal } from "./ui/Reveal";
 
 /* Foto's voor de carrousel — vervang of vul aan via /public/cars */
 const slides = [
-  "/cars/rs3-15.jpg", // RS6 + RS3 samen
-  "/cars/rs6-2.jpg", // RS6
-  "/cars/rs3-6573.jpg", // RS3
-  "/cars/rs3-6570.jpg", // RS3
+  "/cars/rs3-15.webp", // RS6 + RS3 samen
+  "/cars/rs6-2.webp", // RS6
+  "/cars/rs3-6573.webp", // RS3
+  "/cars/rs3-6570.webp", // RS3
 ];
 
 const AUTOPLAY_MS = 3000;

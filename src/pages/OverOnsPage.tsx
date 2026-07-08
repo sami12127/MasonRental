@@ -20,13 +20,13 @@ export function OverOnsPage() {
         title="Alleen het beste is"
         titleAccent="goed genoeg"
         description="Exclusieve autoverhuur zonder gedoe — voor klanten die alleen genoegen nemen met het beste."
-        image="/cars/rs3-6573.jpg"
+        image="/cars/rs3-6573.webp"
         imageAlt="Audi RS3"
       />
       <About showHeading={false} />
       <WhyUs />
       <Reviews />
-      <ContactCTA image="/cars/rs6-1.jpg" imageAlt="Audi RS6" />
+      <ContactCTA image="/cars/rs6-1.webp" imageAlt="Audi RS6" />
     </>
   );
 }
