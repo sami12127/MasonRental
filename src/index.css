@@ -19,6 +19,34 @@ html {
   scrollbar-color: var(--color-gold) transparent;
 }
 
+/* Gouden light-sweep over het curtain-logo tijdens de page transition.
+   Een smalle gouden band wordt via de logo-vorm gemaskeerd en horizontaal
+   over het logo geschoven (background-position wordt door framer-motion
+   geanimeerd). mix-blend-mode: multiply tint alleen de witte logo-pixels
+   goud, zodat het als een subtiele lichtreflectie leest — het logo zelf
+   blijft qua vorm en details exact hetzelfde. */
+.logo-shimmer {
+  background-image: linear-gradient(
+    100deg,
+    rgba(201, 163, 78, 0) 40%,
+    rgba(201, 163, 78, 0.5) 47%,
+    rgba(224, 193, 121, 0.92) 50%,
+    rgba(201, 163, 78, 0.5) 53%,
+    rgba(201, 163, 78, 0) 60%
+  );
+  background-size: 250% 100%;
+  background-repeat: no-repeat;
+  -webkit-mask-image: url("/logo-curtain.png");
+  mask-image: url("/logo-curtain.png");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  mix-blend-mode: multiply;
+}
+
 /* Oneindige logo-carrousel */
 @keyframes marquee {
   from {

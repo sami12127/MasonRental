@@ -1,11 +1,16 @@
 import { Reveal } from "./ui/Reveal";
 
+const DEFAULT_TEXT =
+  "Mason Rental staat voor exclusieve autoverhuur zonder gedoe. Wij bieden een zorgvuldig geselecteerd wagenpark met high-performance auto's voor klanten die alleen genoegen nemen met het beste.";
+
 interface AboutProps {
   /** Toon de sectiekop. Uit op de /over-ons-pagina, die al een PageHero heeft. */
   showHeading?: boolean;
+  /** Alinea-tekst — zodat home en /over-ons een andere tekst kunnen tonen. */
+  text?: string;
 }
 
-export function About({ showHeading = true }: AboutProps) {
+export function About({ showHeading = true, text = DEFAULT_TEXT }: AboutProps) {
   return (
     <section
       id="over-ons"
@@ -25,9 +30,7 @@ export function About({ showHeading = true }: AboutProps) {
         )}
         <Reveal delay={showHeading ? 0.15 : 0}>
           <p className={`text-lg leading-relaxed text-white/70 ${showHeading ? "mt-8" : ""}`}>
-            Mason Rental staat voor exclusieve autoverhuur zonder gedoe. Wij bieden
-            een zorgvuldig geselecteerd wagenpark met high-performance auto's voor
-            klanten die alleen genoegen nemen met het beste.
+            {text}
           </p>
         </Reveal>
       </div>

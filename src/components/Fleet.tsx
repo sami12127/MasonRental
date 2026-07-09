@@ -60,12 +60,12 @@ export function Fleet({
     <section
       id="aanbod"
       className={`bg-night pb-14 md:pb-16 ${
-        showHeading ? "pt-20 md:pt-28" : "pt-4 md:pt-6"
+        showHeading ? "pt-20 md:pt-28" : "pt-0 md:pt-0"
       }`}
     >
       {/* Bredere sectie dan de rest van de site, zodat 4 grote kaarten
          naast elkaar passen. Responsieve max-breedte = nooit horizontale scroll. */}
-      <div className="mx-auto max-w-[1600px] px-6 lg:px-10">
+      <div className="mx-auto max-w-[1840px] px-6 lg:px-10">
         {showHeading && (
           <SectionHeading
             title="Ons"
@@ -153,8 +153,8 @@ function FilterGroup({
   onSelect: (value: string) => void;
 }) {
   return (
-    <div className="flex flex-wrap items-center gap-2.5" role="group" aria-label={`Filter op ${label.toLowerCase()}`}>
-      <span className="mr-1 w-16 text-xs font-semibold uppercase tracking-[0.15em] text-white/40">
+    <div className="flex flex-wrap items-center gap-3" role="group" aria-label={`Filter op ${label.toLowerCase()}`}>
+      <span className="mr-1 text-sm font-semibold uppercase tracking-[0.15em] text-white/50 md:text-base">
         {label}
       </span>
       {options.map((option) => {
@@ -165,7 +165,7 @@ function FilterGroup({
             type="button"
             onClick={() => onSelect(option)}
             aria-pressed={selected}
-            className={`min-h-10 cursor-pointer rounded-full px-4 text-sm font-semibold transition-all duration-200 ${
+            className={`min-h-12 cursor-pointer rounded-full px-5 text-base font-semibold transition-all duration-200 md:px-6 ${
               selected
                 ? "bg-gold text-night"
                 : "border border-white/15 text-white/70 hover:border-gold/50 hover:text-white"
@@ -193,7 +193,7 @@ function CarCard({ car, delay }: { car: Car; delay: number }) {
         <Link
           to={`/auto/${car.id}`}
           aria-label={`Bekijk de ${car.name}`}
-          className="group relative flex aspect-[3/4] flex-col justify-end overflow-hidden rounded-[2rem] border border-white/10"
+          className="group relative flex aspect-[5/7] flex-col justify-end overflow-hidden rounded-[2rem] border border-white/10"
         >
           {/* Basisfoto — vervaagt bij hover */}
           <img
@@ -264,7 +264,7 @@ function UpcomingCard({ car, delay }: { car: UpcomingCar; delay: number }) {
   const hoverImage = car.hoverImage ?? car.image;
   return (
     <Reveal delay={delay}>
-      <div className="group relative flex aspect-[3/4] flex-col justify-end overflow-hidden rounded-[2rem] border border-white/10 bg-charcoal">
+      <div className="group relative flex aspect-[5/7] flex-col justify-end overflow-hidden rounded-[2rem] border border-white/10 bg-charcoal">
         {/* Exterieurfoto — grijs & gedimd zodat het als 'nog niet beschikbaar' leest */}
         <img
           src={car.image}

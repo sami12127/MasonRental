@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Contact } from "../components/Contact";
 import { FAQ } from "../components/FAQ";
+import { Social } from "../components/Social";
 
 export function ContactPage() {
   useEffect(() => {
@@ -12,8 +13,9 @@ export function ContactPage() {
 
   return (
     <div className="pt-16 sm:pt-20">
-      <Contact />
       <FAQ />
+      <Contact />
+      <Social />
     </div>
   );
 }

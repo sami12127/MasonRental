@@ -19,10 +19,9 @@ export function AanbodPage() {
         title="Ons"
         titleAccent="aanbod"
         description="Een zorgvuldig geselecteerd wagenpark met high-performance auto's, altijd in perfecte staat en klaar voor jouw moment."
-        image="/cars/rs6-2.webp"
-        imageAlt="Audi RS6"
+        compact
       />
-      <Fleet showHeading={false} filterable />
+      <Fleet showHeading={false} />
       <HowItWorks />
       <ContactCTA image="/cars/rs3-01.webp" imageAlt="Audi RS3" />
     </>

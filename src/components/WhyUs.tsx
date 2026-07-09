@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { ArrowRightIcon } from "@phosphor-icons/react";
 import { Reveal } from "./ui/Reveal";
 import { LottieIcon } from "./ui/LottieIcon";
@@ -48,7 +49,25 @@ const steps: Step[] = [
   },
 ];
 
-export function WhyUs() {
+interface WhyUsProps {
+  eyebrow?: string;
+  title?: ReactNode;
+  intro?: string;
+}
+
+const DEFAULT_TITLE = (
+  <>
+    De juiste <span className="text-gold">auto</span>, geweldige service
+  </>
+);
+const DEFAULT_INTRO =
+  "Bij ons draait alles om eenvoud en gemak. Van het uitkiezen van jouw favoriete auto tot het ophalen ervan — wij zorgen voor een soepel proces en persoonlijke aandacht. Ontdek waarom klanten telkens weer voor ons kiezen.";
+
+export function WhyUs({
+  eyebrow = "Waarom voor ons kiezen?",
+  title = DEFAULT_TITLE,
+  intro = DEFAULT_INTRO,
+}: WhyUsProps = {}) {
   const renderCard = (step: Step, i: number) => (
     <Reveal key={step.title} delay={i * 0.1}>
       <div
@@ -104,16 +123,13 @@ export function WhyUs() {
         <Reveal>
           <div>
             <p className="mb-4 text-xs font-medium uppercase tracking-[0.3em] text-gold">
-              Waarom voor ons kiezen?
+              {eyebrow}
             </p>
             <h2 className="text-3xl font-bold leading-tight tracking-tight text-white md:text-5xl">
-              De juiste <span className="text-gold">auto</span>, geweldige service
+              {title}
             </h2>
             <p className="mt-6 max-w-md text-base leading-relaxed text-mist">
-              Bij ons draait alles om eenvoud en gemak. Van het uitkiezen van jouw
-              favoriete auto tot het ophalen ervan — wij zorgen voor een soepel
-              proces en persoonlijke aandacht. Ontdek waarom klanten telkens weer
-              voor ons kiezen.
+              {intro}
             </p>
           </div>
         </Reveal>

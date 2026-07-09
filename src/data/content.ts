@@ -47,6 +47,31 @@ export const faqs = [
     answer:
       "Kies jouw auto en stuur ons een bericht via WhatsApp. Wij nemen dezelfde dag nog contact met je op om alles te bevestigen.",
   },
+  {
+    question: "Wat heb ik nodig om te huren?",
+    answer:
+      "Je hebt een geldig rijbewijs, een geldig identiteitsbewijs en een geldige betaalmethode nodig. Bij het ophalen controleren we deze gegevens kort.",
+  },
+  {
+    question: "Kan ik de auto laten bezorgen?",
+    answer:
+      "Ja, bezorgen en ophalen is in overleg mogelijk binnen en rond Amsterdam. Laat ons je locatie weten, dan stemmen we de kosten en het tijdstip af.",
+  },
+  {
+    question: "Zit er een kilometerlimiet op?",
+    answer:
+      "Elke huurperiode heeft een ruime dagelijkse kilometerbundel. Rij je meer? Dan rekenen we een vast tarief per extra kilometer, dat je vooraf van ons hoort.",
+  },
+  {
+    question: "Kan ik mijn huurperiode verlengen?",
+    answer:
+      "Zeker, verlengen kan mits de auto beschikbaar blijft. Geef het tijdig door via WhatsApp, dan regelen wij de verlenging en de bijbehorende kosten.",
+  },
+  {
+    question: "Hoe kan ik betalen?",
+    answer:
+      "Betalen kan eenvoudig via overboeking of Tikkie. De borg en het huurbedrag worden vooraf voldaan; na een correcte teruggave ontvang je de borg volledig terug.",
+  },
 ];
 
 export const steps = [

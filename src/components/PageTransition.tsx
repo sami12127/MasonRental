@@ -36,6 +36,7 @@ export function PageTransitionProvider({ children }: { children: ReactNode }) {
   const reduceMotion = useReducedMotion();
   const curtain = useAnimation();
   const logo = useAnimation();
+  const shimmer = useAnimation();
   const running = useRef(false);
 
   const go = useCallback(
@@ -52,22 +53,40 @@ export function PageTransitionProvider({ children }: { children: ReactNode }) {
       running.current = true;
 
       // 1. Scherm zakt naar beneden en dekt de huidige pagina af.
+      //    Het logo fade't in, schaalt subtiel op en krijgt een zachte
+      //    gouden glow — premium merkintro.
       curtain.set({ y: "-100%" });
-      logo.set({ opacity: 0, scale: 0.92 });
+      logo.set({
+        opacity: 0,
+        scale: 0.92,
+        filter: "drop-shadow(0 0 0px rgba(201,163,78,0))",
+      });
+      shimmer.set({ backgroundPosition: "-60% 0" });
       await Promise.all([
         curtain.start({ y: "0%", transition: { duration: 0.6, ease: EASE } }),
         logo.start({
           opacity: 1,
           scale: 1,
-          transition: { duration: 0.55, ease: "easeOut" },
+          filter: [
+            "drop-shadow(0 0 0px rgba(201,163,78,0))",
+            "drop-shadow(0 0 26px rgba(201,163,78,0.5))",
+            "drop-shadow(0 0 14px rgba(201,163,78,0.28))",
+          ],
+          transition: { duration: 0.75, ease: "easeOut" },
         }),
       ]);
+
+      // Eén elegante gouden light-sweep die over het logo glijdt.
+      shimmer.start({
+        backgroundPosition: "160% 0",
+        transition: { duration: 0.9, ease: [0.4, 0, 0.2, 1] },
+      });
 
       // 2. Navigeer nu de pagina volledig afgedekt is.
       navigate(to);
 
-      // Even vasthouden met het logo in beeld.
-      await new Promise((r) => setTimeout(r, 450));
+      // Even vasthouden met het logo in beeld (light-sweep loopt af).
+      await new Promise((r) => setTimeout(r, 520));
 
       // 3. Logo vervaagt, scherm schuift verder weg → nieuwe pagina.
       logo.start({ opacity: 0, transition: { duration: 0.35 } });
@@ -75,7 +94,7 @@ export function PageTransitionProvider({ children }: { children: ReactNode }) {
 
       running.current = false;
     },
-    [navigate, location.pathname, reduceMotion, curtain, logo]
+    [navigate, location.pathname, reduceMotion, curtain, logo, shimmer]
   );
 
   // Onderschep interne link-clicks zodat elke <Link> de curtain krijgt.
@@ -121,15 +140,26 @@ export function PageTransitionProvider({ children }: { children: ReactNode }) {
         initial={{ y: "-100%" }}
         animate={curtain}
       >
-        <motion.img
-          src="/logo-curtain.png"
-          alt=""
-          width={416}
-          height={313}
-          className="w-72 max-w-[72vw] md:w-[26rem]"
+        <motion.div
+          className="relative isolate w-72 max-w-[72vw] md:w-[26rem]"
           initial={{ opacity: 0, scale: 0.92 }}
           animate={logo}
-        />
+        >
+          <img
+            src="/logo-curtain.png"
+            alt=""
+            width={688}
+            height={518}
+            className="block w-full"
+          />
+          {/* Gouden light-sweep, gemaskeerd op de logo-vorm. */}
+          <motion.span
+            aria-hidden="true"
+            className="logo-shimmer absolute inset-0"
+            initial={{ backgroundPosition: "-60% 0" }}
+            animate={shimmer}
+          />
+        </motion.div>
       </motion.div>
     </TransitionContext.Provider>
   );

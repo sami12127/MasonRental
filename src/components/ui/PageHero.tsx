@@ -10,6 +10,8 @@ interface PageHeroProps {
   /* Optionele achtergrondfoto — anders een strakke nachtblauwe band */
   image?: string;
   imageAlt?: string;
+  /* Compactere band: minder verticale ruimte, tekst zit hoger */
+  compact?: boolean;
 }
 
 /**
@@ -24,11 +26,18 @@ export function PageHero({
   description,
   image,
   imageAlt = "",
+  compact = false,
 }: PageHeroProps) {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section className="relative overflow-hidden bg-night pt-32 pb-16 sm:pt-40 md:pt-44 md:pb-24">
+    <section
+      className={
+        compact
+          ? "relative overflow-hidden bg-night pt-28 pb-10 sm:pt-32 md:pt-32 md:pb-14"
+          : "relative overflow-hidden bg-night pt-32 pb-16 sm:pt-40 md:pt-44 md:pb-24"
+      }
+    >
       {image && (
         <>
           <motion.img
