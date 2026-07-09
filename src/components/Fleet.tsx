@@ -96,7 +96,7 @@ export function Fleet({
             <button
               type="button"
               onClick={resetFilters}
-              className="mt-6 inline-flex min-h-11 cursor-pointer items-center rounded-full bg-gold px-6 text-sm font-semibold text-night transition-colors hover:bg-gold-light"
+              className="mt-6 inline-flex min-h-11 cursor-pointer items-center rounded-none bg-gold px-6 text-sm font-semibold text-night transition-colors hover:bg-gold-light"
             >
               Toon alles
             </button>
@@ -122,7 +122,7 @@ export function Fleet({
           <Reveal className="mt-12 flex justify-center md:mt-14">
             <Link
               to={cta.to}
-              className="group inline-flex min-h-13 cursor-pointer items-center justify-center gap-2 rounded-full bg-gold px-9 py-3.5 text-sm font-bold uppercase tracking-wide text-night transition-all duration-300 hover:bg-gold-light hover:shadow-[0_0_36px_-8px_var(--color-gold)] active:scale-[0.97]"
+              className="group inline-flex min-h-13 cursor-pointer items-center justify-center gap-2 rounded-none bg-gold px-9 py-3.5 text-sm font-bold uppercase tracking-wide text-night transition-all duration-300 hover:bg-gold-light hover:shadow-[0_0_36px_-8px_var(--color-gold)] active:scale-[0.97]"
             >
               {cta.label}
               <ArrowRightIcon
@@ -165,7 +165,7 @@ function FilterGroup({
             type="button"
             onClick={() => onSelect(option)}
             aria-pressed={selected}
-            className={`min-h-12 cursor-pointer rounded-full px-5 text-base font-semibold transition-all duration-200 md:px-6 ${
+            className={`min-h-12 cursor-pointer rounded-none px-5 text-base font-semibold transition-all duration-200 md:px-6 ${
               selected
                 ? "bg-gold text-night"
                 : "border border-white/15 text-white/70 hover:border-gold/50 hover:text-white"

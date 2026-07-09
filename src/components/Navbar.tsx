@@ -109,7 +109,7 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => goToPage("/contact", "contact")}
-            className="hidden min-h-11 cursor-pointer items-center rounded-full bg-gold px-6 py-2.5 text-sm font-semibold text-night transition-all duration-300 hover:bg-gold-light hover:shadow-[0_0_28px_-8px_var(--color-gold)] active:scale-[0.97] sm:inline-flex"
+            className="hidden min-h-11 cursor-pointer items-center rounded-none bg-gold px-6 py-2.5 text-sm font-semibold text-night transition-all duration-300 hover:bg-gold-light hover:shadow-[0_0_28px_-8px_var(--color-gold)] active:scale-[0.97] sm:inline-flex"
           >
             Reserveer
           </button>
@@ -144,7 +144,7 @@ export function Navbar() {
                 <button
                   type="button"
                   onClick={() => goToPage("/contact", "contact")}
-                  className="inline-flex min-h-12 w-full cursor-pointer items-center justify-center rounded-full bg-gold px-6 text-sm font-semibold text-night"
+                  className="inline-flex min-h-12 w-full cursor-pointer items-center justify-center rounded-none bg-gold px-6 text-sm font-semibold text-night"
                 >
                   Reserveer
                 </button>

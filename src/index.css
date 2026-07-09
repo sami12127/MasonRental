@@ -15,7 +15,9 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 6rem;
-  overflow-x: hidden;
+  /* clip i.p.v. hidden: voorkomt horizontale scroll zonder een scroll-context
+     te maken, zodat position: sticky (o.a. de reserveringszijbalk) blijft werken */
+  overflow-x: clip;
   scrollbar-color: var(--color-gold) transparent;
 }
 
@@ -70,7 +72,7 @@ html {
 }
 
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
   background-color: var(--color-night);
   color: #ffffff;
   font-family: var(--font-sans);

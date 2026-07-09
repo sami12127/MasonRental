@@ -84,7 +84,7 @@ export function FAQ() {
               href={whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="group mt-6 inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-full bg-gold px-7 text-sm font-bold uppercase tracking-wide text-night transition-all duration-300 hover:bg-gold-light hover:shadow-[0_0_36px_-8px_var(--color-gold)] active:scale-[0.97]"
+              className="group mt-6 inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-none bg-gold px-7 text-sm font-bold uppercase tracking-wide text-night transition-all duration-300 hover:bg-gold-light hover:shadow-[0_0_36px_-8px_var(--color-gold)] active:scale-[0.97]"
             >
               <WhatsappLogoIcon size={18} weight="fill" aria-hidden="true" />
               Stel je vraag via WhatsApp

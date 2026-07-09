@@ -24,14 +24,14 @@ export function ContactCTA({ image, imageAlt = "Mason Rental auto" }: ContactCTA
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a
                 href="tel:+31618623757"
-                className="inline-flex min-h-13 cursor-pointer items-center justify-center gap-2 rounded-full bg-night px-8 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-charcoal active:scale-[0.98]"
+                className="inline-flex min-h-13 cursor-pointer items-center justify-center gap-2 rounded-none bg-night px-8 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-charcoal active:scale-[0.98]"
               >
                 <PhoneIcon size={18} weight="fill" aria-hidden="true" />
                 06 18623757
               </a>
               <Link
                 to="/contact"
-                className="inline-flex min-h-13 cursor-pointer items-center justify-center rounded-full border border-night/40 px-8 py-3.5 text-sm font-semibold text-night transition-all duration-300 hover:bg-night hover:text-white active:scale-[0.98]"
+                className="inline-flex min-h-13 cursor-pointer items-center justify-center rounded-none border border-night/40 px-8 py-3.5 text-sm font-semibold text-night transition-all duration-300 hover:bg-night hover:text-white active:scale-[0.98]"
               >
                 Contact
               </Link>

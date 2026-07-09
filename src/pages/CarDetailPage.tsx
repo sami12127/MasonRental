@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import {
   ArrowLeftIcon,
   ArrowsOutIcon,
-  CheckIcon,
   WhatsappLogoIcon,
 } from "@phosphor-icons/react";
 import { getCarById } from "../data/cars";
@@ -59,7 +58,7 @@ export function CarDetailPage() {
         <p className="text-mist">Deze auto bestaat niet of is niet meer beschikbaar.</p>
         <Link
           to="/#aanbod"
-          className="inline-flex min-h-12 items-center gap-2 rounded-full bg-gold px-8 text-sm font-semibold text-night transition-colors hover:bg-gold-light"
+          className="inline-flex min-h-12 items-center gap-2 rounded-none bg-gold px-8 text-sm font-semibold text-night transition-colors hover:bg-gold-light"
         >
           Bekijk het aanbod
         </Link>
@@ -84,13 +83,13 @@ export function CarDetailPage() {
 
         {/* Galerij + reserveringszijbalk */}
         <div className="grid gap-8 lg:grid-cols-[2fr_1fr] lg:gap-12">
-          <div className="flex flex-col gap-12">
+          <div className="flex min-w-0 flex-col gap-12">
           <Reveal>
-            <div className="flex flex-col-reverse gap-3 sm:flex-row">
+            <div className="flex min-w-0 flex-col-reverse gap-3 sm:flex-row">
               {/* Thumbnails links. Op desktop scrollt de lijst absoluut binnen
                  een wrapper, zodat de hoofdfoto de hoogte bepaalt (geen restrook). */}
               {car.gallery.length > 1 && (
-                <div className="sm:relative sm:w-24 sm:shrink-0">
+                <div className="min-w-0 sm:relative sm:w-24 sm:shrink-0">
                   <div className="thumb-scroll flex gap-3 overflow-x-auto sm:absolute sm:inset-0 sm:flex-col sm:overflow-x-visible sm:overflow-y-auto sm:pr-4">
                     {car.gallery.map((src, i) => (
                       <button
@@ -118,7 +117,7 @@ export function CarDetailPage() {
               )}
 
               {/* Hoofdfoto met naam onderin */}
-              <div className="relative flex-1 overflow-hidden rounded-3xl border border-white/10 bg-charcoal">
+              <div className="relative min-w-0 flex-1 overflow-hidden rounded-3xl border border-white/10 bg-charcoal">
                 <motion.img
                   key={activeImage}
                   src={car.gallery[activeImage]}
@@ -126,7 +125,7 @@ export function CarDetailPage() {
                   initial={{ opacity: 0.4, scale: 1.02 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.4, ease: "easeOut" }}
-                  className="aspect-[4/3] w-full object-cover"
+                  className="w-full object-cover sm:aspect-[4/3]"
                 />
 
                 <a
@@ -183,7 +182,7 @@ export function CarDetailPage() {
           </div>
 
           <Reveal delay={0.1}>
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-6 lg:sticky lg:top-28">
               {/* Tarieven-card */}
               <div className="rounded-2xl border border-gold/25 bg-charcoal p-5">
                 <h2 className="text-xl font-bold text-gold">Tarieven</h2>
@@ -241,7 +240,7 @@ export function CarDetailPage() {
                 href={whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-13 cursor-pointer items-center justify-center gap-2 rounded-full bg-gold px-8 py-3.5 text-sm font-semibold text-night transition-all duration-300 hover:bg-gold-light hover:shadow-[0_0_28px_-8px_var(--color-gold)] active:scale-[0.98]"
+                className="inline-flex min-h-13 cursor-pointer items-center justify-center gap-2 rounded-none bg-gold px-8 py-3.5 text-sm font-semibold text-night transition-all duration-300 hover:bg-gold-light hover:shadow-[0_0_28px_-8px_var(--color-gold)] active:scale-[0.98]"
               >
                 <WhatsappLogoIcon size={20} weight="fill" aria-hidden="true" />
                 Reserveer via WhatsApp
@@ -265,9 +264,10 @@ export function CarDetailPage() {
             <ul className="mt-4 grid max-w-3xl gap-3 sm:grid-cols-2">
               {car.features.map((feature) => (
                 <li key={feature} className="flex items-center gap-2.5 text-sm text-white/80">
-                  <span className="inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-gold/10 text-gold">
-                    <CheckIcon size={14} weight="bold" aria-hidden="true" />
-                  </span>
+                  <LottieIcon
+                    src="/lottie_animations/vinlje.json"
+                    className="inline-flex size-7 shrink-0"
+                  />
                   {feature}
                 </li>
               ))}
