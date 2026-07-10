@@ -59,7 +59,7 @@ export function Navbar() {
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled || open
           ? "border-b border-white/5 bg-night/85 backdrop-blur-xl"
-          : "bg-transparent"
+          : "bg-gradient-to-b from-night/80 via-night/40 to-transparent"
       }`}
     >
       <nav

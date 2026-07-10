@@ -16,14 +16,25 @@ export function Hero() {
       id="home"
       className="relative flex min-h-dvh flex-col overflow-hidden sm:items-center"
     >
-      {/* Achtergrondfoto. Op mobiel een uitgezoomde bovenband zodat beide
-         auto's zichtbaar blijven; vanaf sm full-bleed achter de tekst. */}
-      <div className="relative h-[44vh] min-h-[15rem] w-full shrink-0 sm:absolute sm:inset-0 sm:h-full">
+      {/* Achtergrondfoto full-bleed achter de tekst. Op mobiel de staande
+         RS3-foto, vanaf sm de duo-foto. */}
+      <div className="absolute inset-0">
+        {/* Mobiel — staande RS3-foto */}
+        <motion.img
+          src="/cars/rs3-6565.webp"
+          alt=""
+          aria-hidden="true"
+          className="h-full w-full object-cover object-center sm:hidden"
+          initial={reduceMotion ? undefined : { scale: 1.08 }}
+          animate={reduceMotion ? undefined : { scale: 1 }}
+          transition={{ duration: 2.4, ease: "easeOut" }}
+        />
+        {/* Desktop — duo-foto full-bleed */}
         <motion.img
           src="/cars/rs3-01.webp"
           alt=""
           aria-hidden="true"
-          className="h-full w-full object-cover object-[28%_55%] sm:object-center"
+          className="hidden h-full w-full object-cover object-center sm:block"
           initial={reduceMotion ? undefined : { scale: 1.08 }}
           animate={reduceMotion ? undefined : { scale: 1 }}
           transition={{ duration: 2.4, ease: "easeOut" }}
@@ -31,22 +42,20 @@ export function Hero() {
         {/* Donkere scrims — meer contrast, foto blijft zichtbaar */}
         <div className="absolute inset-0 bg-night/55" />
         <div className="absolute inset-0 bg-gradient-to-t from-night/80 via-night/40 to-night/50" />
-        {/* Zachte overgang van de mobiele band naar de donkere tekstzone */}
-        <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-night to-transparent sm:hidden" />
       </div>
 
-      <div className="relative z-10 flex w-full flex-1 items-center justify-center px-6 py-10 sm:absolute sm:inset-0 sm:py-0 sm:pt-20 lg:px-10">
-        <div className="mx-auto w-full max-w-3xl text-center">
+      <div className="relative z-10 flex w-full flex-1 items-end justify-center px-6 pb-16 pt-24 sm:items-center sm:py-10 sm:pt-20 lg:px-10">
+        <div className="mx-auto w-full max-w-7xl text-left sm:max-w-3xl sm:text-center">
           <motion.h1
             {...fadeUp(0.1)}
-            className="text-5xl font-black leading-[1.02] tracking-tight text-white sm:text-6xl md:text-7xl"
+            className="text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-6xl sm:leading-[1.02] md:text-7xl"
           >
             Huur jouw droom<span className="text-gold">auto</span>.
           </motion.h1>
 
           <motion.p
             {...fadeUp(0.25)}
-            className="mx-auto mt-6 max-w-lg text-base leading-relaxed text-white/80 sm:text-lg"
+            className="mt-5 max-w-lg text-sm leading-relaxed text-white/80 sm:mx-auto sm:mt-6 sm:text-lg"
           >
             Ervaar pure prestaties, comfort en uitstraling. Stap vandaag nog in een
             auto die elke rit bijzonder maakt — zorgeloos huren vanaf 18 jaar.
@@ -54,7 +63,7 @@ export function Hero() {
 
           <motion.div
             {...fadeUp(0.4)}
-            className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"
+            className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-center"
           >
             <Link
               to="/aanbod"
