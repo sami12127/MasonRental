@@ -68,7 +68,9 @@ export const cars: Car[] = [
     bodyType: "Avant",
     transmission: "Automaat",
     doors: "5 Deurs",
-    image: "/cars/rs6-1.webp",
+    image: "/cars/rs6-1-card.webp",
+    hoverImage: "/cars/rs6-2-card.webp",
+    ctaImage: "/cars/rs6-1.webp",
     gallery: [
       "/cars/rs6-1.webp",
       "/cars/rs6-2.webp",
@@ -118,7 +120,7 @@ export const cars: Car[] = [
     transmission: "Automaat",
     doors: "5 Deurs",
     /* Eigen foto's van de RS3 staan in /public/cars (rs3-6565 t/m rs3-6573 + interieur rs3-35/36) */
-    image: "/cars/rs3-6570.webp",
+    image: "/cars/rs3-6570-card.webp",
     hoverImage: "/cars/rs3-35.webp",
     ctaImage: "/cars/rs3-01.webp",
     gallery: [
@@ -191,7 +193,7 @@ export const upcomingCars: UpcomingCar[] = [
     brand: "Volkswagen",
     bodyType: "Hot Hatch",
     tagline: "De iconische GTI in zijn scherpste vorm.",
-    image: "/cars/golf-8-gti.webp",
+    image: "/cars/golf-8-gti-card.webp",
     hoverImage: "/cars/golf-8-gti-interieur.webp",
   },
   {
@@ -199,7 +201,7 @@ export const upcomingCars: UpcomingCar[] = [
     brand: "Volkswagen",
     bodyType: "Hot Hatch",
     tagline: "Vierwielaandrijving en pure prestatie.",
-    image: "/cars/golf-8-r.webp",
+    image: "/cars/golf-8-r-card.webp",
     hoverImage: "/cars/golf-8-r-interieur.webp",
   },
 ];

@@ -74,7 +74,13 @@ export function Footer() {
 
       {/* Onderbalk */}
       <div className="relative mx-auto mt-12 flex max-w-4xl flex-col items-center gap-3 border-t border-white/10 px-6 py-6 text-xs text-white/35 sm:flex-row sm:justify-between">
-        <p>© {new Date().getFullYear()} Mason Rental. Alle rechten voorbehouden.</p>
+        <p>
+          © {new Date().getFullYear()} Mason Rental. Alle rechten voorbehouden.{" "}
+          {/* Bij launch klikbaar maken: voeg href toe, bijv. href="https://websucces.nl" */}
+          <a className="cursor-pointer font-medium text-white/45 transition-colors hover:text-gold">
+            WebSucces
+          </a>
+        </p>
         <span className="inline-flex items-center gap-1.5">
           <MapPinIcon size={15} weight="duotone" className="text-gold" aria-hidden="true" />
           Capelle aan den IJssel

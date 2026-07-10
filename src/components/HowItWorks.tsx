@@ -1,5 +1,4 @@
 import { steps } from "../data/content";
-import { Reveal } from "./ui/Reveal";
 import { SectionHeading } from "./ui/SectionHeading";
 
 export function HowItWorks() {
@@ -16,19 +15,18 @@ export function HowItWorks() {
           />
           {steps.map((step, i) => (
             <li key={step.title} className="relative">
-              <Reveal delay={i * 0.12}>
-                <div className="flex items-start gap-5 md:flex-col md:items-center md:text-center">
-                  <div className="relative z-10 flex size-12 shrink-0 items-center justify-center rounded-full border border-gold/50 bg-night text-base font-bold text-gold shadow-[0_0_24px_-6px_var(--color-gold)]">
-                    {i + 1}
-                  </div>
-                  <div className="pt-1.5 md:pt-5">
-                    <h3 className="text-lg font-bold text-white">{step.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-mist">
-                      {step.description}
-                    </p>
-                  </div>
+              {/* Geen scroll-reveal: de stappen staan er direct. */}
+              <div className="flex items-start gap-5 md:flex-col md:items-center md:text-center">
+                <div className="relative z-10 flex size-12 shrink-0 items-center justify-center rounded-full border border-gold/50 bg-night text-base font-bold text-gold shadow-[0_0_24px_-6px_var(--color-gold)]">
+                  {i + 1}
                 </div>
-              </Reveal>
+                <div className="pt-1.5 md:pt-5">
+                  <h3 className="text-lg font-bold text-white">{step.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-mist">
+                    {step.description}
+                  </p>
+                </div>
+              </div>
               {/* Verticale verbindingslijn (mobiel) */}
               {i < steps.length - 1 && (
                 <span

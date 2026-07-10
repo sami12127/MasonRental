@@ -10,8 +10,8 @@ export function HomePage() {
   return (
     <>
       <Hero />
-      <Showcase />
       <Fleet cta={{ label: "Bekijk het volledige aanbod", to: "/aanbod" }} />
+      <Showcase />
       <WhyUs />
       <Reviews />
       <Social />

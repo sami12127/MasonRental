@@ -1,15 +1,14 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { ArrowRightIcon } from "@phosphor-icons/react";
 import { Reveal } from "./ui/Reveal";
 
-/* Foto's voor de carrousel — vervang of vul aan via /public/cars */
+/* Foto's voor de carrousel — vervang of vul aan via /public/cars.
+   Alle slides zijn liggend (3:2) zodat ze consistent in het kader vallen. */
 const slides = [
-  "/cars/rs3-15.webp", // RS6 + RS3 samen
-  "/cars/rs6-2.webp", // RS6
-  "/cars/rs3-6573.webp", // RS3
-  "/cars/rs3-6570.webp", // RS3
+  "/cars/rs3-15-show.webp", // RS6 + RS3 samen
+  "/cars/rs6-2-show.webp", // RS6
+  "/cars/rs3-6573-show.webp", // RS3 zijaanzicht
+  "/cars/rs3-6570-show.webp", // RS3 vooraanzicht
 ];
 
 const AUTOPLAY_MS = 3000;
@@ -17,8 +16,14 @@ const AUTOPLAY_MS = 3000;
 export function Showcase() {
   const [index, setIndex] = useState(0);
   const reduceMotion = useReducedMotion();
+  const touchStartX = useRef<number | null>(null);
 
   const goTo = useCallback((i: number) => setIndex(i), []);
+  const next = useCallback(() => setIndex((i) => (i + 1) % slides.length), []);
+  const prev = useCallback(
+    () => setIndex((i) => (i - 1 + slides.length) % slides.length),
+    []
+  );
 
   useEffect(() => {
     if (reduceMotion) return;
@@ -29,11 +34,22 @@ export function Showcase() {
     return () => clearInterval(timer);
   }, [reduceMotion, index]);
 
+  /* Swipe op mobiel: horizontale veeg wisselt van foto. */
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current == null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    if (Math.abs(dx) > 40) (dx < 0 ? next : prev)();
+    touchStartX.current = null;
+  };
+
   return (
     <section className="bg-night pb-24 pt-20 md:pb-32 md:pt-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        {/* Split: tekst links, carrousel rechts */}
-        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+        {/* Split: tekst links, carrousel rechts (iets breder) */}
+        <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.25fr] lg:gap-16">
           <Reveal>
             <div>
               <p className="mb-4 text-xs font-medium uppercase tracking-[0.3em] text-gold">
@@ -48,29 +64,22 @@ export function Showcase() {
                 te genieten van luxe en stijl — wij hebben een passend aanbod om
                 uit te kiezen.
               </p>
-              <Link
-                to="/aanbod"
-                className="group mt-9 inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-none bg-gold px-8 py-3.5 text-sm font-bold uppercase tracking-wide text-night transition-all duration-300 hover:bg-gold-light hover:shadow-[0_0_36px_-8px_var(--color-gold)] active:scale-[0.97]"
-              >
-                Bekijk het aanbod
-                <ArrowRightIcon
-                  size={16}
-                  weight="bold"
-                  className="transition-transform duration-300 group-hover:translate-x-1"
-                  aria-hidden="true"
-                />
-              </Link>
             </div>
           </Reveal>
 
           <Reveal delay={0.15}>
-            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-charcoal">
+            <div
+              className="relative overflow-hidden rounded-3xl border border-white/10 bg-charcoal touch-pan-y select-none"
+              onTouchStart={onTouchStart}
+              onTouchEnd={onTouchEnd}
+            >
               <div className="relative aspect-[4/3]">
                 <AnimatePresence initial={false} mode="popLayout">
                   <motion.img
                     key={index}
                     src={slides[index]}
                     alt={`Mason Rental auto ${index + 1}`}
+                    draggable={false}
                     initial={{ opacity: 0, scale: 1.04 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0 }}
