@@ -44,7 +44,7 @@ const steps: Step[] = [
     lottieSrc: "/lottie_animations/rijdendeAUTO.json",
     title: "Auto ophalen & let's go",
     description:
-      "Haal je auto op bij onze locatie in Amsterdam en geniet van elke kilometer.",
+      "Haal je auto op bij onze locatie in Capelle aan den IJssel en geniet van elke kilometer.",
     tall: true,
   },
 ];

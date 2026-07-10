@@ -6,22 +6,32 @@ interface ContactCTAProps {
   /** Foto rechts in de card — per pagina anders. */
   image: string;
   imageAlt?: string;
+  /** Zet de card lager en dichter bij de footer (auto-detailpagina's). */
+  tightBottom?: boolean;
 }
 
-export function ContactCTA({ image, imageAlt = "Mason Rental auto" }: ContactCTAProps) {
+export function ContactCTA({
+  image,
+  imageAlt = "Mason Rental auto",
+  tightBottom = false,
+}: ContactCTAProps) {
   return (
-    <section className="bg-night px-6 py-16 md:py-24 lg:px-10">
+    <section
+      className={`bg-night px-6 lg:px-10 ${
+        tightBottom ? "pt-20 pb-8 md:pt-28 md:pb-10" : "py-16 md:py-24"
+      }`}
+    >
       <Reveal>
-        <div className="mx-auto grid max-w-5xl overflow-hidden rounded-[2rem] bg-gold md:grid-cols-2">
+        <div className="mx-auto grid max-w-4xl overflow-hidden rounded-[2rem] bg-gold md:grid-cols-2">
           {/* Tekst + acties */}
-          <div className="flex flex-col justify-center p-8 md:p-12 lg:p-16">
-            <h2 className="text-3xl font-black tracking-tight text-night md:text-4xl">
+          <div className="flex flex-col justify-center p-8 md:p-10 lg:p-12">
+            <h2 className="text-2xl font-black tracking-tight text-night md:text-3xl">
               Heb je nog vragen?
             </h2>
-            <p className="mt-3 max-w-md text-base leading-relaxed text-night/70">
+            <p className="mt-3 max-w-md text-sm leading-relaxed text-night/70 md:text-base">
               Neem contact met ons op via dit nummer of bezoek onze contactpagina.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <a
                 href="tel:+31618623757"
                 className="inline-flex min-h-13 cursor-pointer items-center justify-center gap-2 rounded-none bg-night px-8 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-charcoal active:scale-[0.98]"
@@ -44,7 +54,7 @@ export function ContactCTA({ image, imageAlt = "Mason Rental auto" }: ContactCTA
               src={image}
               alt={imageAlt}
               loading="lazy"
-              className="h-56 w-full rounded-2xl object-cover md:h-full md:min-h-[18rem]"
+              className="h-48 w-full rounded-2xl object-cover md:h-full md:min-h-[14rem]"
             />
           </div>
         </div>

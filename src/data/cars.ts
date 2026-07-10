@@ -44,6 +44,8 @@ export interface Car {
   image: string;
   /* Optioneel: foto die bij hover op de aanbod-card verschijnt (val terug op gallery[1]) */
   hoverImage?: string;
+  /* Optioneel: foto in de "Heb je nog vragen?"-card op de detailpagina (val terug op image) */
+  ctaImage?: string;
   /* Alle foto's voor de galerij op de detailpagina (eerste = hoofdfoto) */
   gallery: string[];
   pricePerDay: number;
@@ -96,7 +98,7 @@ export const cars: Car[] = [
       { icon: "year", text: "2021" },
       { icon: "seats", text: "5 zitplaatsen" },
       { icon: "engine", text: "4.0 V8 Biturbo" },
-      { icon: "location", text: "Amsterdam" },
+      { icon: "location", text: "Capelle aan den IJssel" },
     ],
     features: [
       "Dynamic Package (305 km/u)",
@@ -118,18 +120,15 @@ export const cars: Car[] = [
     /* Eigen foto's van de RS3 staan in /public/cars (rs3-6565 t/m rs3-6573 + interieur rs3-35/36) */
     image: "/cars/rs3-6570.webp",
     hoverImage: "/cars/rs3-35.webp",
+    ctaImage: "/cars/rs3-01.webp",
     gallery: [
+      "/cars/rs3-39.webp",
       "/cars/rs3-6567.webp",
-      "/cars/rs3-6573.webp",
       "/cars/rs3-35.webp",
+      "/cars/rs3-38.webp",
       "/cars/rs3-36.webp",
-      "/cars/rs3-6572.webp",
-      "/cars/rs3-6570.webp",
-      "/cars/rs3-6565.webp",
-      "/cars/rs3-6566.webp",
       "/cars/rs3-6568.webp",
       "/cars/rs3-6569.webp",
-      "/cars/rs3-6571.webp",
     ],
     pricePerDay: 350,
     deposit: 2000,
@@ -154,7 +153,7 @@ export const cars: Car[] = [
       { icon: "year", text: "2022" },
       { icon: "seats", text: "5 zitplaatsen" },
       { icon: "engine", text: "2.5 TFSI 5-cilinder" },
-      { icon: "location", text: "Amsterdam" },
+      { icon: "location", text: "Capelle aan den IJssel" },
     ],
     features: [
       "RS Torque Splitter",

@@ -55,7 +55,7 @@ export const faqs = [
   {
     question: "Kan ik de auto laten bezorgen?",
     answer:
-      "Ja, bezorgen en ophalen is in overleg mogelijk binnen en rond Amsterdam. Laat ons je locatie weten, dan stemmen we de kosten en het tijdstip af.",
+      "Ja, bezorgen en ophalen is in overleg mogelijk binnen en rond Capelle aan den IJssel. Laat ons je locatie weten, dan stemmen we de kosten en het tijdstip af.",
   },
   {
     question: "Zit er een kilometerlimiet op?",

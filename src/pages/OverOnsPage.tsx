@@ -22,7 +22,7 @@ export function OverOnsPage() {
       />
       <About
         showHeading={false}
-        text="Wat begon uit pure passie voor bijzondere auto's is uitgegroeid tot Mason Rental — dé plek in Amsterdam om high-performance auto's te huren. Elke auto in ons wagenpark kiezen we met zorg en houden we in topconditie, zodat jij zonder omkijken kunt genieten van elke kilometer."
+        text="Wat begon uit pure passie voor bijzondere auto's is uitgegroeid tot Mason Rental — dé plek in Capelle aan den IJssel om high-performance auto's te huren. Elke auto in ons wagenpark kiezen we met zorg en houden we in topconditie, zodat jij zonder omkijken kunt genieten van elke kilometer."
       />
       <WhyUs
         eyebrow="Onze belofte"

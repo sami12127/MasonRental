@@ -77,7 +77,7 @@ export function Footer() {
         <p>© {new Date().getFullYear()} Mason Rental. Alle rechten voorbehouden.</p>
         <span className="inline-flex items-center gap-1.5">
           <MapPinIcon size={15} weight="duotone" className="text-gold" aria-hidden="true" />
-          Amsterdam
+          Capelle aan den IJssel
         </span>
       </div>
     </footer>

@@ -71,7 +71,7 @@ export function CarDetailPage() {
   )}`;
 
   return (
-    <div className="bg-night pt-[7.5rem] pb-24 md:pt-[8.5rem]">
+    <div className="bg-night pt-[7.5rem] md:pt-[8.5rem]">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Link
           to="/#aanbod"
@@ -90,7 +90,7 @@ export function CarDetailPage() {
                  een wrapper, zodat de hoofdfoto de hoogte bepaalt (geen restrook). */}
               {car.gallery.length > 1 && (
                 <div className="min-w-0 sm:relative sm:w-24 sm:shrink-0">
-                  <div className="thumb-scroll flex gap-3 overflow-x-auto sm:absolute sm:inset-0 sm:flex-col sm:overflow-x-visible sm:overflow-y-auto sm:pr-4">
+                  <div className="thumb-scroll flex gap-3 overflow-x-auto sm:absolute sm:inset-0 sm:flex-col sm:overflow-x-hidden sm:overflow-y-auto sm:pr-4">
                     {car.gallery.map((src, i) => (
                       <button
                         key={src}
@@ -179,10 +179,36 @@ export function CarDetailPage() {
               </ul>
             </div>
           </Reveal>
+
+          {/* Over deze auto + kenmerken */}
+          <Reveal>
+            <div>
+              <h2 className="text-2xl font-bold text-white md:text-3xl">
+                De {car.name}
+              </h2>
+              <div className="mt-4 h-px w-14 bg-gold/60" aria-hidden="true" />
+              <p className="mt-6 max-w-3xl text-base leading-relaxed text-white/70">
+                {car.description}
+              </p>
+
+              <h3 className="mt-10 text-lg font-bold text-white">Uitgelicht</h3>
+              <ul className="mt-4 grid max-w-3xl gap-3 sm:grid-cols-2">
+                {car.features.map((feature) => (
+                  <li key={feature} className="flex items-center gap-2.5 text-sm text-white/80">
+                    <LottieIcon
+                      src="/lottie_animations/vinlje.json"
+                      className="inline-flex size-7 shrink-0"
+                    />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
           </div>
 
           <Reveal delay={0.1}>
-            <div className="flex flex-col gap-6 lg:sticky lg:top-28">
+            <div className="flex flex-col gap-6 lg:sticky lg:top-24">
               {/* Tarieven-card */}
               <div className="rounded-2xl border border-gold/25 bg-charcoal p-5">
                 <h2 className="text-xl font-bold text-gold">Tarieven</h2>
@@ -248,35 +274,9 @@ export function CarDetailPage() {
             </div>
           </Reveal>
         </div>
-
-        {/* Over deze auto + kenmerken */}
-        <div className="mt-16 md:mt-24">
-          <Reveal>
-            <h2 className="text-2xl font-bold text-white md:text-3xl">
-              De {car.name}
-            </h2>
-            <div className="mt-4 h-px w-14 bg-gold/60" aria-hidden="true" />
-            <p className="mt-6 max-w-3xl text-base leading-relaxed text-white/70">
-              {car.description}
-            </p>
-
-            <h3 className="mt-10 text-lg font-bold text-white">Uitgelicht</h3>
-            <ul className="mt-4 grid max-w-3xl gap-3 sm:grid-cols-2">
-              {car.features.map((feature) => (
-                <li key={feature} className="flex items-center gap-2.5 text-sm text-white/80">
-                  <LottieIcon
-                    src="/lottie_animations/vinlje.json"
-                    className="inline-flex size-7 shrink-0"
-                  />
-                  {feature}
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-        </div>
       </div>
 
-      <ContactCTA image={car.image} imageAlt={car.name} />
+      <ContactCTA image={car.ctaImage ?? car.image} imageAlt={car.name} tightBottom />
     </div>
   );
 }

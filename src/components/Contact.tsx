@@ -94,7 +94,7 @@ export function Contact() {
                     <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-full bg-gold/10 text-gold">
                       <MapPinIcon size={20} weight="duotone" aria-hidden="true" />
                     </span>
-                    Voorbeeldstraat 1, Amsterdam
+                    Voorbeeldstraat 1, Capelle aan den IJssel
                   </li>
                 </ul>
               </div>

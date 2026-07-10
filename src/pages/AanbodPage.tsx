@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { Fleet } from "../components/Fleet";
 import { HowItWorks } from "../components/HowItWorks";
-import { ContactCTA } from "../components/ContactCTA";
 import { PageHero } from "../components/ui/PageHero";
 
 export function AanbodPage() {
@@ -23,7 +22,6 @@ export function AanbodPage() {
       />
       <Fleet showHeading={false} />
       <HowItWorks />
-      <ContactCTA image="/cars/rs3-01.webp" imageAlt="Audi RS3" />
     </>
   );
 }

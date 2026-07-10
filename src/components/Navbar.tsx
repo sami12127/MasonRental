@@ -13,6 +13,11 @@ const links: NavLink[] = [
   { label: "Contact & FAQ", to: "/contact" },
 ];
 
+/** WhatsApp-link voor de Reserveer-knop — zelfde nummer als elders op de site. */
+const WHATSAPP_URL = `https://wa.me/31618623757?text=${encodeURIComponent(
+  "Hallo Mason Rental, ik wil graag een auto reserveren."
+)}`;
+
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -106,13 +111,14 @@ export function Navbar() {
         </ul>
 
         <div className="flex items-center gap-3">
-          <button
-            type="button"
-            onClick={() => goToPage("/contact", "contact")}
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="hidden min-h-11 cursor-pointer items-center rounded-none bg-gold px-6 py-2.5 text-sm font-semibold text-night transition-all duration-300 hover:bg-gold-light hover:shadow-[0_0_28px_-8px_var(--color-gold)] active:scale-[0.97] sm:inline-flex"
           >
             Reserveer
-          </button>
+          </a>
         </div>
       </nav>
 
@@ -141,13 +147,15 @@ export function Navbar() {
                 </li>
               ))}
               <li className="pb-2 pt-3">
-                <button
-                  type="button"
-                  onClick={() => goToPage("/contact", "contact")}
+                <a
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setOpen(false)}
                   className="inline-flex min-h-12 w-full cursor-pointer items-center justify-center rounded-none bg-gold px-6 text-sm font-semibold text-night"
                 >
                   Reserveer
-                </button>
+                </a>
               </li>
             </ul>
           </motion.div>

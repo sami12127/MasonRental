@@ -71,7 +71,7 @@ export function Social() {
                       : "border-white/10 bg-charcoal hover:border-gold/40"
                   }`}
                 >
-                  <Logo className="mb-5 size-16 rounded-2xl shadow-lg shadow-black/20 transition-transform duration-300 group-hover:scale-105" />
+                  <Logo className="mb-5 size-16 rounded-full shadow-lg shadow-black/20 transition-transform duration-300 group-hover:scale-105" />
 
                   <h3
                     className={`text-lg font-bold tracking-wide ${
