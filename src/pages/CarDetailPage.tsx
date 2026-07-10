@@ -71,7 +71,7 @@ export function CarDetailPage() {
   )}`;
 
   return (
-    <div className="bg-night pt-[7.5rem] md:pt-[8.5rem]">
+    <div className="bg-night pt-[6rem] md:pt-[7rem]">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Link
           to="/#aanbod"
@@ -116,69 +116,74 @@ export function CarDetailPage() {
                 </div>
               )}
 
-              {/* Hoofdfoto met naam onderin */}
-              <div className="relative min-w-0 flex-1 overflow-hidden rounded-3xl border border-white/10 bg-charcoal">
-                <motion.img
-                  key={activeImage}
-                  src={car.gallery[activeImage]}
-                  alt={`${car.name} — foto ${activeImage + 1}`}
-                  initial={{ opacity: 0.4, scale: 1.02 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
-                  className="w-full object-cover sm:aspect-[4/3]"
-                />
-
-                <a
-                  href={car.gallery[activeImage]}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Foto op volledig formaat bekijken"
-                  className="absolute left-4 top-4 inline-flex size-10 cursor-pointer items-center justify-center rounded-full border border-white/15 bg-night/50 text-white backdrop-blur-md transition-colors duration-200 hover:border-gold hover:text-gold"
-                >
-                  <ArrowsOutIcon size={18} weight="bold" aria-hidden="true" />
-                </a>
-
-                {/* Gouden gloed die onderin de foto begint */}
-                <div
-                  className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-gold/45 via-night/70 to-transparent"
-                  aria-hidden="true"
-                />
-                <div
-                  className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-night via-night/50 to-transparent px-6 pb-6 pt-16 md:px-8 md:pb-8"
-                  aria-hidden="true"
-                />
-                <div className="absolute inset-x-0 bottom-0 px-6 pb-6 md:px-8 md:pb-8">
-                  <h1 className="text-3xl font-black tracking-tight text-white md:text-4xl">
+              {/* Hoofdfoto. Naam + tagline: mobiel boven de card, desktop
+                 als overlay onderin de foto. */}
+              <div className="relative flex min-w-0 flex-1 flex-col">
+                {/* Naam + tagline */}
+                <div className="order-first mb-4 sm:order-none sm:absolute sm:inset-x-0 sm:bottom-0 sm:z-10 sm:mb-0 sm:px-6 sm:pb-6 md:px-8 md:pb-8">
+                  <h1 className="text-2xl font-black tracking-tight text-white sm:text-3xl md:text-4xl">
                     {car.name}
                   </h1>
                   <p className="mt-1.5 text-sm text-white/80 md:text-base">
                     {car.tagline}
                   </p>
                 </div>
+
+                {/* Foto-card */}
+                <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-charcoal">
+                  <motion.img
+                    key={activeImage}
+                    src={car.gallery[activeImage]}
+                    alt={`${car.name} — foto ${activeImage + 1}`}
+                    initial={{ opacity: 0.4, scale: 1.02 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
+                    className="aspect-[4/3] w-full object-cover"
+                  />
+
+                  <a
+                    href={car.gallery[activeImage]}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Foto op volledig formaat bekijken"
+                    className="absolute left-4 top-4 inline-flex size-10 cursor-pointer items-center justify-center rounded-full border border-white/15 bg-night/50 text-white backdrop-blur-md transition-colors duration-200 hover:border-gold hover:text-gold"
+                  >
+                    <ArrowsOutIcon size={18} weight="bold" aria-hidden="true" />
+                  </a>
+
+                  {/* Gouden gloed + donkere gradient achter de overlay-tekst —
+                     alleen op desktop, want daar staat de naam over de foto. */}
+                  <div
+                    className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-2/3 bg-gradient-to-t from-gold/45 via-night/70 to-transparent sm:block"
+                    aria-hidden="true"
+                  />
+                  <div
+                    className="pointer-events-none absolute inset-x-0 bottom-0 hidden bg-gradient-to-t from-night via-night/50 to-transparent px-6 pb-6 pt-16 sm:block md:px-8 md:pb-8"
+                    aria-hidden="true"
+                  />
+                </div>
               </div>
             </div>
           </Reveal>
 
-          {/* Handig om te weten */}
-          <Reveal>
-            <div>
-              <h2 className="text-2xl font-bold text-white md:text-3xl">Handig om te weten</h2>
-              <div className="mt-4 h-px w-14 bg-gold/60" aria-hidden="true" />
-              <ul className="mt-8 grid gap-x-16 gap-y-3 sm:grid-cols-2">
-                {car.highlights.map((highlight) => (
-                  <li key={highlight.text} className="flex items-center gap-4">
-                    <LottieIcon
-                      src={highlightLotties[highlight.icon]}
-                      className="inline-flex size-9 shrink-0"
-                    />
-                    <span className="text-base font-medium text-white md:text-lg">
-                      {highlight.text}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Reveal>
+          {/* Handig om te weten — verschijnt direct, zonder scroll-animatie */}
+          <div>
+            <h2 className="text-2xl font-bold text-white md:text-3xl">Handig om te weten</h2>
+            <div className="mt-4 h-px w-14 bg-gold/60" aria-hidden="true" />
+            <ul className="mt-8 grid gap-x-16 gap-y-3 sm:grid-cols-2">
+              {car.highlights.map((highlight) => (
+                <li key={highlight.text} className="flex items-center gap-4">
+                  <LottieIcon
+                    src={highlightLotties[highlight.icon]}
+                    className="inline-flex size-9 shrink-0"
+                  />
+                  <span className="text-base font-medium text-white md:text-lg">
+                    {highlight.text}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
 
           {/* Over deze auto + kenmerken */}
           <Reveal>
