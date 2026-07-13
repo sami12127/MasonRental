@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { ArrowRightIcon } from "@phosphor-icons/react";
 import { Reveal } from "./ui/Reveal";
 import { LottieIcon } from "./ui/LottieIcon";
 
@@ -20,6 +19,10 @@ interface Step {
   tall?: boolean;
   /** Altijd direct zichtbaar — geen fade-up reveal bij het in beeld scrollen */
   noReveal?: boolean;
+  /** Duwt de inhoud iets omlaag in de stacked-layout (kortere cards). */
+  stackedNudge?: boolean;
+  /** Relatieve kaarthoogte in de split-layout (home / over-ons). */
+  splitSize?: "sm" | "lg";
 }
 
 const steps: Step[] = [
@@ -27,6 +30,8 @@ const steps: Step[] = [
     lottieSrc: "/lottie_animations/tappendeVINGER.json",
     title: "Kies jouw auto",
     description: "Kies uit ons gevarieerde aanbod jouw favoriete auto.",
+    stackedNudge: true,
+    splitSize: "sm",
   },
   {
     lottieSrc: "/lottie_animations/contactzwart.json",
@@ -41,6 +46,7 @@ const steps: Step[] = [
     title: "Ontvang je prijsopgave en proefovereenkomst",
     description:
       "Na je aanvraag krijg je binnen 1 uur de prijs en een helder overzicht van onze huurvoorwaarden.",
+    splitSize: "lg",
   },
   {
     lottieSrc: "/lottie_animations/rijdendeAUTO.json",
@@ -56,6 +62,11 @@ interface WhyUsProps {
   eyebrow?: string;
   title?: ReactNode;
   intro?: string;
+  /**
+   * "split" — tekst links, verspringende 2×2 cards rechts (standaard).
+   * "stacked" — tekst gecentreerd bovenaan, vier cards horizontaal eronder.
+   */
+  layout?: "split" | "stacked";
 }
 
 const DEFAULT_TITLE = (
@@ -70,31 +81,52 @@ export function WhyUs({
   eyebrow = "Waarom voor ons kiezen?",
   title = DEFAULT_TITLE,
   intro = DEFAULT_INTRO,
+  layout = "split",
 }: WhyUsProps = {}) {
+  const stacked = layout === "stacked";
+
+  const splitMinH = (step: Step) =>
+    step.splitSize === "sm"
+      ? "sm:min-h-[15rem]"
+      : step.splitSize === "lg"
+        ? "sm:min-h-[23rem]"
+        : "sm:min-h-[19rem]";
+
   const renderCard = (step: Step, i: number) => {
     const card = (
       <div
-        className={`flex flex-col items-center rounded-3xl border p-8 text-center transition-all duration-300 hover:-translate-y-1.5 ${
-          step.tall ? "sm:min-h-[19rem] sm:justify-center" : ""
+        className={`flex flex-col items-center rounded-3xl border text-center transition-all duration-300 hover:-translate-y-1.5 ${
+          stacked ? "h-full p-10 md:p-12" : "p-8"
+        } ${
+          stacked ? "" : `${splitMinH(step)} sm:justify-center`
         } ${
           step.highlight
             ? "border-transparent bg-gold"
             : "border-white/10 bg-charcoal hover:border-gold/40"
         }`}
       >
-        <LottieIcon src={step.lottieSrc} className="mb-5 size-16" />
+        <LottieIcon
+          src={step.lottieSrc}
+          className={
+            stacked
+              ? `mb-6 size-24 md:size-28 ${
+                  step.stackedNudge ? "mt-6 md:mt-10" : ""
+                }`
+              : "mb-5 size-16"
+          }
+        />
 
         <h3
-          className={`text-sm font-bold uppercase tracking-wide ${
-            step.highlight ? "text-night" : "text-gold"
-          }`}
+          className={`font-bold uppercase tracking-wide ${
+            stacked ? "text-lg md:text-xl" : "text-lg"
+          } ${step.highlight ? "text-night" : "text-gold"}`}
         >
           {step.title}
         </h3>
         <p
-          className={`mt-2.5 text-sm leading-relaxed ${
-            step.highlight ? "text-night/70" : "text-mist"
-          }`}
+          className={`mt-3 leading-relaxed ${
+            stacked ? "text-base md:text-lg" : "mt-2.5 text-lg"
+          } ${step.highlight ? "text-night/70" : "text-mist"}`}
         >
           {step.description}
         </p>
@@ -104,15 +136,9 @@ export function WhyUs({
             href={step.cta.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="group mt-5 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-night transition-colors"
+            className="mt-5 text-lg font-extrabold uppercase tracking-wide text-night transition-colors"
           >
             {step.cta.label}
-            <ArrowRightIcon
-              size={14}
-              weight="bold"
-              aria-hidden="true"
-              className="transition-transform duration-200 group-hover:translate-x-0.5"
-            />
           </a>
         )}
       </div>
@@ -120,15 +146,53 @@ export function WhyUs({
 
     // Deze card blijft altijd in beeld — geen reveal-animatie.
     if (step.noReveal) {
-      return <div key={step.title}>{card}</div>;
+      return (
+        <div key={step.title} className={stacked ? "h-full" : undefined}>
+          {card}
+        </div>
+      );
     }
 
     return (
-      <Reveal key={step.title} delay={i * 0.1}>
+      <Reveal
+        key={step.title}
+        delay={i * 0.1}
+        className={stacked ? "h-full" : undefined}
+      >
         {card}
       </Reveal>
     );
   };
+
+  if (stacked) {
+    return (
+      <section className="bg-night pt-24 pb-12 md:pt-32 md:pb-16">
+        <div className="mx-auto max-w-[88rem] px-6 lg:px-10">
+          {/* Tekst gecentreerd bovenaan */}
+          <Reveal className="mx-auto mb-16 max-w-5xl text-center md:mb-24">
+            <p className="mb-4 text-xs font-medium uppercase tracking-[0.3em] text-gold">
+              {eyebrow}
+            </p>
+            <h2 className="text-4xl font-bold leading-tight tracking-tight text-white md:text-6xl">
+              {title}
+            </h2>
+            <div
+              className="mx-auto mt-6 h-px w-16 bg-gold/60"
+              aria-hidden="true"
+            />
+            <p className="mx-auto mt-7 max-w-4xl text-lg leading-relaxed text-mist md:text-xl">
+              {intro}
+            </p>
+          </Reveal>
+
+          {/* Vier cards horizontaal naast elkaar */}
+          <div className="grid items-stretch gap-6 sm:grid-cols-2 md:gap-8 lg:grid-cols-4">
+            {steps.map((step, i) => renderCard(step, i))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="bg-night pt-24 pb-12 md:pt-32 md:pb-16">

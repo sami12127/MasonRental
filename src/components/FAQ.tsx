@@ -1,12 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { PlusIcon } from "@phosphor-icons/react";
 import { faqs } from "../data/content";
 import { Reveal } from "./ui/Reveal";
 import { SectionHeading } from "./ui/SectionHeading";
 
+/** True vanaf de md-breakpoint (768px) — synchroon geïnitialiseerd zodat
+   de accordion op desktop meteen zichtbaar is, zonder flits. */
+function useIsDesktop() {
+  const query = "(min-width: 768px)";
+  const [isDesktop, setIsDesktop] = useState(
+    () => typeof window !== "undefined" && window.matchMedia(query).matches
+  );
+
+  useEffect(() => {
+    const mql = window.matchMedia(query);
+    const onChange = () => setIsDesktop(mql.matches);
+    mql.addEventListener("change", onChange);
+    return () => mql.removeEventListener("change", onChange);
+  }, []);
+
+  return isDesktop;
+}
+
 export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const isDesktop = useIsDesktop();
 
   return (
     <section id="faq" className="bg-night pt-12 pb-8 md:pt-16 md:pb-12">
@@ -22,13 +41,12 @@ export function FAQ() {
         <div className="grid items-start gap-4 md:grid-cols-2">
           {faqs.map((faq, i) => {
             const isOpen = openIndex === i;
-            return (
-              <Reveal key={faq.question} delay={i * 0.06}>
-                <div
-                  className={`overflow-hidden rounded-2xl border transition-colors duration-300 ${
-                    isOpen ? "border-gold/40 bg-night/70" : "border-white/10 bg-night/40"
-                  }`}
-                >
+            const item = (
+              <div
+                className={`overflow-hidden rounded-2xl border transition-colors duration-300 ${
+                  isOpen ? "border-gold/40 bg-night/70" : "border-white/10 bg-night/40"
+                }`}
+              >
                   <button
                     type="button"
                     onClick={() => setOpenIndex(isOpen ? null : i)}
@@ -67,7 +85,15 @@ export function FAQ() {
                       </motion.div>
                     )}
                   </AnimatePresence>
-                </div>
+              </div>
+            );
+
+            // Desktop: meteen zichtbaar. Mobiel: fade-up bij het scrollen.
+            return isDesktop ? (
+              <div key={faq.question}>{item}</div>
+            ) : (
+              <Reveal key={faq.question} delay={i * 0.06}>
+                {item}
               </Reveal>
             );
           })}

@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { Fleet } from "../components/Fleet";
-import { HowItWorks } from "../components/HowItWorks";
+import { WhyUs } from "../components/WhyUs";
+import { Social } from "../components/Social";
+import { ContactCTA } from "../components/ContactCTA";
 import { PageHero } from "../components/ui/PageHero";
 
 export function AanbodPage() {
@@ -21,7 +23,19 @@ export function AanbodPage() {
         compact
       />
       <Fleet showHeading={false} />
-      <HowItWorks />
+      <WhyUs
+        layout="stacked"
+        eyebrow="Waarom Mason Rental?"
+        title={
+          <>
+            De perfecte <span className="text-gold">auto</span>, service die
+            klopt
+          </>
+        }
+        intro="Bij ons draait alles om gemak en vertrouwen. Van het uitkiezen van jouw ideale auto tot het moment dat je wegrijdt, regelen wij elke stap soepel en met persoonlijke aandacht. Zo weet je precies waar je aan toe bent en kom je telkens weer bij ons terug."
+      />
+      <Social />
+      <ContactCTA image="/cars/rs6-1.webp" imageAlt="Audi RS6" />
     </>
   );
 }

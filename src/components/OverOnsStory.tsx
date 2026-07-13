@@ -1,3 +1,6 @@
+import { useEffect, useRef, useState } from "react";
+import type { TouchEvent } from "react";
+import { useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Reveal } from "./ui/Reveal";
 import { LottieIcon } from "./ui/LottieIcon";
@@ -24,6 +27,8 @@ interface StoryBlock {
   reverse?: boolean;
   /** Laadt de foto direct (boven de fold) i.p.v. lazy. */
   priority?: boolean;
+  /** Meerdere foto's → auto-roterende slideshow i.p.v. één foto. */
+  images?: string[];
 }
 
 const blocks: StoryBlock[] = [
@@ -36,8 +41,14 @@ const blocks: StoryBlock[] = [
     priority: true,
   },
   {
-    image: "/cars/rs6-2.webp",
-    imageAlt: "Audi RS6",
+    image: "/cars/rs3-37-wide.webp",
+    images: [
+      "/cars/rs3-37-wide.webp",
+      "/cars/rs3-17.webp",
+      "/cars/rs3-27.webp",
+      "/cars/rs3-6572-wide.webp",
+    ],
+    imageAlt: "Audi RS3",
     eyebrow: "Onze aanpak",
     title: "Persoonlijk en zonder gedoe",
     text: "Bij ons geen ingewikkelde formulieren of verborgen kosten. We denken met je mee, regelen alles snel en houden de communicatie kort en helder. Zo voelt huren bij Mason Rental net zo bijzonder als de auto waar je in stapt.",
@@ -45,18 +56,94 @@ const blocks: StoryBlock[] = [
   },
 ];
 
+/** Auto-roterende slideshow met crossfade, navigatiebolletjes en swipe. */
+function Slideshow({ images, alt }: { images: string[]; alt: string }) {
+  const [index, setIndex] = useState(0);
+  const reduceMotion = useReducedMotion();
+  const touchStartX = useRef<number | null>(null);
+
+  const go = (i: number) =>
+    setIndex(((i % images.length) + images.length) % images.length);
+
+  // Auto-advance; herstart de timer na elke wissel (ook na swipe/klik).
+  useEffect(() => {
+    if (images.length <= 1) return;
+    const id = setTimeout(() => go(index + 1), 4500);
+    return () => clearTimeout(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [index, images.length]);
+
+  const onTouchStart = (e: TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const onTouchEnd = (e: TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    if (Math.abs(dx) > 40) go(index + (dx < 0 ? 1 : -1));
+    touchStartX.current = null;
+  };
+
+  return (
+    <div
+      className="relative h-64 w-full touch-pan-y select-none sm:h-80 md:h-[26rem]"
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+    >
+      {images.map((src, i) => (
+        <img
+          key={src}
+          src={src}
+          alt={i === 0 ? alt : ""}
+          aria-hidden={i === 0 ? undefined : true}
+          loading={i === 0 ? "eager" : "lazy"}
+          draggable={false}
+          className={`absolute inset-0 h-full w-full object-cover ${
+            reduceMotion ? "" : "transition-opacity duration-1000 ease-in-out"
+          } ${i === index ? "opacity-100" : "opacity-0"}`}
+        />
+      ))}
+
+      {/* Scrim voor leesbaarheid van de bolletjes */}
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-night/50 to-transparent"
+        aria-hidden="true"
+      />
+
+      {/* Navigatiebolletjes */}
+      <div className="absolute inset-x-0 bottom-4 flex justify-center gap-2">
+        {images.map((_, i) => (
+          <button
+            key={i}
+            type="button"
+            onClick={() => go(i)}
+            aria-label={`Ga naar foto ${i + 1}`}
+            aria-current={i === index}
+            className={`h-2 rounded-full transition-all duration-300 ${
+              i === index ? "w-6 bg-gold" : "w-2 bg-white/60 hover:bg-white/90"
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function StoryRow({ block }: { block: StoryBlock }) {
   return (
     <Reveal>
       <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12 lg:gap-16">
         <div className={block.reverse ? "md:order-2" : ""}>
           <div className="overflow-hidden rounded-3xl border border-white/10">
-            <img
-              src={block.image}
-              alt={block.imageAlt}
-              loading={block.priority ? "eager" : "lazy"}
-              className="h-64 w-full object-cover sm:h-80 md:h-[26rem]"
-            />
+            {block.images ? (
+              <Slideshow images={block.images} alt={block.imageAlt} />
+            ) : (
+              <img
+                src={block.image}
+                alt={block.imageAlt}
+                loading={block.priority ? "eager" : "lazy"}
+                className="h-64 w-full object-cover sm:h-80 md:h-[26rem]"
+              />
+            )}
           </div>
         </div>
         <div className={block.reverse ? "md:order-1" : ""}>

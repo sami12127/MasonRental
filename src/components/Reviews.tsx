@@ -25,7 +25,7 @@ export function Reviews() {
   const review = reviews[index];
 
   return (
-    <section className="bg-night py-24 md:py-32">
+    <section className="bg-night pt-10 pb-24 md:pt-12 md:pb-32">
       <div className="mx-auto max-w-3xl px-6 lg:px-10">
         <SectionHeading eyebrow="Reviews" title="Wat onze klanten zeggen" />
 

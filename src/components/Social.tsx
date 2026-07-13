@@ -1,5 +1,4 @@
 import type { ComponentType } from "react";
-import { ArrowRightIcon } from "@phosphor-icons/react";
 import { Reveal } from "./ui/Reveal";
 import { SectionHeading } from "./ui/SectionHeading";
 import {
@@ -89,17 +88,11 @@ export function Social() {
                   </p>
 
                   <span
-                    className={`mt-6 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide ${
+                    className={`mt-6 text-lg font-extrabold uppercase tracking-wide ${
                       card.highlight ? "text-night" : "text-gold"
                     }`}
                   >
                     {card.cta}
-                    <ArrowRightIcon
-                      size={14}
-                      weight="bold"
-                      aria-hidden="true"
-                      className="transition-transform duration-200 group-hover:translate-x-0.5"
-                    />
                   </span>
                 </a>
               </Reveal>
