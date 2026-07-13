@@ -46,7 +46,7 @@ const cards: SocialCard[] = [
 
 export function Social() {
   return (
-    <section className="bg-night py-24 md:py-32">
+    <section className="bg-night pt-8 pb-24 md:pt-12 md:pb-32">
       <div className="mx-auto max-w-6xl px-6 lg:px-10">
         <SectionHeading
           eyebrow="Volg ons"

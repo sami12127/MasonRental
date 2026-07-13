@@ -18,7 +18,7 @@ export function ContactCTA({
   return (
     <section
       className={`bg-night px-6 lg:px-10 ${
-        tightBottom ? "pt-20 pb-8 md:pt-28 md:pb-10" : "py-16 md:py-24"
+        tightBottom ? "pt-20 pb-8 md:pt-28 md:pb-10" : "py-8 md:py-12"
       }`}
     >
       <Reveal>

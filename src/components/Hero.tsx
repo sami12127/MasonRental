@@ -40,8 +40,12 @@ export function Hero() {
           transition={{ duration: 2.4, ease: "easeOut" }}
         />
         {/* Donkere scrims — meer contrast, foto blijft zichtbaar */}
-        <div className="absolute inset-0 bg-night/55" />
-        <div className="absolute inset-0 bg-gradient-to-t from-night/80 via-night/40 to-night/50" />
+        <div className="absolute inset-0 bg-night/45" />
+        {/* Subtiele top-fade voor navbar-leesbaarheid */}
+        <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-night/60 to-transparent" />
+        {/* Zachte, hoge fade naar de zwarte sectie eronder — de foto lost
+           volledig op in #0a0a0a, zodat er geen zichtbare naad ontstaat. */}
+        <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-night via-night/70 to-transparent" />
       </div>
 
       <div className="relative z-10 flex w-full flex-1 items-end justify-center px-6 pb-16 pt-24 sm:items-center sm:py-10 sm:pt-20 lg:px-10">

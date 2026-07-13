@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Contact } from "../components/Contact";
 import { FAQ } from "../components/FAQ";
 import { Social } from "../components/Social";
+import { ContactCTA } from "../components/ContactCTA";
 
 export function ContactPage() {
   useEffect(() => {
@@ -16,6 +17,7 @@ export function ContactPage() {
       <FAQ />
       <Contact />
       <Social />
+      <ContactCTA image="/cars/rs6-1.webp" imageAlt="Audi RS6" />
     </div>
   );
 }

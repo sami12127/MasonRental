@@ -18,6 +18,8 @@ interface Step {
   cta?: { label: string; href: string };
   /** Extra hoogte — hoeft niet gelijk te zijn aan de kaart ernaast */
   tall?: boolean;
+  /** Altijd direct zichtbaar — geen fade-up reveal bij het in beeld scrollen */
+  noReveal?: boolean;
 }
 
 const steps: Step[] = [
@@ -46,6 +48,7 @@ const steps: Step[] = [
     description:
       "Haal je auto op bij onze locatie in Capelle aan den IJssel en geniet van elke kilometer.",
     tall: true,
+    noReveal: true,
   },
 ];
 
@@ -68,8 +71,8 @@ export function WhyUs({
   title = DEFAULT_TITLE,
   intro = DEFAULT_INTRO,
 }: WhyUsProps = {}) {
-  const renderCard = (step: Step, i: number) => (
-    <Reveal key={step.title} delay={i * 0.1}>
+  const renderCard = (step: Step, i: number) => {
+    const card = (
       <div
         className={`flex flex-col items-center rounded-3xl border p-8 text-center transition-all duration-300 hover:-translate-y-1.5 ${
           step.tall ? "sm:min-h-[19rem] sm:justify-center" : ""
@@ -83,7 +86,7 @@ export function WhyUs({
 
         <h3
           className={`text-sm font-bold uppercase tracking-wide ${
-            step.highlight ? "text-night" : "text-white"
+            step.highlight ? "text-night" : "text-gold"
           }`}
         >
           {step.title}
@@ -113,11 +116,22 @@ export function WhyUs({
           </a>
         )}
       </div>
-    </Reveal>
-  );
+    );
+
+    // Deze card blijft altijd in beeld — geen reveal-animatie.
+    if (step.noReveal) {
+      return <div key={step.title}>{card}</div>;
+    }
+
+    return (
+      <Reveal key={step.title} delay={i * 0.1}>
+        {card}
+      </Reveal>
+    );
+  };
 
   return (
-    <section className="bg-night py-24 md:py-32">
+    <section className="bg-night pt-24 pb-12 md:pt-32 md:pb-16">
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-2 lg:gap-16 lg:px-10">
         {/* Tekst links */}
         <Reveal>
