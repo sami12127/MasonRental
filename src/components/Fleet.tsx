@@ -217,9 +217,10 @@ function CarCard({ car, delay }: { car: Car; delay: number }) {
             className="absolute inset-0 bg-gradient-to-t from-night/95 via-night/45 to-transparent"
             aria-hidden="true"
           />
-          {/* Gouden gloed die bij hover onderin de card omhoog komt */}
+          {/* Gouden gloed die bij hover onderin de card omhoog komt.
+             Op mobiel (geen hover) staat de gloed standaard aan. */}
           <div
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-gold/55 via-gold/15 to-transparent opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100"
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-gold/55 via-gold/15 to-transparent opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100 max-sm:opacity-100!"
             aria-hidden="true"
           />
 
