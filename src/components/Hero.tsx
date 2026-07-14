@@ -16,40 +16,30 @@ export function Hero() {
       id="home"
       className="relative flex min-h-dvh flex-col overflow-hidden sm:items-center"
     >
-      {/* Achtergrondfoto full-bleed achter de tekst. Op mobiel de staande
-         RS3-foto, vanaf sm de duo-foto. */}
+      {/* Achtergrondfoto full-bleed. De auto staat rechts in beeld, dus de
+         tekst staat links; die zijde wordt extra verdonkerd voor contrast. */}
       <div className="absolute inset-0">
-        {/* Mobiel — staande RS3-foto */}
         <motion.img
-          src="/cars/rs3-6565.webp"
+          src="/hero-rs3.webp"
           alt=""
           aria-hidden="true"
-          className="h-full w-full object-cover object-center sm:hidden"
+          className="h-full w-full object-cover object-[71%_50%] sm:object-center"
           initial={reduceMotion ? undefined : { scale: 1.08 }}
           animate={reduceMotion ? undefined : { scale: 1 }}
           transition={{ duration: 2.4, ease: "easeOut" }}
         />
-        {/* Desktop — duo-foto full-bleed */}
-        <motion.img
-          src="/cars/rs3-01.webp"
-          alt=""
-          aria-hidden="true"
-          className="hidden h-full w-full object-cover object-center sm:block"
-          initial={reduceMotion ? undefined : { scale: 1.08 }}
-          animate={reduceMotion ? undefined : { scale: 1 }}
-          transition={{ duration: 2.4, ease: "easeOut" }}
-        />
-        {/* Donkere scrims — meer contrast, foto blijft zichtbaar */}
-        <div className="absolute inset-0 bg-night/45" />
+        {/* Links-naar-rechts verloop: tekstzijde donker, auto blijft zichtbaar */}
+        <div className="absolute inset-0 bg-gradient-to-r from-night/90 via-night/55 to-transparent sm:via-night/45" />
+        {/* Extra verduistering op mobiel voor contrast */}
+        <div className="absolute inset-0 bg-night/25 sm:bg-transparent" />
         {/* Subtiele top-fade voor navbar-leesbaarheid */}
         <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-night/60 to-transparent" />
-        {/* Zachte, hoge fade naar de zwarte sectie eronder — de foto lost
-           volledig op in #0a0a0a, zodat er geen zichtbare naad ontstaat. */}
+        {/* Zachte, hoge fade naar de sectie eronder — geen zichtbare naad */}
         <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-night via-night/70 to-transparent" />
       </div>
 
-      <div className="relative z-10 flex w-full flex-1 items-end justify-center px-6 pb-16 pt-24 sm:items-center sm:py-10 sm:pt-20 lg:px-10">
-        <div className="mx-auto w-full max-w-7xl text-left sm:max-w-3xl sm:text-center">
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-end px-6 pb-16 pt-24 sm:items-center sm:py-10 sm:pt-20 lg:px-10">
+        <div className="w-full max-w-xl text-left sm:max-w-2xl">
           <motion.h1
             {...fadeUp(0.1)}
             className="text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-6xl sm:leading-[1.02] md:text-7xl"
@@ -59,7 +49,7 @@ export function Hero() {
 
           <motion.p
             {...fadeUp(0.25)}
-            className="mt-5 max-w-lg text-sm leading-relaxed text-white/80 sm:mx-auto sm:mt-6 sm:text-lg"
+            className="mt-5 max-w-lg text-sm leading-relaxed text-white/80 sm:mt-6 sm:text-lg"
           >
             Ervaar pure prestaties, comfort en uitstraling. Stap vandaag nog in een
             auto die elke rit bijzonder maakt — zorgeloos huren vanaf 18 jaar.
@@ -67,7 +57,7 @@ export function Hero() {
 
           <motion.div
             {...fadeUp(0.4)}
-            className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-center"
+            className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center"
           >
             <Link
               to="/aanbod"
