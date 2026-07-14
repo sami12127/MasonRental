@@ -85,25 +85,6 @@ export function Contact() {
           {/* Linkerkolom — compacte WhatsApp-card + contactgegevens */}
           <Reveal>
             <div className="flex h-full flex-col gap-6">
-              <div className="rounded-3xl border border-gold/25 bg-charcoal p-6">
-                <h3 className="text-base font-bold text-white">
-                  Direct reserveren via WhatsApp
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-mist">
-                  Stuur de gewenste auto en datum — wij bevestigen doorgaans
-                  binnen enkele uren.
-                </p>
-                <a
-                  href={whatsappHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-4 inline-flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-none bg-gold px-6 py-3 text-sm font-semibold text-night transition-all duration-300 hover:bg-gold-light hover:shadow-[0_0_28px_-8px_var(--color-gold)] active:scale-[0.98]"
-                >
-                  <WhatsappLogoIcon size={18} weight="fill" aria-hidden="true" />
-                  Reserveer via WhatsApp
-                </a>
-              </div>
-
               <div className="rounded-3xl border border-white/10 bg-charcoal p-6 md:p-7">
                 <h3 className="text-lg font-bold text-white">Direct contact</h3>
                 <ul className="mt-4 space-y-1">
@@ -143,6 +124,25 @@ export function Contact() {
                     );
                   })}
                 </ul>
+              </div>
+
+              <div className="rounded-3xl border border-gold/25 bg-charcoal p-6">
+                <h3 className="text-base font-bold text-white">
+                  Direct reserveren via WhatsApp
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-mist">
+                  Stuur de gewenste auto en datum — wij bevestigen doorgaans
+                  binnen enkele uren.
+                </p>
+                <a
+                  href={whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 inline-flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-none bg-gold px-6 py-3 text-sm font-semibold text-night transition-all duration-300 hover:bg-gold-light hover:shadow-[0_0_28px_-8px_var(--color-gold)] active:scale-[0.98]"
+                >
+                  <WhatsappLogoIcon size={18} weight="fill" aria-hidden="true" />
+                  Reserveer via WhatsApp
+                </a>
               </div>
             </div>
           </Reveal>
