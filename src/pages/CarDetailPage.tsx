@@ -10,6 +10,7 @@ import { getCarById } from "../data/cars";
 import type { HighlightIcon } from "../data/cars";
 import { Reveal } from "../components/ui/Reveal";
 import { LottieIcon } from "../components/ui/LottieIcon";
+import { FAQ } from "../components/FAQ";
 import { ContactCTA } from "../components/ContactCTA";
 
 /* Vervang door je eigen WhatsApp-nummer (internationaal, zonder + of spaties) */
@@ -82,7 +83,7 @@ export function CarDetailPage() {
         </Link>
 
         {/* Galerij + reserveringszijbalk */}
-        <div className="grid gap-8 lg:grid-cols-[2fr_1fr] lg:gap-12">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_19rem] lg:gap-12">
           <div className="flex min-w-0 flex-col gap-12">
           <Reveal>
             <div className="flex min-w-0 flex-col-reverse gap-3 sm:flex-row">
@@ -138,7 +139,7 @@ export function CarDetailPage() {
                     initial={{ opacity: 0.4, scale: 1.02 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.4, ease: "easeOut" }}
-                    className="aspect-[4/3] w-full object-cover"
+                    className="aspect-[16/10] w-full object-cover"
                   />
 
                   <a
@@ -154,7 +155,7 @@ export function CarDetailPage() {
                   {/* Gouden gloed + donkere gradient achter de overlay-tekst —
                      alleen op desktop, want daar staat de naam over de foto. */}
                   <div
-                    className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-2/3 bg-gradient-to-t from-gold/45 via-night/70 to-transparent sm:block"
+                    className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-1/3 bg-gradient-to-t from-gold/15 via-night/25 to-transparent sm:block"
                     aria-hidden="true"
                   />
                   <div
@@ -279,6 +280,10 @@ export function CarDetailPage() {
             </div>
           </Reveal>
         </div>
+      </div>
+
+      <div className="pt-10 md:pt-16">
+        <FAQ />
       </div>
 
       <ContactCTA image={car.ctaImage ?? car.image} imageAlt={car.name} tightBottom />
