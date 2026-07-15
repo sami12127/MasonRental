@@ -49,6 +49,28 @@ html {
   mix-blend-mode: multiply;
 }
 
+/* Knop-hover: een thema-kleur veegt van links naar rechts over de knop.
+   De vulkleur zit in een ::before-laag die met translateX binnenschuift.
+   Per knop instelbaar via de --sweep custom property (val terug op goud). */
+.btn-sweep {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.btn-sweep::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--sweep, var(--color-gold));
+  transform: translateX(-101%);
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.btn-sweep:hover::before,
+.btn-sweep:focus-visible::before {
+  transform: translateX(0);
+}
+
 /* Oneindige logo-carrousel */
 @keyframes marquee {
   from {

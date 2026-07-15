@@ -272,7 +272,7 @@ export function CarDetailPage() {
                 href={whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-13 cursor-pointer items-center justify-center gap-2 rounded-none bg-gold px-8 py-3.5 text-sm font-semibold text-night transition-all duration-300 hover:bg-gold-light hover:shadow-[0_0_28px_-8px_var(--color-gold)] active:scale-[0.98]"
+                className="btn-sweep [--sweep:var(--color-night)] inline-flex min-h-13 cursor-pointer items-center justify-center gap-2 rounded-none bg-gold px-8 py-3.5 text-sm font-semibold text-night transition-all duration-300 hover:text-gold hover:shadow-[0_0_28px_-8px_var(--color-gold)] active:scale-[0.98]"
               >
                 <WhatsappLogoIcon size={20} weight="fill" aria-hidden="true" />
                 Reserveer via WhatsApp
