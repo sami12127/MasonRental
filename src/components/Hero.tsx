@@ -2,6 +2,11 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowUpRightIcon } from "@phosphor-icons/react";
 
+/** WhatsApp-link voor de reserveer-knop — zelfde nummer/bericht als in de navbar. */
+const WHATSAPP_URL = `https://wa.me/31618623757?text=${encodeURIComponent(
+  "Hallo Mason Rental, ik wil graag een auto reserveren."
+)}`;
+
 export function Hero() {
   const reduceMotion = useReducedMotion();
 
@@ -61,7 +66,7 @@ export function Hero() {
           >
             <Link
               to="/aanbod"
-              className="group inline-flex min-h-13 cursor-pointer items-center justify-center gap-2 rounded-none bg-gold px-8 py-3.5 text-sm font-bold uppercase tracking-wide text-night transition-all duration-300 hover:bg-gold-light hover:shadow-[0_0_36px_-8px_var(--color-gold)] active:scale-[0.97]"
+              className="group btn-sweep [--sweep:var(--color-night)] inline-flex min-h-13 cursor-pointer items-center justify-center gap-2 rounded-none bg-gold px-8 py-3.5 text-sm font-bold uppercase tracking-wide text-night transition-all duration-300 hover:text-gold active:scale-[0.97]"
             >
               Ontdek ons aanbod
               <ArrowUpRightIcon
@@ -71,9 +76,11 @@ export function Hero() {
                 aria-hidden="true"
               />
             </Link>
-            <Link
-              to="/contact"
-              className="group inline-flex min-h-13 cursor-pointer items-center justify-center gap-2 rounded-none border border-white/30 bg-white/[0.06] px-8 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition-colors duration-300 hover:border-gold hover:text-gold"
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex min-h-13 cursor-pointer items-center justify-center gap-2 rounded-none border border-white/30 bg-white/[0.06] px-8 py-3.5 text-sm font-bold uppercase tracking-wide text-white backdrop-blur-sm transition-colors duration-300 hover:border-gold hover:text-gold"
             >
               Maak een reservering
               <ArrowUpRightIcon
@@ -82,7 +89,7 @@ export function Hero() {
                 className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 aria-hidden="true"
               />
-            </Link>
+            </a>
           </motion.div>
         </div>
       </div>

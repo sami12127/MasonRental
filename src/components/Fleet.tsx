@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRightIcon } from "@phosphor-icons/react";
@@ -96,7 +96,7 @@ export function Fleet({
             <button
               type="button"
               onClick={resetFilters}
-              className="mt-6 inline-flex min-h-11 cursor-pointer items-center rounded-none bg-gold px-6 text-sm font-semibold text-night transition-colors hover:bg-gold-light"
+              className="mt-6 btn-sweep [--sweep:var(--color-night)] inline-flex min-h-11 cursor-pointer items-center rounded-none bg-gold px-6 text-sm font-semibold text-night transition-all duration-300 hover:text-gold active:scale-[0.98]"
             >
               Toon alles
             </button>
@@ -122,7 +122,7 @@ export function Fleet({
           <Reveal className="mt-12 flex justify-center md:mt-14">
             <Link
               to={cta.to}
-              className="group inline-flex min-h-13 cursor-pointer items-center justify-center gap-2 rounded-none bg-gold px-9 py-3.5 text-sm font-bold uppercase tracking-wide text-night transition-all duration-300 hover:bg-gold-light hover:shadow-[0_0_36px_-8px_var(--color-gold)] active:scale-[0.97]"
+              className="group btn-sweep [--sweep:var(--color-night)] inline-flex min-h-13 cursor-pointer items-center justify-center gap-2 rounded-none bg-gold px-9 py-3.5 text-sm font-bold uppercase tracking-wide text-night transition-all duration-300 hover:text-gold active:scale-[0.97]"
             >
               {cta.label}
               <ArrowRightIcon
@@ -181,8 +181,49 @@ function FilterGroup({
 
 /* ---------- Kaarten ---------- */
 
+/* True zolang het scherm smal is (1 kolom). Op die breedte bestaat er geen
+   hover, dus activeren we het kaart-effect op scroll i.p.v. op hover. */
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 639px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+  return isMobile;
+}
+
+/* Geeft true zodra het element de horizontale middenband van het scherm raakt.
+   Alleen actief wanneer `enabled` (mobiel), zodat desktop puur op hover werkt. */
+function useActiveInView<T extends HTMLElement>(enabled: boolean) {
+  const ref = useRef<T>(null);
+  const [active, setActive] = useState(false);
+  useEffect(() => {
+    if (!enabled) {
+      setActive(false);
+      return;
+    }
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setActive(entry.isIntersecting),
+      { rootMargin: "-45% 0px -45% 0px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [enabled]);
+  return [ref, active] as const;
+}
+
 function CarCard({ car, delay }: { car: Car; delay: number }) {
   const hoverImage = car.hoverImage ?? car.gallery[1] ?? car.gallery[0];
+  const isMobile = useIsMobile();
+  const [cardRef, inView] = useActiveInView<HTMLAnchorElement>(isMobile);
+  /* Op mobiel activeert de kaart in het midden van het scherm hetzelfde
+     effect als een hover op desktop: foto-wissel + gouden gloed. */
+  const active = isMobile && inView;
   return (
     <Reveal delay={delay}>
       <motion.div
@@ -191,18 +232,21 @@ function CarCard({ car, delay }: { car: Car; delay: number }) {
         className="h-full"
       >
         <Link
+          ref={cardRef}
           to={`/auto/${car.id}`}
           aria-label={`Bekijk de ${car.name}`}
           className="group relative flex aspect-[5/7] flex-col justify-end overflow-hidden rounded-[2rem] border border-white/10"
         >
-          {/* Basisfoto — vervaagt bij hover */}
+          {/* Basisfoto — vervaagt bij hover (desktop) of in beeld (mobiel) */}
           <img
             src={car.image}
             alt={car.name}
             loading="lazy"
             width={1400}
             height={875}
-            className="absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-0"
+            className={`absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-0 ${
+              active ? "scale-105 opacity-0" : ""
+            }`}
           />
           {/* Tweede foto — verschijnt bij hover (eager geladen voor een vloeiende wissel) */}
           <img
@@ -211,16 +255,20 @@ function CarCard({ car, delay }: { car: Car; delay: number }) {
             aria-hidden="true"
             width={1400}
             height={875}
-            className="absolute inset-0 h-full w-full object-cover opacity-0 transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-100"
+            className={`absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-100 ${
+              active ? "scale-105 opacity-100" : "opacity-0"
+            }`}
           />
           <div
             className="absolute inset-0 bg-gradient-to-t from-night/95 via-night/45 to-transparent"
             aria-hidden="true"
           />
-          {/* Gouden gloed die bij hover onderin de card omhoog komt.
-             Op mobiel (geen hover) staat de gloed standaard aan. */}
+          {/* Gouden gloed die onderin de card omhoog komt bij hover (desktop)
+             of wanneer de kaart in beeld staat (mobiel). */}
           <div
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-gold/55 via-gold/15 to-transparent opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100 max-sm:opacity-100!"
+            className={`pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-gold/55 via-gold/15 to-transparent transition-opacity duration-500 ease-out group-hover:opacity-100 ${
+              active ? "opacity-100" : "opacity-0"
+            }`}
             aria-hidden="true"
           />
 

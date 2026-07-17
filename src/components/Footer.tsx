@@ -65,7 +65,7 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={social.label}
-            className="inline-flex size-11 cursor-pointer items-center justify-center rounded-full border border-white/15 text-white/60 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold hover:bg-gold hover:text-night hover:shadow-[0_0_22px_-6px_var(--color-gold)]"
+            className="inline-flex size-11 cursor-pointer items-center justify-center rounded-full border border-white/15 text-white/60 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold hover:bg-gold hover:text-night"
           >
             <social.icon size={20} weight="fill" aria-hidden="true" />
           </a>
@@ -81,10 +81,18 @@ export function Footer() {
             WebSucces
           </a>
         </p>
-        <span className="inline-flex items-center gap-1.5">
-          <MapPinIcon size={15} weight="duotone" className="text-gold" aria-hidden="true" />
-          Capelle aan den IJssel
-        </span>
+        <div className="flex items-center gap-5">
+          <Link
+            to="/privacybeleid"
+            className="font-medium text-white/45 transition-colors hover:text-gold"
+          >
+            Privacybeleid
+          </Link>
+          <span className="inline-flex items-center gap-1.5">
+            <MapPinIcon size={15} weight="duotone" className="text-gold" aria-hidden="true" />
+            Capelle aan den IJssel
+          </span>
+        </div>
       </div>
     </footer>
   );

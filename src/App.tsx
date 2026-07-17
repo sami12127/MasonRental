@@ -9,10 +9,21 @@ import { AanbodPage } from "./pages/AanbodPage";
 import { OverOnsPage } from "./pages/OverOnsPage";
 import { CarDetailPage } from "./pages/CarDetailPage";
 import { ContactPage } from "./pages/ContactPage";
+import { PrivacyPage } from "./pages/PrivacyPage";
+import { CookieConsent } from "./components/CookieConsent";
 
 /** Scrollt naar boven bij routewissel, of naar de sectie als er een hash is. */
 function ScrollManager() {
   const { pathname, hash } = useLocation();
+
+  // Zet de browser-scrollherstel op 'manual', anders herstelt de browser bij
+  // een refresh de vorige scrollpositie (bv. de aanbod-sectie) en overschrijft
+  // dat de scroll-naar-boven hieronder. Nu bepaalt de app zelf de positie.
+  useEffect(() => {
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+  }, []);
 
   useEffect(() => {
     if (hash) {
@@ -49,11 +60,13 @@ export default function App() {
           <Route path="/over-ons" element={<OverOnsPage />} />
           <Route path="/auto/:id" element={<CarDetailPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/privacybeleid" element={<PrivacyPage />} />
           <Route path="*" element={<HomePage />} />
         </Routes>
       </main>
       <Footer />
       <WhatsAppButton />
+      <CookieConsent />
     </PageTransitionProvider>
   );
 }
