@@ -24,7 +24,7 @@ const cards: SocialCard[] = [
     description:
       "Blijf op de hoogte van onze nieuwste auto's en verhuuraanbiedingen.",
     cta: "Bekijk posts",
-    href: "https://instagram.com/masonrental",
+    href: "https://instagram.com/rentbymason",
   },
   {
     icon: TikTokIcon,
