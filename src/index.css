@@ -66,9 +66,16 @@ html {
   transform: translateX(-101%);
   transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.btn-sweep:hover::before,
-.btn-sweep:focus-visible::before {
-  transform: translateX(0);
+/* De veeg verschijnt alleen op apparaten die écht hover ondersteunen, en niet
+   op :focus-visible. Reden: Tailwind wikkelt de bijbehorende tekstkleur
+   (hover:text-gold) zelf in @media (hover: hover). Zonder dezelfde voorwaarde
+   verscheen op touch (sticky :hover na een tik) wél de donkere veeg, maar niet
+   de lichte tekst → donkere tekst op donkere vulling = onleesbaar. Nu blijft de
+   knop op touch gewoon zichtbaar; toetsenbordfocus krijgt de outline-ring. */
+@media (hover: hover) {
+  .btn-sweep:hover::before {
+    transform: translateX(0);
+  }
 }
 
 /* Lopende tekst op de privacybeleid-pagina: lijsten met gouden bullets en
