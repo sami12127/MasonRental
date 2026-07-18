@@ -34,9 +34,6 @@ export function SectionHeading({
         {title}
         {titleAccent && <span className="text-gold"> {titleAccent}</span>}
       </h2>
-      {!tight && (
-        <div className="mx-auto mt-6 h-px w-16 bg-gold/60" aria-hidden="true" />
-      )}
       {description && (
         <p
           className={`text-base leading-relaxed text-mist ${

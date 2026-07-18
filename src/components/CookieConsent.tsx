@@ -81,7 +81,7 @@ export function CookieConsent() {
             <button
               type="button"
               onClick={dismiss}
-              className="btn-sweep [--sweep:var(--color-night)] inline-flex min-h-11 w-full shrink-0 cursor-pointer items-center justify-center rounded-none bg-gold px-8 text-sm font-semibold text-night transition-all duration-300 hover:text-gold active:scale-[0.98] sm:w-auto"
+              className="btn-sweep [--sweep:var(--color-night)] border-2 border-gold inline-flex min-h-11 w-full shrink-0 cursor-pointer items-center justify-center rounded-lg bg-gold px-8 text-sm font-semibold text-night transition-all duration-300 hover:text-gold active:scale-[0.98] sm:w-auto"
             >
               Begrepen
             </button>

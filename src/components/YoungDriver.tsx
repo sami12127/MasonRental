@@ -10,7 +10,6 @@ export function YoungDriver() {
         <h2 className="text-3xl font-bold leading-tight tracking-tight text-white md:text-5xl">
           Al op je 18e <span className="text-gold">de weg op</span>
         </h2>
-        <div className="mx-auto mt-6 h-px w-16 bg-gold/60" aria-hidden="true" />
         <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-mist">
           Net je rijbewijs? Geen probleem. Bij Mason Rental stap je al vanaf je
           achttiende achter het stuur. Perfect voor een uitje, een speciale

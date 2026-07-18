@@ -138,7 +138,7 @@ export function Contact() {
                   href={whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-4 btn-sweep [--sweep:var(--color-night)] inline-flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-none bg-gold px-6 py-3 text-sm font-semibold text-night transition-all duration-300 hover:text-gold active:scale-[0.98]"
+                  className="mt-4 btn-sweep [--sweep:var(--color-night)] border-2 border-gold inline-flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-gold px-6 py-3 text-sm font-semibold text-night transition-all duration-300 hover:text-gold active:scale-[0.98]"
                 >
                   <WhatsappLogoIcon size={18} weight="fill" aria-hidden="true" />
                   Reserveer via WhatsApp

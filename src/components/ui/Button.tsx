@@ -6,10 +6,10 @@ interface ButtonProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
 }
 
 const base =
-  "inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-none px-8 py-3 text-sm font-medium tracking-wide transition-all duration-300 active:scale-[0.97]";
+  "inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-lg px-8 py-3 text-sm font-medium tracking-wide transition-all duration-300 active:scale-[0.97]";
 
 const variants = {
-  gold: "btn-sweep [--sweep:var(--color-night)] bg-gold text-night hover:text-gold",
+  gold: "btn-sweep [--sweep:var(--color-night)] border-2 border-gold bg-gold text-night hover:text-gold",
   outline:
     "btn-sweep [--sweep:var(--color-gold)] border border-white/25 text-white hover:border-gold hover:text-night",
 };

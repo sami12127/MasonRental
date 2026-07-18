@@ -59,7 +59,7 @@ export function CarDetailPage() {
         <p className="text-mist">Deze auto bestaat niet of is niet meer beschikbaar.</p>
         <Link
           to="/#aanbod"
-          className="btn-sweep [--sweep:var(--color-night)] inline-flex min-h-12 cursor-pointer items-center gap-2 rounded-none bg-gold px-8 text-sm font-semibold text-night transition-all duration-300 hover:text-gold active:scale-[0.98]"
+          className="btn-sweep [--sweep:var(--color-night)] border-2 border-gold inline-flex min-h-12 cursor-pointer items-center gap-2 rounded-lg bg-gold px-8 text-sm font-semibold text-night transition-all duration-300 hover:text-gold active:scale-[0.98]"
         >
           Bekijk het aanbod
         </Link>
@@ -170,7 +170,6 @@ export function CarDetailPage() {
           {/* Handig om te weten — verschijnt direct, zonder scroll-animatie */}
           <div>
             <h2 className="text-2xl font-bold text-white md:text-3xl">Handig om te weten</h2>
-            <div className="mt-4 h-px w-14 bg-gold/60" aria-hidden="true" />
             <ul className="mt-8 grid gap-x-16 gap-y-3 sm:grid-cols-2">
               {car.highlights.map((highlight) => (
                 <li key={highlight.text} className="flex items-center gap-4">
@@ -192,7 +191,6 @@ export function CarDetailPage() {
               <h2 className="text-2xl font-bold text-white md:text-3xl">
                 De {car.name}
               </h2>
-              <div className="mt-4 h-px w-14 bg-gold/60" aria-hidden="true" />
               <p className="mt-6 max-w-3xl text-base leading-relaxed text-white/70">
                 {car.description}
               </p>
@@ -272,7 +270,7 @@ export function CarDetailPage() {
                 href={whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-sweep [--sweep:var(--color-night)] inline-flex min-h-13 cursor-pointer items-center justify-center gap-2 rounded-none bg-gold px-8 py-3.5 text-sm font-semibold text-night transition-all duration-300 hover:text-gold active:scale-[0.98]"
+                className="btn-sweep [--sweep:var(--color-night)] border-2 border-gold inline-flex min-h-13 cursor-pointer items-center justify-center gap-2 rounded-lg bg-gold px-8 py-3.5 text-sm font-semibold text-night transition-all duration-300 hover:text-gold active:scale-[0.98]"
               >
                 <WhatsappLogoIcon size={20} weight="fill" aria-hidden="true" />
                 Reserveer via WhatsApp

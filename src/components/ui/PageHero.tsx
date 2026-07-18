@@ -68,7 +68,6 @@ export function PageHero({
             {title}
             {titleAccent && <span className="text-gold"> {titleAccent}</span>}
           </h1>
-          <div className="mx-auto mt-6 h-px w-16 bg-gold/60" aria-hidden="true" />
         </Reveal>
         {description && (
           <Reveal delay={0.15}>

@@ -66,7 +66,7 @@ export function Hero() {
           >
             <Link
               to="/aanbod"
-              className="group btn-sweep [--sweep:var(--color-night)] inline-flex min-h-13 cursor-pointer items-center justify-center gap-2 rounded-none bg-gold px-8 py-3.5 text-sm font-bold uppercase tracking-wide text-night transition-all duration-300 hover:text-gold active:scale-[0.97]"
+              className="group btn-sweep [--sweep:var(--color-night)] border-2 border-gold inline-flex min-h-13 cursor-pointer items-center justify-center gap-2 rounded-lg bg-gold px-8 py-3.5 text-sm font-bold uppercase tracking-wide text-night transition-all duration-300 hover:text-gold active:scale-[0.97]"
             >
               Ontdek ons aanbod
               <ArrowUpRightIcon
@@ -80,7 +80,7 @@ export function Hero() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex min-h-13 cursor-pointer items-center justify-center gap-2 rounded-none border border-white/30 bg-white/[0.06] px-8 py-3.5 text-sm font-bold uppercase tracking-wide text-white backdrop-blur-sm transition-colors duration-300 hover:border-gold hover:text-gold"
+              className="group inline-flex min-h-13 cursor-pointer items-center justify-center gap-2 rounded-lg border border-white/30 bg-white/[0.06] px-8 py-3.5 text-sm font-bold uppercase tracking-wide text-white backdrop-blur-sm transition-colors duration-300 hover:border-gold hover:text-gold"
             >
               Maak een reservering
               <ArrowUpRightIcon

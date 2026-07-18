@@ -155,7 +155,7 @@ export function Navbar() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-sweep [--sweep:var(--color-night)] hidden min-h-11 cursor-pointer items-center rounded-none bg-gold px-6 py-2.5 text-sm font-semibold text-night transition-all duration-300 hover:text-gold active:scale-[0.97] sm:inline-flex"
+            className="btn-sweep [--sweep:var(--color-night)] border-2 border-gold hidden min-h-11 cursor-pointer items-center rounded-lg bg-gold px-6 py-2.5 text-sm font-semibold text-night transition-all duration-300 hover:text-gold active:scale-[0.97] sm:inline-flex"
           >
             Reserveer
           </a>
@@ -237,7 +237,7 @@ export function Navbar() {
                       exit: { opacity: 0 },
                     }
               }
-              className="btn-sweep [--sweep:var(--color-night)] inline-flex min-h-13 cursor-pointer items-center justify-center rounded-none bg-gold px-10 text-base font-semibold text-night transition-all duration-300 hover:text-gold active:scale-[0.98]"
+              className="btn-sweep [--sweep:var(--color-night)] border-2 border-gold inline-flex min-h-13 cursor-pointer items-center justify-center rounded-lg bg-gold px-10 text-base font-semibold text-night transition-all duration-300 hover:text-gold active:scale-[0.98]"
             >
               Reserveer
             </motion.a>

@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
-import { PhoneIcon } from "@phosphor-icons/react";
+import { useState } from "react";
 import { Reveal } from "./ui/Reveal";
+import { LottieIcon } from "./ui/LottieIcon";
 
 interface ContactCTAProps {
   /** Foto rechts in de card — per pagina anders. */
@@ -15,6 +15,8 @@ export function ContactCTA({
   imageAlt = "Mason Rental auto",
   tightBottom = false,
 }: ContactCTAProps) {
+  const [callHover, setCallHover] = useState(false);
+
   return (
     <section
       className={`bg-night px-6 lg:px-10 ${
@@ -29,22 +31,22 @@ export function ContactCTA({
               Heb je nog vragen?
             </h2>
             <p className="mt-3 max-w-md text-sm leading-relaxed text-night/70 md:text-base">
-              Neem contact met ons op via dit nummer of bezoek onze contactpagina.
+              Neem gerust telefonisch contact met ons op via onderstaand nummer.
             </p>
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-6">
               <a
                 href="tel:+31618623757"
-                className="inline-flex min-h-13 cursor-pointer items-center justify-center gap-2 rounded-none bg-night px-8 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-charcoal active:scale-[0.98]"
+                onMouseEnter={() => setCallHover(true)}
+                onMouseLeave={() => setCallHover(false)}
+                className="inline-flex min-h-13 cursor-pointer items-center justify-center gap-2 rounded-lg bg-night px-8 py-3.5 text-sm font-semibold text-white transition-colors duration-300 hover:text-gold active:scale-[0.98]"
               >
-                <PhoneIcon size={18} weight="fill" aria-hidden="true" />
+                <LottieIcon
+                  src="/lottie_animations/bellen.json"
+                  className="size-5 shrink-0"
+                  playing={callHover}
+                />
                 06 18623757
               </a>
-              <Link
-                to="/contact"
-                className="inline-flex min-h-13 cursor-pointer items-center justify-center rounded-none border border-night/40 px-8 py-3.5 text-sm font-semibold text-night transition-all duration-300 hover:bg-night hover:text-white active:scale-[0.98]"
-              >
-                Contact
-              </Link>
             </div>
           </div>
 

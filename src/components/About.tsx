@@ -25,7 +25,6 @@ export function About({ showHeading = true, text = DEFAULT_TEXT }: AboutProps) {
             <h2 className="text-3xl font-bold tracking-tight text-white md:text-5xl">
               Alleen het beste is goed genoeg
             </h2>
-            <div className="mx-auto mt-6 h-px w-16 bg-gold/60" aria-hidden="true" />
           </Reveal>
         )}
         <Reveal delay={showHeading ? 0.15 : 0}>

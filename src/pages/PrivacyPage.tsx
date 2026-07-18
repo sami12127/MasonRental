@@ -238,7 +238,6 @@ export function PrivacyPage() {
                   <h2 className="text-xl font-bold text-white md:text-2xl">
                     {section.title}
                   </h2>
-                  <div className="mt-3 h-px w-12 bg-gold/50" aria-hidden="true" />
                   <div className="privacy-prose mt-5 space-y-4 text-base leading-relaxed text-white/70">
                     {section.body}
                   </div>

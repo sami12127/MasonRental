@@ -176,10 +176,6 @@ export function WhyUs({
             <h2 className="text-4xl font-bold leading-tight tracking-tight text-white md:text-6xl">
               {title}
             </h2>
-            <div
-              className="mx-auto mt-6 h-px w-16 bg-gold/60"
-              aria-hidden="true"
-            />
             <p className="mx-auto mt-7 max-w-4xl text-lg leading-relaxed text-mist md:text-xl">
               {intro}
             </p>

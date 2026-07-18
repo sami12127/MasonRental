@@ -290,7 +290,6 @@ export function OverOnsStory() {
             <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
               Wij werken aan <span className="text-gold">jouw comfort</span>
             </h2>
-            <div className="mx-auto mt-6 h-px w-16 bg-gold/60" aria-hidden="true" />
             <p className="mt-8 text-lg leading-relaxed text-white/70">
               Bij Mason Rental draait alles om comfort en gemak. Ons team zorgt
               ervoor dat je huurervaring van begin tot eind soepel verloopt — of
