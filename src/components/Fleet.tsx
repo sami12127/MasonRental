@@ -319,17 +319,17 @@ function UpcomingCard({ car, delay }: { car: UpcomingCar; delay: number }) {
           src={car.image}
           alt={car.name}
           loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover grayscale brightness-[0.55] transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-0"
+          className="absolute inset-0 h-full w-full object-cover grayscale brightness-[0.78] transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-0"
         />
         {/* Interieurfoto bij hover */}
         <img
           src={hoverImage}
           alt=""
           aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover opacity-0 grayscale brightness-[0.55] transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-100"
+          className="absolute inset-0 h-full w-full object-cover opacity-0 grayscale brightness-[0.78] transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-100"
         />
         <div
-          className="absolute inset-0 bg-gradient-to-t from-night/95 via-night/55 to-night/30"
+          className="absolute inset-0 bg-gradient-to-t from-night via-night/50 to-night/15"
           aria-hidden="true"
         />
 

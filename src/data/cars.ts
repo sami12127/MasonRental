@@ -189,19 +189,19 @@ export interface UpcomingCar {
 
 export const upcomingCars: UpcomingCar[] = [
   {
-    name: "Golf 8 GTI",
-    brand: "Volkswagen",
-    bodyType: "Hot Hatch",
-    tagline: "De iconische GTI in zijn scherpste vorm.",
-    image: "/cars/golf-8-gti-card.webp",
-    hoverImage: "/cars/golf-8-gti-interieur.webp",
+    name: "AMG C63 S E Performance",
+    brand: "Mercedes-AMG",
+    bodyType: "Sedan",
+    tagline: "F1-hybridetechniek in een strakke sedan.",
+    image: "/cars/mercedes-c63s-card.webp",
+    hoverImage: "/cars/mercedes-c63s-interieur.webp",
   },
   {
-    name: "Golf 8 R",
-    brand: "Volkswagen",
+    name: "AMG A45 S",
+    brand: "Mercedes-AMG",
     bodyType: "Hot Hatch",
-    tagline: "Vierwielaandrijving en pure prestatie.",
-    image: "/cars/golf-8-r-card.webp",
-    hoverImage: "/cars/golf-8-r-interieur.webp",
+    tagline: "De sterkste viercilinder ter wereld.",
+    image: "/cars/mercedes-a45s-card.webp",
+    hoverImage: "/cars/mercedes-a45s-interieur.webp",
   },
 ];
