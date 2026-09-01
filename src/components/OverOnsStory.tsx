@@ -12,8 +12,6 @@ const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent
 const reserveerHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
   "Hallo Mason Rental, ik wil graag een auto reserveren."
 )}`;
-const reviewsHref =
-  "https://www.google.com/maps/search/?api=1&query=Mason+Rental+Capelle+aan+den+IJssel";
 
 /* ---------- Wisselende foto/tekst-blokken ---------- */
 
@@ -192,7 +190,7 @@ const features: FeatureCard[] = [
     title: "Betrouwbaar",
     description:
       "Onze auto's verkeren altijd in topconditie en worden zorgvuldig onderhouden. Rijd met een gerust hart.",
-    cta: { label: "Google reviews", href: reviewsHref },
+    cta: { label: "Bekijk het aanbod", to: "/aanbod" },
     highlight: true,
   },
   {

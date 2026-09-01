@@ -11,7 +11,7 @@ const base =
 const variants = {
   gold: "btn-sweep [--sweep:var(--color-night)] border-2 border-gold bg-gold text-night hover:text-gold",
   outline:
-    "btn-sweep [--sweep:var(--color-gold)] border border-white/25 text-white hover:border-gold hover:text-night",
+    "btn-sweep [--sweep:var(--color-gold)] [--sweep-text:var(--color-night)] border border-white/25 text-white hover:border-gold hover:text-night",
 };
 
 export function Button({ variant = "gold", children, className = "", ...rest }: ButtonProps) {

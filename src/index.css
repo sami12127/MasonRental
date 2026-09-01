@@ -77,6 +77,18 @@ html {
     transform: translateX(0);
   }
 }
+/* Op touch (geen echte hover) speelt de veeg af tijdens de tik (:active). Om te
+   voorkomen dat de tekst onleesbaar wordt op de donkere vulling — het probleem
+   dat hierboven beschreven staat — flippen we tegelijk de tekstkleur mee via
+   --sweep-text (standaard goud; per knop overschrijfbaar, net als --sweep). */
+@media (hover: none) {
+  .btn-sweep:active::before {
+    transform: translateX(0);
+  }
+  .btn-sweep:active {
+    color: var(--sweep-text, var(--color-gold));
+  }
+}
 
 /* Lopende tekst op de privacybeleid-pagina: lijsten met gouden bullets en
    gouden, onderstreepte links binnen de tekstblokken. */
