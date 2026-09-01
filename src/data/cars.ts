@@ -97,7 +97,7 @@ export const cars: Car[] = [
       { icon: "acceleration", text: "0-100 KM/H in 3.6s" },
       { icon: "fuel", text: "Benzine SuperPlus 98" },
       { icon: "transmission", text: "8-traps automaat" },
-      { icon: "year", text: "2021" },
+      { icon: "year", text: "2020" },
       { icon: "seats", text: "5 zitplaatsen" },
       { icon: "engine", text: "4.0 V8 Biturbo" },
       { icon: "location", text: "Capelle aan den IJssel" },
