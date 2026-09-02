@@ -75,9 +75,12 @@ export function Contact() {
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_1.65fr]">
           {/* Linkerkolom — compacte WhatsApp-card + contactgegevens */}
-          <Reveal>
-            <div className="flex h-full flex-col gap-6">
-              <div className="rounded-3xl border border-white/10 bg-charcoal p-6 md:p-7">
+          <Reveal className="contents lg:block">
+            {/* Op mobiel lost deze kolom op (display:contents), zodat de
+               kaarten losse grid-items worden en de kaart ertussen past.
+               Vanaf lg is het weer gewoon een kolom. */}
+            <div className="contents lg:flex lg:h-full lg:flex-col lg:gap-6">
+              <div className="order-1 rounded-3xl border border-white/10 bg-charcoal p-6 md:p-7 lg:order-none">
                 <h3 className="text-lg font-bold text-white">Direct contact</h3>
                 <ul className="mt-4 space-y-1">
                   {rows.map((row) => {
@@ -118,7 +121,7 @@ export function Contact() {
                 </ul>
               </div>
 
-              <div className="rounded-3xl border border-gold/25 bg-charcoal p-6">
+              <div className="order-3 rounded-3xl border border-gold/25 bg-charcoal p-6 lg:order-none">
                 <h3 className="text-base font-bold text-white">
                   Direct reserveren via WhatsApp
                 </h3>
@@ -139,8 +142,9 @@ export function Contact() {
             </div>
           </Reveal>
 
-          {/* Rechterkolom — grote Google Maps-embed */}
-          <Reveal delay={0.15}>
+          {/* Google Maps — rechterkolom op desktop, op mobiel tussen de
+             contactgegevens en de WhatsApp-kaart */}
+          <Reveal delay={0.15} className="order-2 lg:order-none">
             <a
               href={mapsHref}
               target="_blank"
