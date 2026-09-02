@@ -8,6 +8,7 @@ import {
 } from "@phosphor-icons/react";
 
 const WHATSAPP_NUMBER = "31618623757";
+const KVK = "97892343";
 const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
   "Hallo Mason Rental, ik wil graag een auto reserveren."
 )}`;
@@ -85,7 +86,8 @@ export function Footer() {
             WebSucces
           </a>
         </p>
-        <div className="flex items-center gap-5">
+        <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+          <span>KVK {KVK}</span>
           <Link
             to="/privacybeleid"
             className="font-medium text-white/45 transition-colors hover:text-gold"

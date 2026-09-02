@@ -38,7 +38,9 @@ export function ContactCTA({
                 href="tel:+31618623757"
                 onMouseEnter={() => setCallHover(true)}
                 onMouseLeave={() => setCallHover(false)}
-                className="inline-flex min-h-13 cursor-pointer items-center justify-center gap-2 rounded-lg bg-night px-8 py-3.5 text-sm font-semibold text-white transition-colors duration-300 hover:text-gold active:scale-[0.98]"
+                /* Op mobiel over de volle breedte van de card; vanaf sm weer
+                   een knop op maat van de tekst. */
+                className="flex w-full min-h-13 cursor-pointer items-center justify-center gap-2 rounded-lg bg-night px-8 py-3.5 text-sm font-semibold text-white transition-colors duration-300 hover:text-gold active:scale-[0.98] sm:inline-flex sm:w-auto"
               >
                 <LottieIcon
                   src="/lottie_animations/bellen.json"
