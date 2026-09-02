@@ -311,22 +311,34 @@ function CarCard({ car, delay }: { car: Car; delay: number }) {
    Foto in grijstinten + duidelijke 'binnenkort'-banner. */
 function UpcomingCard({ car, delay }: { car: UpcomingCar; delay: number }) {
   const hoverImage = car.hoverImage ?? car.image;
+  const isMobile = useIsMobile();
+  const [cardRef, inView] = useActiveInView<HTMLDivElement>(isMobile);
+  /* Net als bij de gewone kaarten: op mobiel bestaat er geen hover, dus
+     wisselt de foto zodra de kaart in het midden van het scherm staat. */
+  const active = isMobile && inView;
   return (
     <Reveal delay={delay}>
-      <div className="group relative flex aspect-[5/7] flex-col justify-end overflow-hidden rounded-[2rem] border border-white/10 bg-charcoal">
+      <div
+        ref={cardRef}
+        className="group relative flex aspect-[5/7] flex-col justify-end overflow-hidden rounded-[2rem] border border-white/10 bg-charcoal"
+      >
         {/* Exterieurfoto — grijs & gedimd zodat het als 'nog niet beschikbaar' leest */}
         <img
           src={car.image}
           alt={car.name}
           loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover grayscale brightness-[0.78] transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-0"
+          className={`absolute inset-0 h-full w-full object-cover grayscale brightness-[0.78] transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-0 ${
+            active ? "scale-105 opacity-0" : ""
+          }`}
         />
-        {/* Interieurfoto bij hover */}
+        {/* Interieurfoto bij hover (desktop) of in beeld (mobiel) */}
         <img
           src={hoverImage}
           alt=""
           aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover opacity-0 grayscale brightness-[0.78] transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-100"
+          className={`absolute inset-0 h-full w-full object-cover grayscale brightness-[0.78] transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-100 ${
+            active ? "scale-105 opacity-100" : "opacity-0"
+          }`}
         />
         <div
           className="absolute inset-0 bg-gradient-to-t from-night via-night/50 to-night/15"

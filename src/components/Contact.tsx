@@ -1,7 +1,6 @@
 import { WhatsappLogoIcon } from "@phosphor-icons/react";
 import type { ReactNode } from "react";
 import { Reveal } from "./ui/Reveal";
-import { SectionHeading } from "./ui/SectionHeading";
 import { LottieIcon } from "./ui/LottieIcon";
 
 /* Vervang door je eigen WhatsApp-nummer (internationaal, zonder + of spaties) */
@@ -74,13 +73,6 @@ export function Contact() {
   return (
     <section id="contact" className="bg-night pt-8 pb-8 md:pt-12 md:pb-12">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <SectionHeading
-          eyebrow="Contact"
-          title="Reserveer jouw"
-          titleAccent="auto"
-          description="Reserveren doe je snel en persoonlijk via WhatsApp — wij nemen dezelfde dag nog contact met je op."
-        />
-
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_1.65fr]">
           {/* Linkerkolom — compacte WhatsApp-card + contactgegevens */}
           <Reveal>

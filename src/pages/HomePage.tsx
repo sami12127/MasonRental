@@ -1,7 +1,6 @@
 import { Hero } from "../components/Hero";
 import { Showcase } from "../components/Showcase";
 import { Fleet } from "../components/Fleet";
-import { YoungDriver } from "../components/YoungDriver";
 import { WhyUs } from "../components/WhyUs";
 import { Reviews } from "../components/Reviews";
 import { Social } from "../components/Social";
@@ -13,7 +12,6 @@ export function HomePage() {
       <Hero />
       <Fleet cta={{ label: "Bekijk het volledige aanbod", to: "/aanbod" }} />
       <Showcase />
-      <YoungDriver />
       <WhyUs />
       <Reviews />
       <Social />

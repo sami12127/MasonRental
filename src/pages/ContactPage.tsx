@@ -14,8 +14,8 @@ export function ContactPage() {
 
   return (
     <div className="pt-16 sm:pt-20">
-      <FAQ />
       <Contact />
+      <FAQ />
       <Social />
       <ContactCTA image="/cars/rs6-1.webp" imageAlt="Audi RS6" />
     </div>
