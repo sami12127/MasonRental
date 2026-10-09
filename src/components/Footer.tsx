@@ -27,10 +27,14 @@ export function Footer() {
       <div className="relative px-6 pt-16 pb-10 md:pt-20">
         <Link to="/#home" aria-label="Mason Rental — naar home" className="block">
           <img
-            src="/logo-mr.png"
+            src="/logo-mr.webp"
+            srcSet="/logo-mr-480.webp 480w, /logo-mr.webp 1288w"
+            sizes="(min-width: 1024px) 1152px, (min-width: 768px) 896px, 100vw"
             alt="Mason Rental"
             width={1288}
             height={203}
+            loading="lazy"
+            decoding="async"
             className="mx-auto w-full max-w-4xl select-none lg:max-w-6xl"
           />
         </Link>
@@ -74,14 +78,14 @@ export function Footer() {
       </div>
 
       {/* Onderbalk */}
-      <div className="relative mx-auto mt-12 flex max-w-4xl flex-col items-center gap-3 border-t border-white/10 px-6 py-6 text-xs text-white/35 sm:flex-row sm:justify-between">
+      <div className="relative mx-auto mt-12 flex max-w-4xl flex-col items-center gap-3 border-t border-white/10 px-6 py-6 text-xs text-white/55 sm:flex-row sm:justify-between">
         <p>
           © {new Date().getFullYear()} Mason Rental. Alle rechten voorbehouden.{" "}
           <a
             href="https://websucces.io"
             target="_blank"
             rel="noopener noreferrer"
-            className="cursor-pointer font-medium text-white/45 transition-colors hover:text-gold"
+            className="cursor-pointer font-medium text-white/70 transition-colors hover:text-gold"
           >
             WebSucces
           </a>
@@ -90,7 +94,7 @@ export function Footer() {
           <span>KVK {KVK}</span>
           <Link
             to="/privacybeleid"
-            className="font-medium text-white/45 transition-colors hover:text-gold"
+            className="font-medium text-white/70 transition-colors hover:text-gold"
           >
             Privacybeleid
           </Link>

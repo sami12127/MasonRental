@@ -146,8 +146,10 @@ export function PageTransitionProvider({ children }: { children: ReactNode }) {
           animate={logo}
         >
           <img
-            src="/logo-curtain.png"
+            src="/logo-curtain.webp"
             alt=""
+            decoding="async"
+            fetchPriority="low"
             width={688}
             height={518}
             className="block w-full"

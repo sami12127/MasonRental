@@ -1,0 +1,16 @@
+# Bestanden met een hash in de naam veranderen nooit → 1 jaar cachen
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Foto's en logo's: een week cachen, daarna opnieuw controleren
+/cars/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+/*.webp
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+/lottie_animations/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400

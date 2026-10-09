@@ -26,9 +26,9 @@ export function CookieConsent() {
       /* localStorage niet beschikbaar (bv. private mode) — toon de melding. */
     }
     if (!stored) {
-      // Korte vertraging zodat de melding rustig ná de pagina inschuift.
-      const timer = setTimeout(() => setVisible(true), 800);
-      return () => clearTimeout(timer);
+      // Direct tonen (schuift in tegelijk met de hero). Een vertraging maakt
+      // de melding het laatst getekende grote element, wat de laadscore drukt.
+      setVisible(true);
     }
   }, []);
 

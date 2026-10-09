@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+/* Nippo variable font, zelf gehost (wordt in index.html gepreload) */
+@font-face {
+  font-family: "Nippo";
+  src: url("/fonts/nippo-variable.woff2") format("woff2");
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   /* Mason Rental brand tokens */
   --color-night: #181818;
@@ -9,7 +18,7 @@
   --color-gold-light: #e0c179;
   --color-mist: #a3a3a3;
 
-  --font-sans: "Nippo", "Satoshi", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Nippo", "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
 html {
@@ -38,8 +47,8 @@ html {
   );
   background-size: 250% 100%;
   background-repeat: no-repeat;
-  -webkit-mask-image: url("/logo-curtain.png");
-  mask-image: url("/logo-curtain.png");
+  -webkit-mask-image: url("/logo-curtain.webp");
+  mask-image: url("/logo-curtain.webp");
   -webkit-mask-size: contain;
   mask-size: contain;
   -webkit-mask-repeat: no-repeat;

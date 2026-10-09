@@ -5,6 +5,11 @@ import { ArrowRightIcon } from "@phosphor-icons/react";
 import { cars as allCars, upcomingCars, type Car, type UpcomingCar } from "../data/cars";
 import { Reveal } from "./ui/Reveal";
 import { SectionHeading } from "./ui/SectionHeading";
+import { responsiveImg } from "../lib/responsiveImg";
+
+/* Kaartbreedte in het grid (1 / 2 / 4 kolommen) en de verhouding van de kaart (5:7). */
+const CARD_SIZES = "(min-width: 1024px) 25vw, (min-width: 640px) 50vw, calc(100vw - 48px)";
+const CARD_ASPECT = 5 / 7;
 
 const ALL = "Alle";
 
@@ -74,6 +79,8 @@ export function Fleet({
             spacing="tight"
           />
         )}
+        {/* Zonder zichtbare kop toch een h2, zodat de kaarttitels (h3) in de juiste volgorde staan */}
+        {!showHeading && <h2 className="sr-only">Ons aanbod</h2>}
 
         {filterable && (
           <div className="mb-8 md:mb-10">
@@ -234,25 +241,27 @@ function CarCard({ car, delay }: { car: Car; delay: number }) {
         <Link
           ref={cardRef}
           to={`/auto/${car.id}`}
-          aria-label={`Bekijk de ${car.name}`}
           className="group relative flex aspect-[5/7] flex-col justify-end overflow-hidden rounded-[2rem] border border-white/10"
         >
           {/* Basisfoto — vervaagt bij hover (desktop) of in beeld (mobiel) */}
           <img
-            src={car.image}
+            {...responsiveImg(car.image, CARD_SIZES, CARD_ASPECT)}
             alt={car.name}
             loading="lazy"
+            decoding="async"
             width={1400}
             height={875}
             className={`absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-0 ${
               active ? "scale-105 opacity-0" : ""
             }`}
           />
-          {/* Tweede foto — verschijnt bij hover (eager geladen voor een vloeiende wissel) */}
+          {/* Tweede foto — verschijnt bij hover; laadt mee zodra de kaart in de buurt komt */}
           <img
-            src={hoverImage}
+            {...responsiveImg(hoverImage, CARD_SIZES, CARD_ASPECT)}
             alt=""
             aria-hidden="true"
+            loading="lazy"
+            decoding="async"
             width={1400}
             height={875}
             className={`absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-100 ${
@@ -318,16 +327,19 @@ function UpcomingCard({ car, delay }: { car: UpcomingCar; delay: number }) {
       <div className="group relative flex aspect-[5/7] flex-col justify-end overflow-hidden rounded-[2rem] border border-white/10 bg-charcoal">
         {/* Exterieurfoto — grijs & gedimd zodat het als 'nog niet beschikbaar' leest */}
         <img
-          src={car.image}
+          {...responsiveImg(car.image, CARD_SIZES, CARD_ASPECT)}
           alt={car.name}
           loading="lazy"
+          decoding="async"
           className="absolute inset-0 h-full w-full object-cover grayscale brightness-[0.78] transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-0"
         />
         {/* Interieurfoto bij hover (alleen desktop) */}
         <img
-          src={hoverImage}
+          {...responsiveImg(hoverImage, CARD_SIZES, CARD_ASPECT)}
           alt=""
           aria-hidden="true"
+          loading="lazy"
+          decoding="async"
           className="absolute inset-0 h-full w-full object-cover opacity-0 grayscale brightness-[0.78] transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-100"
         />
         <div

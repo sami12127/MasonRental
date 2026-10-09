@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Reveal } from "./ui/Reveal";
+import { responsiveImg } from "../lib/responsiveImg";
 
 /* Foto's voor de carrousel — vervang of vul aan via /public/cars.
    Alle slides zijn liggend (3:2) zodat ze consistent in het kader vallen. */
@@ -77,8 +78,14 @@ export function Showcase() {
                 <AnimatePresence initial={false} mode="popLayout">
                   <motion.img
                     key={index}
-                    src={slides[index]}
+                    {...responsiveImg(
+                      slides[index],
+                      "(min-width: 1280px) 700px, (min-width: 1024px) 55vw, calc(100vw - 48px)",
+                      4 / 3
+                    )}
                     alt={`Mason Rental auto ${index + 1}`}
+                    loading="lazy"
+                    decoding="async"
                     draggable={false}
                     initial={{ opacity: 0, scale: 1.04 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -94,7 +101,7 @@ export function Showcase() {
               </div>
 
               {/* Navigatiebolletjes */}
-              <div className="absolute inset-x-0 bottom-4 flex items-center justify-center gap-2.5">
+              <div className="absolute inset-x-0 bottom-4 flex items-center justify-center gap-0.5">
                 {slides.map((_, i) => (
                   <button
                     key={i}
@@ -102,12 +109,16 @@ export function Showcase() {
                     onClick={() => goTo(i)}
                     aria-label={`Toon foto ${i + 1}`}
                     aria-current={i === index}
-                    className={`h-2 cursor-pointer rounded-full transition-all duration-300 ${
-                      i === index
-                        ? "w-6 bg-gold"
-                        : "w-2 bg-white/40 hover:bg-white/70"
-                    }`}
-                  />
+                    className="group/dot flex h-6 min-w-6 cursor-pointer items-center justify-center"
+                  >
+                    <span
+                      className={`block h-2 rounded-full transition-all duration-300 ${
+                        i === index
+                          ? "w-6 bg-gold"
+                          : "w-2 bg-white/40 group-hover/dot:bg-white/70"
+                      }`}
+                    />
+                  </button>
                 ))}
               </div>
             </div>

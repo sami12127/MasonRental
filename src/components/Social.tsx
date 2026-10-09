@@ -63,7 +63,6 @@ export function Social() {
                   href={card.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`Bekijk Mason Rental op ${card.name}`}
                   className={`group flex h-full flex-col items-center rounded-3xl border p-8 text-center transition-all duration-300 hover:-translate-y-1.5 md:p-10 ${
                     card.highlight
                       ? "border-transparent bg-gold shadow-[0_18px_50px_-12px_rgba(201,163,78,0.5)] md:-my-3 md:py-14"

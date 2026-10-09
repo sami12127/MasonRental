@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Reveal } from "./ui/Reveal";
 import { LottieIcon } from "./ui/LottieIcon";
+import { responsiveImg } from "../lib/responsiveImg";
 
 interface ContactCTAProps {
   /** Foto rechts in de card — per pagina anders. */
@@ -55,9 +56,10 @@ export function ContactCTA({
           {/* Foto */}
           <div className="p-4 md:py-6 md:pr-6 md:pl-0">
             <img
-              src={image}
+              {...responsiveImg(image, "(min-width: 768px) 450px, calc(100vw - 80px)")}
               alt={imageAlt}
               loading="lazy"
+              decoding="async"
               className="h-48 w-full rounded-2xl object-cover md:h-full md:min-h-[14rem]"
             />
           </div>

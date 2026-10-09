@@ -1,16 +1,39 @@
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { WhatsAppButton } from "./components/WhatsAppButton";
 import { PageTransitionProvider } from "./components/PageTransition";
 import { HomePage } from "./pages/HomePage";
-import { AanbodPage } from "./pages/AanbodPage";
-import { OverOnsPage } from "./pages/OverOnsPage";
-import { CarDetailPage } from "./pages/CarDetailPage";
-import { ContactPage } from "./pages/ContactPage";
-import { PrivacyPage } from "./pages/PrivacyPage";
 import { CookieConsent } from "./components/CookieConsent";
+
+/* Subpagina's in aparte chunks, zodat de homepage minder JS hoeft te laden. */
+const loadAanbod = () => import("./pages/AanbodPage");
+const loadOverOns = () => import("./pages/OverOnsPage");
+const loadCarDetail = () => import("./pages/CarDetailPage");
+const loadContact = () => import("./pages/ContactPage");
+const loadPrivacy = () => import("./pages/PrivacyPage");
+const AanbodPage = lazy(() => loadAanbod().then((m) => ({ default: m.AanbodPage })));
+const OverOnsPage = lazy(() => loadOverOns().then((m) => ({ default: m.OverOnsPage })));
+const CarDetailPage = lazy(() => loadCarDetail().then((m) => ({ default: m.CarDetailPage })));
+const ContactPage = lazy(() => loadContact().then((m) => ({ default: m.ContactPage })));
+const PrivacyPage = lazy(() => loadPrivacy().then((m) => ({ default: m.PrivacyPage })));
+
+/** Haalt de subpagina's alvast op zodra de browser niets te doen heeft,
+    zodat een paginawissel achter de curtain niet op het netwerk wacht. */
+function PrefetchPages() {
+  useEffect(() => {
+    const prefetch = () =>
+      [loadAanbod, loadOverOns, loadCarDetail, loadContact, loadPrivacy].forEach((load) => load());
+    if ("requestIdleCallback" in window) {
+      const id = window.requestIdleCallback(prefetch, { timeout: 4000 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const timer = setTimeout(prefetch, 3000);
+    return () => clearTimeout(timer);
+  }, []);
+  return null;
+}
 
 /** Scrollt naar boven bij routewissel, of naar de sectie als er een hash is. */
 function ScrollManager() {
@@ -53,16 +76,19 @@ export default function App() {
       </a>
       <ScrollManager />
       <Navbar />
+      <PrefetchPages />
       <main id="main">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/aanbod" element={<AanbodPage />} />
-          <Route path="/over-ons" element={<OverOnsPage />} />
-          <Route path="/auto/:id" element={<CarDetailPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/privacybeleid" element={<PrivacyPage />} />
-          <Route path="*" element={<HomePage />} />
-        </Routes>
+        <Suspense fallback={<div className="min-h-dvh" />}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/aanbod" element={<AanbodPage />} />
+            <Route path="/over-ons" element={<OverOnsPage />} />
+            <Route path="/auto/:id" element={<CarDetailPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/privacybeleid" element={<PrivacyPage />} />
+            <Route path="*" element={<HomePage />} />
+          </Routes>
+        </Suspense>
       </main>
       <Footer />
       <WhatsAppButton />

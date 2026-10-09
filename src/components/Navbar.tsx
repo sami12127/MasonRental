@@ -125,7 +125,7 @@ export function Navbar() {
           className="absolute left-1/2 -translate-x-1/2 cursor-pointer lg:static lg:left-auto lg:translate-x-0"
         >
           <img
-            src="/logo-mr.png"
+            src="/logo-mr-480.webp"
             alt="Mason Rental"
             width={1288}
             height={203}

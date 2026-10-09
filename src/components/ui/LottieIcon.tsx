@@ -1,6 +1,10 @@
-import { useEffect, useRef, useState } from "react";
-import Lottie, { type LottieRefCurrentProps } from "lottie-react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import type { LottieRefCurrentProps } from "lottie-react";
 import { useReducedMotion } from "framer-motion";
+
+/* lottie-web is groot; pas laden wanneer er echt een animatie getoond wordt,
+   zodat het niet in de eerste bundel zit. */
+const Lottie = lazy(() => import("lottie-react"));
 
 interface LottieIconProps {
   /** Pad naar het Lottie-JSON in /public (bv. "/lottie_animations/door.json"). */
@@ -20,23 +24,67 @@ interface LottieIconProps {
    meerdere kaarten niet telkens opnieuw wordt gedownload. */
 const cache = new Map<string, object>();
 
+/* Wacht tot de browser na het laden van de pagina even niets te doen heeft,
+   zodat Lottie niet concurreert met de eerste weergave. */
+const idle = new Promise<void>((resolve) => {
+  const schedule = () =>
+    "requestIdleCallback" in window
+      ? window.requestIdleCallback(() => resolve(), { timeout: 2000 })
+      : setTimeout(resolve, 1);
+  if (document.readyState === "complete") schedule();
+  else window.addEventListener("load", schedule, { once: true });
+});
+
 /**
  * Rendert een Lottie-animatie als icoon. Respecteert prefers-reduced-motion:
  * dan wordt de animatie stilgezet op het eerste frame.
+ *
+ * De animatie wordt pas opgehaald en gestart als het icoon (bijna) in beeld
+ * komt, en pauzeert zodra het uit beeld is — dat scheelt veel rekenwerk bij
+ * het laden van de pagina.
  */
 export function LottieIcon({ src, className, loop = true, playing }: LottieIconProps) {
-  const [data, setData] = useState<object | null>(() => cache.get(src) ?? null);
+  const [data, setData] = useState<object | null>(null);
+  const [nearView, setNearView] = useState(false);
   const reduceMotion = useReducedMotion();
   const lottieRef = useRef<LottieRefCurrentProps>(null);
+  const containerRef = useRef<HTMLSpanElement>(null);
+  const inView = useRef(false);
   const controlled = playing !== undefined;
 
+  /* Houd bij of het icoon in (of vlak bij) beeld is. */
   useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    if (!("IntersectionObserver" in window)) {
+      setNearView(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        inView.current = entry.isIntersecting;
+        if (entry.isIntersecting) setNearView(true);
+        /* Automatisch afspelende animaties pauzeren buiten beeld. */
+        const api = lottieRef.current;
+        if (!api || controlled || reduceMotion) return;
+        if (entry.isIntersecting) api.play();
+        else api.pause();
+      },
+      { rootMargin: "200px 0px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [controlled, reduceMotion]);
+
+  useEffect(() => {
+    if (!nearView) return;
     if (cache.has(src)) {
       setData(cache.get(src)!);
       return;
     }
     let active = true;
-    fetch(src)
+    idle
+      .then(() => fetch(src))
       .then((res) => res.json())
       .then((json: object) => {
         cache.set(src, json);
@@ -46,7 +94,7 @@ export function LottieIcon({ src, className, loop = true, playing }: LottieIconP
     return () => {
       active = false;
     };
-  }, [src]);
+  }, [src, nearView]);
 
   /* Controlled modus: speel af bij `playing`, zet anders stil op frame 0. */
   useEffect(() => {
@@ -58,15 +106,17 @@ export function LottieIcon({ src, className, loop = true, playing }: LottieIconP
   }, [playing, controlled, reduceMotion, data]);
 
   return (
-    <span className={className} aria-hidden="true">
+    <span ref={containerRef} className={className} aria-hidden="true">
       {data && (
-        <Lottie
-          lottieRef={lottieRef}
-          animationData={data}
-          loop={reduceMotion ? false : loop}
-          autoplay={controlled ? false : !reduceMotion}
-          style={{ width: "100%", height: "100%" }}
-        />
+        <Suspense fallback={null}>
+          <Lottie
+            lottieRef={lottieRef}
+            animationData={data}
+            loop={reduceMotion ? false : loop}
+            autoplay={controlled ? false : !reduceMotion && inView.current}
+            style={{ width: "100%", height: "100%" }}
+          />
+        </Suspense>
       )}
     </span>
   );
