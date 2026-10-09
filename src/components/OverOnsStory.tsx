@@ -4,6 +4,7 @@ import { useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Reveal } from "./ui/Reveal";
 import { LottieIcon } from "./ui/LottieIcon";
+import { IMAGE_SIZES, responsiveImg } from "../lib/responsiveImg";
 
 const WHATSAPP_NUMBER = "31618623757";
 const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
@@ -90,7 +91,7 @@ function Slideshow({ images, alt }: { images: string[]; alt: string }) {
       {images.map((src, i) => (
         <img
           key={src}
-          src={src}
+          {...responsiveImg(src, IMAGE_SIZES.story)}
           alt={i === 0 ? alt : ""}
           aria-hidden={i === 0 ? undefined : true}
           loading={i === 0 ? "eager" : "lazy"}
@@ -108,7 +109,7 @@ function Slideshow({ images, alt }: { images: string[]; alt: string }) {
       />
 
       {/* Navigatiebolletjes */}
-      <div className="absolute inset-x-0 bottom-4 flex justify-center gap-2">
+      <div className="absolute inset-x-0 bottom-4 flex justify-center gap-0.5">
         {images.map((_, i) => (
           <button
             key={i}
@@ -116,10 +117,14 @@ function Slideshow({ images, alt }: { images: string[]; alt: string }) {
             onClick={() => go(i)}
             aria-label={`Ga naar foto ${i + 1}`}
             aria-current={i === index}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              i === index ? "w-6 bg-gold" : "w-2 bg-white/60 hover:bg-white/90"
-            }`}
-          />
+            className="group/dot flex h-6 min-w-6 cursor-pointer items-center justify-center"
+          >
+            <span
+              className={`block h-2 rounded-full transition-all duration-300 ${
+                i === index ? "w-6 bg-gold" : "w-2 bg-white/60 group-hover/dot:bg-white/90"
+              }`}
+            />
+          </button>
         ))}
       </div>
     </div>
@@ -136,7 +141,7 @@ function StoryRow({ block }: { block: StoryBlock }) {
               <Slideshow images={block.images} alt={block.imageAlt} />
             ) : (
               <img
-                src={block.image}
+                {...responsiveImg(block.image, IMAGE_SIZES.story)}
                 alt={block.imageAlt}
                 loading={block.priority ? "eager" : "lazy"}
                 className="h-64 w-full object-cover sm:h-80 md:h-[26rem]"

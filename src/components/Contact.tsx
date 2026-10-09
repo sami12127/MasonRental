@@ -81,14 +81,14 @@ export function Contact() {
                Vanaf lg is het weer gewoon een kolom. */}
             <div className="contents lg:flex lg:h-full lg:flex-col lg:gap-6">
               <div className="order-1 rounded-3xl border border-white/10 bg-charcoal p-6 md:p-7 lg:order-none">
-                <h3 className="text-lg font-bold text-white">Direct contact</h3>
+                <h2 className="text-lg font-bold text-white">Direct contact</h2>
                 <ul className="mt-4 space-y-1">
                   {rows.map((row) => {
                     const content = (
                       <>
                         <ContactIcon row={row} />
                         <span className="flex min-w-0 flex-col">
-                          <span className="text-[0.7rem] font-medium uppercase tracking-[0.15em] text-gold/70">
+                          <span className="text-[0.7rem] font-medium uppercase tracking-[0.15em] text-gold/90">
                             {row.label}
                           </span>
                           <span className="truncate text-sm font-medium text-white/85 transition-colors group-hover:text-gold">
@@ -122,9 +122,9 @@ export function Contact() {
               </div>
 
               <div className="order-3 rounded-3xl border border-gold/25 bg-charcoal p-6 lg:order-none">
-                <h3 className="text-base font-bold text-white">
+                <h2 className="text-base font-bold text-white">
                   Direct reserveren via WhatsApp
-                </h3>
+                </h2>
                 <p className="mt-2 text-sm leading-relaxed text-mist">
                   Stuur de gewenste auto en datum — wij bevestigen doorgaans
                   binnen enkele uren.

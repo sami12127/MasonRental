@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -10,6 +10,7 @@ import { getCarById } from "../data/cars";
 import type { HighlightIcon } from "../data/cars";
 import { Reveal } from "../components/ui/Reveal";
 import { LottieIcon } from "../components/ui/LottieIcon";
+import { IMAGE_SIZES, responsiveImg } from "../lib/responsiveImg";
 import { FAQ } from "../components/FAQ";
 import { ContactCTA } from "../components/ContactCTA";
 
@@ -43,13 +44,12 @@ export function CarDetailPage() {
   const { id } = useParams();
   const car = getCarById(id);
   const [activeImage, setActiveImage] = useState(0);
+  /* Pas na een klik op een thumbnail infaden: de eerste foto staat in de
+     vooraf gerenderde HTML en moet meteen volledig zichtbaar zijn. */
+  const switched = useRef(false);
 
   useEffect(() => {
     setActiveImage(0);
-    if (car) document.title = `${car.name} huren | Mason Rental`;
-    return () => {
-      document.title = "Mason Rental | Luxe Auto Verhuur";
-    };
   }, [car]);
 
   if (!car) {
@@ -96,7 +96,10 @@ export function CarDetailPage() {
                       <button
                         key={src}
                         type="button"
-                        onClick={() => setActiveImage(i)}
+                        onClick={() => {
+                          switched.current = true;
+                          setActiveImage(i);
+                        }}
                         aria-label={`Toon foto ${i + 1}`}
                         aria-current={i === activeImage}
                         className={`aspect-square size-16 shrink-0 cursor-pointer overflow-hidden rounded-xl border transition-all duration-200 sm:size-20 ${
@@ -106,9 +109,10 @@ export function CarDetailPage() {
                         }`}
                       >
                         <img
-                          src={src}
+                          {...responsiveImg(src, "80px", 1)}
                           alt=""
                           loading="lazy"
+                          decoding="async"
                           className="h-full w-full object-cover"
                         />
                       </button>
@@ -134,9 +138,9 @@ export function CarDetailPage() {
                 <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-charcoal">
                   <motion.img
                     key={activeImage}
-                    src={car.gallery[activeImage]}
+                    {...responsiveImg(car.gallery[activeImage], IMAGE_SIZES.carMain, 16 / 10)}
                     alt={`${car.name} — foto ${activeImage + 1}`}
-                    initial={{ opacity: 0.4, scale: 1.02 }}
+                    initial={switched.current ? { opacity: 0.4, scale: 1.02 } : false}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.4, ease: "easeOut" }}
                     className="aspect-[16/10] w-full object-cover"

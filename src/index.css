@@ -137,6 +137,47 @@ html {
   color: var(--color-gold-light);
 }
 
+/* Hero-intro: in CSS zodat het direct op de vooraf gerenderde HTML draait */
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.hero-fade-up {
+  animation: hero-fade-up 0.7s cubic-bezier(0.21, 0.47, 0.32, 0.98) both;
+}
+@keyframes hero-zoom {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: none;
+  }
+}
+.hero-zoom {
+  animation: hero-zoom 2.4s ease-out both;
+}
+
+/* Cookiemelding: schuift in zonder op JavaScript te wachten. Alleen de
+   beginstand wordt vastgehouden (backwards), zodat framer-motion daarna de
+   uitschuif-animatie kan doen. */
+@keyframes cookie-slide-in {
+  from {
+    transform: translateY(100%);
+  }
+}
+.cookie-banner {
+  animation: cookie-slide-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+html.cookie-ok .cookie-banner {
+  display: none;
+}
+
 /* Oneindige logo-carrousel */
 @keyframes marquee {
   from {

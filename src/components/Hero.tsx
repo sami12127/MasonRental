@@ -1,4 +1,3 @@
-import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowUpRightIcon } from "@phosphor-icons/react";
 
@@ -7,15 +6,10 @@ const WHATSAPP_URL = `https://wa.me/31618623757?text=${encodeURIComponent(
   "Hallo Mason Rental, ik wil graag een auto reserveren."
 )}`;
 
+/* De intro-animaties zijn CSS (zie .hero-fade-up / .hero-zoom in index.css):
+   die starten zodra de vooraf gerenderde HTML binnen is, zonder op JavaScript
+   te wachten — de tekst staat dus meteen in beeld. */
 export function Hero() {
-  const reduceMotion = useReducedMotion();
-
-  const fadeUp = (delay: number) => ({
-    initial: reduceMotion ? { opacity: 0 } : { opacity: 0, y: 24 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.7, delay, ease: [0.21, 0.47, 0.32, 0.98] as const },
-  });
-
   return (
     <section
       id="home"
@@ -24,14 +18,11 @@ export function Hero() {
       {/* Achtergrondfoto full-bleed. De auto staat rechts in beeld, dus de
          tekst staat links; die zijde wordt extra verdonkerd voor contrast. */}
       <div className="absolute inset-0">
-        <motion.img
+        <img
           src="/hero-rs3.webp"
           alt=""
           aria-hidden="true"
-          className="h-full w-full object-cover object-[71%_50%] sm:object-center"
-          initial={reduceMotion ? undefined : { scale: 1.08 }}
-          animate={reduceMotion ? undefined : { scale: 1 }}
-          transition={{ duration: 2.4, ease: "easeOut" }}
+          className="hero-zoom h-full w-full object-cover object-[71%_50%] sm:object-center"
         />
         {/* Links-naar-rechts verloop: tekstzijde donker, auto blijft zichtbaar */}
         <div className="absolute inset-0 bg-gradient-to-r from-night/90 via-night/55 to-transparent sm:via-night/45" />
@@ -45,24 +36,24 @@ export function Hero() {
 
       <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-end px-6 pb-16 pt-24 sm:items-center sm:py-10 sm:pt-20 lg:px-10">
         <div className="w-full max-w-xl text-left sm:max-w-2xl">
-          <motion.h1
-            {...fadeUp(0.1)}
-            className="text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-6xl sm:leading-[1.02] md:text-7xl"
+          <h1
+            style={{ animationDelay: "0.1s" }}
+            className="hero-fade-up text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-6xl sm:leading-[1.02] md:text-7xl"
           >
             Huur jouw droom<span className="text-gold">auto</span>.
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            {...fadeUp(0.25)}
-            className="mt-5 max-w-lg text-sm leading-relaxed text-white/80 sm:mt-6 sm:text-lg"
+          <p
+            style={{ animationDelay: "0.25s" }}
+            className="hero-fade-up mt-5 max-w-lg text-sm leading-relaxed text-white/80 sm:mt-6 sm:text-lg"
           >
             Ervaar pure prestaties, comfort en uitstraling. Stap vandaag nog in een
             auto die elke rit bijzonder maakt — zorgeloos huren vanaf 18 jaar.
-          </motion.p>
+          </p>
 
-          <motion.div
-            {...fadeUp(0.4)}
-            className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center"
+          <div
+            style={{ animationDelay: "0.4s" }}
+            className="hero-fade-up mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center"
           >
             <Link
               to="/aanbod"
@@ -90,7 +81,7 @@ export function Hero() {
                 aria-hidden="true"
               />
             </a>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

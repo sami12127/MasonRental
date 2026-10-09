@@ -149,7 +149,6 @@ export function PageTransitionProvider({ children }: { children: ReactNode }) {
             src="/logo-curtain.webp"
             alt=""
             decoding="async"
-            fetchPriority="low"
             width={688}
             height={518}
             className="block w-full"

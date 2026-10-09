@@ -27,6 +27,7 @@ const cache = new Map<string, object>();
 /* Wacht tot de browser na het laden van de pagina even niets te doen heeft,
    zodat Lottie niet concurreert met de eerste weergave. */
 const idle = new Promise<void>((resolve) => {
+  if (typeof window === "undefined") return; // prerender: nooit laden
   const schedule = () =>
     "requestIdleCallback" in window
       ? window.requestIdleCallback(() => resolve(), { timeout: 2000 })

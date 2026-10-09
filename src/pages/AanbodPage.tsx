@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Fleet } from "../components/Fleet";
 import { WhyUs } from "../components/WhyUs";
 import { Social } from "../components/Social";
@@ -6,13 +5,6 @@ import { ContactCTA } from "../components/ContactCTA";
 import { PageHero } from "../components/ui/PageHero";
 
 export function AanbodPage() {
-  useEffect(() => {
-    document.title = "Aanbod | Mason Rental";
-    return () => {
-      document.title = "Mason Rental | Luxe Auto Verhuur";
-    };
-  }, []);
-
   return (
     <>
       <PageHero

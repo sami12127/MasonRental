@@ -6,6 +6,7 @@ import { WhatsAppButton } from "./components/WhatsAppButton";
 import { PageTransitionProvider } from "./components/PageTransition";
 import { HomePage } from "./pages/HomePage";
 import { CookieConsent } from "./components/CookieConsent";
+import { applyMeta, getPageMeta } from "./data/seo";
 
 /* Subpagina's in aparte chunks, zodat de homepage minder JS hoeft te laden. */
 const loadAanbod = () => import("./pages/AanbodPage");
@@ -32,6 +33,15 @@ function PrefetchPages() {
     const timer = setTimeout(prefetch, 3000);
     return () => clearTimeout(timer);
   }, []);
+  return null;
+}
+
+/** Zet titel, beschrijving, canonical en gestructureerde data voor de huidige pagina. */
+function DocumentMeta() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    applyMeta(getPageMeta(pathname));
+  }, [pathname]);
   return null;
 }
 
@@ -75,6 +85,7 @@ export default function App() {
         Naar hoofdinhoud
       </a>
       <ScrollManager />
+      <DocumentMeta />
       <Navbar />
       <PrefetchPages />
       <main id="main">

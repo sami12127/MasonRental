@@ -8,14 +8,19 @@ const STORAGE_KEY = "mr-cookie-consent";
 
 /**
  * Cookiemelding. Verschijnt eenmalig bij het eerste bezoek en onthoudt in
- * localStorage dat hij is gezien. De site gebruikt uitsluitend functionele
+ * localStorage dat hij is gezien.
+ *
+ * De melding staat in de vooraf gerenderde HTML en schuift met CSS in, zodat
+ * hij niet op JavaScript wacht. Een inline script in index.html zet de class
+ * "cookie-ok" op <html> als de melding al gezien is; die verbergt hem direct
+ * (zie .cookie-banner in index.css), waarna React hem hier weghaalt. De site gebruikt uitsluitend functionele
  * cookies, dus is dit een informatieve melding met één bevestigingsknop.
  *
  * Zowel op mobiel als desktop een balk over de volle breedte die van onderen
  * omhoog schuift.
  */
 export function CookieConsent() {
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
@@ -25,11 +30,7 @@ export function CookieConsent() {
     } catch {
       /* localStorage niet beschikbaar (bv. private mode) — toon de melding. */
     }
-    if (!stored) {
-      // Direct tonen (schuift in tegelijk met de hero). Een vertraging maakt
-      // de melding het laatst getekende grote element, wat de laadscore drukt.
-      setVisible(true);
-    }
+    if (stored) setVisible(false);
   }, []);
 
   const dismiss = () => {
@@ -47,11 +48,10 @@ export function CookieConsent() {
         <motion.div
           role="dialog"
           aria-label="Cookiemelding"
-          initial={reduceMotion ? { opacity: 0 } : { y: "100%" }}
-          animate={reduceMotion ? { opacity: 1 } : { y: 0 }}
+          initial={false}
           exit={reduceMotion ? { opacity: 0 } : { y: "100%" }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed inset-x-0 bottom-0 z-[70] border-t border-gold/25 bg-charcoal/95 backdrop-blur-md max-sm:pb-[env(safe-area-inset-bottom)]"
+          className="cookie-banner fixed inset-x-0 bottom-0 z-[70] border-t border-gold/25 bg-charcoal/95 backdrop-blur-md max-sm:pb-[env(safe-area-inset-bottom)]"
         >
           <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-8 lg:px-10">
             <div className="flex items-start gap-4 sm:items-center">

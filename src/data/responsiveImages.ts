@@ -1,4 +1,4 @@
-// Gegenereerd: originele afmetingen van foto's waarvoor -640/-1280 varianten bestaan.
+// Gegenereerd: originele afmetingen van foto's waarvoor -640/-960/-1280 varianten bestaan.
 export const RESPONSIVE_IMAGES: Record<string, { w: number; h: number }> = {
   "/cars/rs6-1-card.webp": { w: 1093, h: 1530 },
   "/cars/rs6-2-card.webp": { w: 1425, h: 1996 },
@@ -13,4 +13,19 @@ export const RESPONSIVE_IMAGES: Record<string, { w: number; h: number }> = {
   "/cars/rs3-6573-show.webp": { w: 1600, h: 1073 },
   "/cars/rs3-6570-show.webp": { w: 1600, h: 1073 },
   "/cars/rs6-1.webp": { w: 1600, h: 893 },
+  "/cars/rs6-2.webp": { w: 1600, h: 893 },
+  "/cars/rs6-3.webp": { w: 1600, h: 893 },
+  "/cars/rs6-4.webp": { w: 1600, h: 893 },
+  "/cars/rs3-39.webp": { w: 1600, h: 1195 },
+  "/cars/rs3-6567.webp": { w: 1600, h: 1073 },
+  "/cars/rs3-38.webp": { w: 1600, h: 1195 },
+  "/cars/rs3-36.webp": { w: 1600, h: 1067 },
+  "/cars/rs3-6568.webp": { w: 1600, h: 1195 },
+  "/cars/rs3-6569.webp": { w: 1600, h: 1073 },
+  "/cars/rs3-01.webp": { w: 1600, h: 900 },
+  "/cars/rs3-37-wide.webp": { w: 1600, h: 900 },
+  "/cars/rs3-17.webp": { w: 1600, h: 900 },
+  "/cars/rs3-27.webp": { w: 1600, h: 900 },
+  "/cars/rs3-6572-wide.webp": { w: 1600, h: 900 },
+  "/over-ons.webp": { w: 1920, h: 1290 },
 };

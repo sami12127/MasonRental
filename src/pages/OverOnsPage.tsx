@@ -1,18 +1,11 @@
-import { useEffect } from "react";
 import { OverOnsStory } from "../components/OverOnsStory";
 import { WhyUs } from "../components/WhyUs";
 import { ContactCTA } from "../components/ContactCTA";
 
 export function OverOnsPage() {
-  useEffect(() => {
-    document.title = "Over ons | Mason Rental";
-    return () => {
-      document.title = "Mason Rental | Luxe Auto Verhuur";
-    };
-  }, []);
-
   return (
     <div className="pt-16 sm:pt-20">
+      <h1 className="sr-only">Over Mason Rental: luxe autoverhuur in Capelle aan den IJssel</h1>
       <OverOnsStory />
       <WhyUs
         eyebrow="Onze belofte"

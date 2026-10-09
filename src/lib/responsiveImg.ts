@@ -2,6 +2,15 @@ import { RESPONSIVE_IMAGES } from "../data/responsiveImages";
 
 const WIDTHS = [640, 960, 1280];
 
+/** Vakbreedtes die zowel in componenten als in de preload (src/data/seo.ts) nodig zijn. */
+export const IMAGE_SIZES = {
+  /** Hoofdfoto op de autopagina, naast de thumbnails en de reserveringsbalk */
+  carMain:
+    "(min-width: 1280px) 740px, (min-width: 1024px) calc(100vw - 480px), (min-width: 640px) calc(100vw - 156px), calc(100vw - 48px)",
+  /** Foto's in de verhaalblokken op Over ons (2 kolommen vanaf md) */
+  story: "(min-width: 1280px) 560px, (min-width: 768px) 45vw, calc(100vw - 48px)",
+};
+
 /**
  * Geeft src/srcSet/sizes voor een foto, zodat de browser een passend kleinere
  * variant (-640 / -960 / -1280) kiest i.p.v. altijd het volledige origineel.

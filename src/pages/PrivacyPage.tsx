@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import type { ReactNode } from "react";
 import { PageHero } from "../components/ui/PageHero";
 import { Reveal } from "../components/ui/Reveal";
@@ -209,13 +208,6 @@ const sections: Section[] = [
 ];
 
 export function PrivacyPage() {
-  useEffect(() => {
-    document.title = "Privacybeleid | Mason Rental";
-    return () => {
-      document.title = "Mason Rental | Luxe Auto Verhuur";
-    };
-  }, []);
-
   return (
     <div>
       <PageHero
@@ -227,7 +219,7 @@ export function PrivacyPage() {
 
       <section className="bg-night pb-4">
         <div className="mx-auto max-w-3xl px-6 lg:px-10">
-          <p className="text-sm text-white/40">
+          <p className="text-sm text-white/60">
             Laatst bijgewerkt: {LAST_UPDATED}
           </p>
 
